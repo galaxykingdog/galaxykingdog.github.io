@@ -4,7 +4,7 @@
  */
 'use strict';
 
-const BUILD_REVISION = '63b81beb6472b07651261e85'; // Set by the mobile asset builder.
+const BUILD_REVISION = 'df53c7811ff23f2e4ad9cfcd'; // Set by the mobile asset builder.
 const CACHE_PREFIX = 'gkd-mobile-v1-';
 const CACHE_NAME = CACHE_PREFIX + BUILD_REVISION;
 const MANIFEST_URL = '/assets/mobile/precache.json';

@@ -598,6 +598,8 @@
   }
 
   function renderLeaderboard(list) {
+    // The game's HI-SCORE on web3 pages is the best recorded on-chain score.
+    window.GKDSetChainHighScore?.(list && list.length ? Number(list[0].score) : 0);
     let el = document.getElementById("gkd-leaderboard");
     if (!el) {
       el = document.createElement("div");

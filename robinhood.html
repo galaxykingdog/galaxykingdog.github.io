@@ -28,11 +28,11 @@
     #game-container { width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; }
     #chain-ui {
       position:fixed; top:10px; left:10px; right:10px; z-index:9999;
-      display:flex; gap:10px; align-items:center; justify-content:space-between;
+      display:flex; gap:10px; align-items:flex-start; justify-content:space-between;
       pointer-events:none;
     }
     #chain-ui .box {
-      pointer-events:auto; display:flex; gap:10px; align-items:center; min-height:34px;
+      pointer-events:auto; display:flex; gap:10px; align-items:flex-start; min-height:34px;
       padding:8px 10px; border:1px solid rgba(0,200,120,.38); border-radius:10px;
       background:rgba(0,0,0,.72);
     }
@@ -40,6 +40,10 @@
       max-width:70vw; overflow:hidden; color:#7dffbd; font-size:12px;
       opacity:.96; text-overflow:ellipsis; white-space:nowrap;
     }
+    /* The status box yields width to the buttons, so they never wrap onto two lines. */
+    #chain-ui > .box:first-of-type { flex:0 1 auto; min-width:0; max-width:42vw; flex-wrap:wrap; }
+    #chain-ui > .box:first-of-type #chain-status { min-width:0; max-width:100%; }
+    #chain-ui > .box:last-of-type { flex:0 0 auto; }
     #network-badge { color:#fff; font:700 11px 'Courier New',monospace; letter-spacing:.5px; }
     #btn-connect, #btn-retry-score, #btn-player-name {
       padding:6px 10px; border:1px solid rgba(0,255,150,.38); border-radius:8px;
@@ -78,7 +82,7 @@
 <script src="src/chain/web3_preflight.js?v=web3-candidate-1"></script>
 <script src="src/chain/robinhood_deployment.js?v=web3-candidate-1"></script>
 <script src="src/chain/robinhood_config.js?v=web3-candidate-1"></script>
-<script src="src/chain/robinhood_client.js?v=rh-charity-admin-2"></script>
+<script src="src/chain/robinhood_client.js?v=chain-scores-1"></script>
 <script src="src/chain/web3_account.js?v=web3-candidate-1"></script>
 <script src="src/chain/rh_pool_nft_panel.js?v=rh-charity-admin-2"></script>
 
@@ -95,7 +99,7 @@
   <script src="src/invasion_presentation.js?v=invasion-2"></script>
   <script src="src/arcade_features.js?v=invasion-2"></script>
   <script src="src/enemy_motion.js?v=1.7.2"></script>
-  <script src="src/main_galaxian.js?v=invasion-2"></script>
+  <script src="src/main_galaxian.js?v=chain-scores-1"></script>
   <script>
     (() => {
       const button = document.getElementById("btn-player-name");

@@ -24,6 +24,11 @@ const GKD_FIXED_SIMULATION = window.CHAIN?.enabled === true && window.CHAIN?.cha
   && window.CHAIN?.simulationProtocol === 'fixed_step_v1';
 const GKD_SIMULATION_TICK_MS = 16;
 let GKD_simulationSession = null;
+// Web3 pages show only scores recorded on the blockchain. The free arcade shares this origin's
+// local storage and its global Top 10, so without this they would show free-play scores as if
+// they were chain records, and web3 runs would land in the free Top 10.
+const CHAIN_SCORES_ONLY = window.CHAIN?.enabled === true;
+if (CHAIN_SCORES_ONLY) window.GKD_DISABLE_GLOBAL_LEADERBOARD = true;
 let GKD_simulationTime = 0;
 let GKD_simulationRemainder = 0;
 document.title = GKD_MOBILE ? 'Robin — Mobile Arcade' : 'DOG KING (POHP v3)';
@@ -1148,8 +1153,28 @@ function safeJSONParse(str, fallback) {
 // uploaded build and follows the player to any device. This holds the value read
 // back from Game Jolt before the scene exists.
 let gamejoltRestoredHigh = 0;
+let chainHighScore = 0;
+
+// HI-SCORE on web3 pages is the best score recorded on-chain, set by the chain client whenever
+// it reads the on-chain leaderboard. An unrecorded run never raises it.
+function applyChainHighScore(value) {
+  const record = Number(value);
+  if (!CHAIN_SCORES_ONLY || !Number.isSafeInteger(record) || record < 0) return false;
+  chainHighScore = record;
+  highScore = record;
+  refreshScoreTexts();
+  return true;
+}
+if (typeof window !== 'undefined' && CHAIN_SCORES_ONLY) {
+  window.GKDSetChainHighScore = applyChainHighScore;
+}
 
 function loadScores() {
+  if (CHAIN_SCORES_ONLY) {
+    highScore = chainHighScore;
+    topScores = [];
+    return;
+  }
   try {
     const hs = parseInt(localStorage.getItem(LS_HISCORE_KEY) || "0", 10);
     highScore = Number.isFinite(hs) ? hs : 0;
@@ -1166,6 +1191,7 @@ function loadScores() {
 }
 
 function saveScores() {
+  if (CHAIN_SCORES_ONLY) return;
   try {
     localStorage.setItem(LS_HISCORE_KEY, String(highScore));
     localStorage.setItem(LS_TOP5_KEY, JSON.stringify(topScores.slice(0, 5)));
@@ -1232,6 +1258,7 @@ function exportScoresBackup() {
 }
 
 function importScoresBackupText(raw) {
+  if (CHAIN_SCORES_ONLY) throw new Error('Local score backups do not apply to on-chain scores');
   const data = safeJSONParse(String(raw || ''), null);
   if (!data || typeof data !== 'object') throw new Error('Invalid backup JSON');
   const importedTop = normalizeTopScores(data.top5 || []);
@@ -1270,6 +1297,7 @@ function importScoresBackup() {
 }
 
 function maybeUpdateHighScore() {
+  if (CHAIN_SCORES_ONLY) return false;
   if (score > highScore) {
     highScore = score;
     return true;
@@ -1285,6 +1313,7 @@ function pushTopScore(s, w) {
 }
 
 function formatTopScores() {
+  if (CHAIN_SCORES_ONLY) return "";
   if (!topScores.length) return "TOP 5 (LOCAL):\n—";
   const lines = ["TOP 5 (LOCAL):"];
   for (let i = 0; i < topScores.length; i++) {
@@ -2445,10 +2474,11 @@ window.__CHAIN_STATUS_CB = (msg) => {
   try {
     if (!chainStatusText) return;
     if (gamePhase === GAME_PHASE.GAME_OVER) {
+      // Phones have no keyboard, so the key hints are left out there.
       if (isDemoMode()) {
-        chainStatusText.setText("R = RESTART");
+        chainStatusText.setText(GKD_MOBILE ? "" : "R = RESTART");
       } else {
-        chainStatusText.setText(msg + "\nR = RESTART   B = RECORD SCORE ON-CHAIN   P = DOWNLOAD PROOF   H = EXPORT SCORES   J = IMPORT SCORES");
+        chainStatusText.setText(GKD_MOBILE ? msg : msg + "\nR = RESTART   B = RECORD SCORE ON-CHAIN   P = DOWNLOAD PROOF" + (CHAIN_SCORES_ONLY ? "" : "   H = EXPORT SCORES   J = IMPORT SCORES"));
       }
     } else {
       chainStatusText.setText(msg);
@@ -3337,7 +3367,8 @@ function update(time, delta) {
 
 // GAME OVER input
   if (gamePhase === GAME_PHASE.GAME_OVER) {
-    if (pohpDownloadText) pohpDownloadText.setVisible(!isDemoMode());
+    if (pohpDownloadText) pohpDownloadText.setVisible(!isDemoMode() && !GKD_MOBILE);
+    layoutGameOverStatusTexts();
 
     if (restartKey && Phaser.Input.Keyboard.JustDown(restartKey)) {
       showStartScreen(mainScene);
@@ -5758,6 +5789,16 @@ function clearAllBullets() {
 }
 
 // =================== GAME OVER ===================
+const GAME_OVER_PROOF_LINE = GKD_MOBILE ? "PROOF READY ✅" : "PROOF READY ✅  Press P to download runPackage.json  |  Verify: ?replay=1";
+
+// The game-over status texts are multi-line and grow with each message, so they are stacked
+// every frame instead of sitting on fixed rows (they used to draw over each other). Display only.
+function layoutGameOverStatusTexts() {
+  if (!chainStatusText || !pohpStatusText) return;
+  pohpStatusText.setY(chainStatusText.y + (chainStatusText.text ? chainStatusText.height + 6 : 0));
+  if (pohpDownloadText) pohpDownloadText.setY(pohpStatusText.y + (pohpStatusText.text ? pohpStatusText.height + 6 : 0));
+}
+
 function gameOver() {
   arcadeInvasionEvent('hide');
   const gameJoltResult = window.GKD_GAMEJOLT === true
@@ -5782,7 +5823,7 @@ function gameOver() {
   } else if (!isDemoMode()) {
     // Build runPackage (async). Download is triggered by user gesture (press P) to avoid browser blocking.
     POHP_finalizeRunPackageOnGameOver(score, wave).then(() => {
-  if (pohpStatusText) pohpStatusText.setText("PROOF READY ✅  Press P to download runPackage.json  |  Verify: ?replay=1");
+  if (pohpStatusText) pohpStatusText.setText(GAME_OVER_PROOF_LINE);
 
   // Auto-verify the exact runPackage we just built (NO gameplay changes)
   const ledgerState = window.ChainClient?._state?.ledger;
@@ -5802,7 +5843,11 @@ function gameOver() {
         : ("SCORE CLAIMED ⚠️ " + claimedScore + " / wave " + claimedWave + " (GateD " + mode + ":" + status + ")");
       const seasonLine = "SEASON: " + seasonTier.toUpperCase() + (rewardEligible ? " (reward eligible ✅)" : " (reward pending)");
       const closeLine = verificationClosed ? "VERIFICATION CLOSED ✅" : "VERIFICATION PENDING ⏳";
-      pohpStatusText.setText("PROOF READY ✅  Press P to download runPackage.json  |  Verify: ?replay=1\n" + verdictLine + "\n" + seasonLine + "\n" + closeLine);
+      pohpStatusText.setText(GAME_OVER_PROOF_LINE + "\n" + verdictLine + "\n" + seasonLine + "\n" + closeLine);
+      // Record the verified run on-chain straight away. Players often close the page at game over,
+      // and phones have no B key, so waiting for them lost the record and its reward. The verifier
+      // relays it; the Retry button and B stay as fallbacks, and a submission never runs twice.
+      if (verificationClosed && window.CHAIN?.chainKind === 'robinhood' && window.ChainClient?._state?.connected) submitScoreToChain();
     }).catch(() => {
       // keep silent; UI will still show proof ready
     });
@@ -5834,7 +5879,7 @@ function gameOver() {
     // Submit to global leaderboard
     const finalScore = score;
     const finalWave = wave;
-    if (!GKD_MOBILE && window.GKD_GAMEJOLT !== true) (async () => {
+    if (!GKD_MOBILE && window.GKD_GAMEJOLT !== true && !window.GKD_DISABLE_GLOBAL_LEADERBOARD) (async () => {
       if (!playerName) {
         await promptPlayerName();
       }
@@ -5864,7 +5909,7 @@ function gameOver() {
   if (gameOverImage) gameOverImage.setVisible(true);
 
   if (chainStatusText) {
-    chainStatusText.setText(isDemoMode() ? "R = RESTART" : "R = RESTART   B = RECORD SCORE ON-CHAIN   P = DOWNLOAD PROOF");
+    chainStatusText.setText(GKD_MOBILE ? "" : (isDemoMode() ? "R = RESTART" : "R = RESTART   B = RECORD SCORE ON-CHAIN   P = DOWNLOAD PROOF"));
   }
 
   // audio: keep bgm low, loops silent

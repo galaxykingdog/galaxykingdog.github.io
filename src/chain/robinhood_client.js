@@ -1521,14 +1521,33 @@
   }
 
   function renderLeaderboard(entries) {
+    // The game's HI-SCORE on web3 pages is the best recorded on-chain score.
+    window.GKDSetChainHighScore?.(entries?.length ? Number(entries[0].score) : 0);
     let element = $("gkd-leaderboard");
+    // On the desktop page the list lives in the header's status box: as a floating panel it
+    // covered the game's own SCORE and WAVE text. The phone page keeps the floating panel.
+    const headerBox = document.body?.classList?.contains?.("web3-mobile") || typeof document.querySelector !== "function"
+      ? null : document.querySelector("#chain-ui .box");
     if (!element) {
       element = document.createElement("div");
       element.id = "gkd-leaderboard";
-      element.style.cssText = "position:fixed;top:143px;left:10px;z-index:9998;background:rgba(0,0,0,.72);border:1px solid rgba(0,255,150,.28);border-radius:10px;padding:8px 12px;color:#35ff9a;font:12px 'Courier New',monospace;line-height:1.45;min-width:210px;pointer-events:none";
-      document.body.appendChild(element);
+      if (headerBox) {
+        element.style.cssText = "flex-basis:100%;color:#35ff9a;font:12px 'Courier New',monospace;line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;pointer-events:none";
+        headerBox.style.flexWrap = "wrap";
+        headerBox.appendChild(element);
+      } else {
+        element.style.cssText = "position:fixed;top:143px;left:10px;z-index:9998;background:rgba(0,0,0,.72);border:1px solid rgba(0,255,150,.28);border-radius:10px;padding:8px 12px;color:#35ff9a;font:12px 'Courier New',monospace;line-height:1.45;min-width:210px;pointer-events:none";
+        document.body.appendChild(element);
+      }
     }
     const medals = ["🥇", "🥈", "🥉"];
+    if (element.parentElement !== document.body) {
+      const line = entries?.length
+        ? entries.map((entry, index) => `${medals[index] || `${index + 1}.`} ${entry.score} ${escapeLeaderboardText(entry.name || (entry.player ? `${entry.player.slice(0, 6)}…${entry.player.slice(-4)}` : ""))}`).join(" · ")
+        : "no scores yet";
+      element.innerHTML = `🏆 TOP 3 · ${line}`;
+      return;
+    }
     const rows = entries?.length
       ? entries.map((entry, index) => {
           const wallet = entry.player ? `${entry.player.slice(0, 6)}…${entry.player.slice(-4)}` : "";

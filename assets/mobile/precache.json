@@ -1,10 +1,10 @@
 {
   "schema": 1,
-  "version": "63b81beb6472b07651261e85",
+  "version": "df53c7811ff23f2e4ad9cfcd",
   "scope": "/mobile/",
   "entry": "/mobile/",
   "count": 120,
-  "totalBytes": 7702136,
+  "totalBytes": 7704611,
   "voiceCount": 60,
   "assets": [
     {
@@ -204,14 +204,14 @@
     },
     {
       "url": "/mobile/",
-      "sha256": "4f0076265327abbec5dc1a449d08a282b09320cd22ebc88b9cd924819fe0706a",
-      "bytes": 6842,
+      "sha256": "efe7b4351aebcbcb60bc61780f7b8785bb726b98b50f7a04351a739e1e41b705",
+      "bytes": 6846,
       "sourceUrl": "/assets/mobile/offline-shell.txt"
     },
     {
       "url": "/mobile/index.html",
-      "sha256": "4f0076265327abbec5dc1a449d08a282b09320cd22ebc88b9cd924819fe0706a",
-      "bytes": 6842,
+      "sha256": "efe7b4351aebcbcb60bc61780f7b8785bb726b98b50f7a04351a739e1e41b705",
+      "bytes": 6846,
       "sourceUrl": "/assets/mobile/offline-shell.txt"
     },
     {
@@ -250,9 +250,9 @@
       "bytes": 9685
     },
     {
-      "url": "/src/main_galaxian.js?v=invasion-2",
-      "sha256": "0086d08740b41410ef500dcee8d2e46569f8528e4a67b4b0102d89c1fc5eefae",
-      "bytes": 236419
+      "url": "/src/main_galaxian.js?v=chain-scores-1",
+      "sha256": "01bd2694f388b06bb77c0dad8618dc36e14549f04d13941dd3ac69391e9b5be3",
+      "bytes": 238886
     },
     {
       "url": "/src/main_runtime_patch.js?v=1.7.2",
