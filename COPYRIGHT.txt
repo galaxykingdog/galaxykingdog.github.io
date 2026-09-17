@@ -1,0 +1,59 @@
+GALAXY KING DOG
+Copyright (c) 2026 Galaxy King Dog (Liolee). All rights reserved.
+
+This game and everything published with it are protected by copyright and other
+intellectual property laws. This includes the source code, bundled and compiled
+files, game design and mechanics as expressed in the software, levels, story text,
+dialogue, the character Robin and all other original characters, original artwork,
+original audio and voice lines, names, logos, whitepaper and website content.
+
+PLAYING
+You may play the game for personal, non-commercial use only on the official
+pages where the copyright holder publishes it:
+  - https://galaxykingdogs.netlify.app
+  - https://liolee.itch.io/galaxy-king-dog
+  - https://gamejolt.com/games/galaxy-king-dog/1084669
+Making the game playable in a web browser does not grant any licence or right
+to its files. Your browser receiving the files in order to run the game is not
+permission to keep, copy or reuse them.
+
+PROHIBITED WITHOUT PRIOR WRITTEN PERMISSION
+  1. Copying, downloading for reuse, mirroring, rehosting, framing or embedding
+     the game or any of its files on any other website, app, store or platform.
+  2. Modifying, adapting, translating, decompiling, reverse engineering,
+     extracting or reusing any code, artwork, audio or text, or creating any
+     derivative work, clone or remake.
+  3. Selling, renting, sublicensing, bundling or otherwise exploiting the game
+     or any part of it commercially, including through ads or paid access.
+  4. Using the names "Galaxy King Dog" or "Robin" as used in this game, its
+     characters, artwork, logos or links for any token, coin, contract address,
+     NFT, presale, airdrop, community, project or product. No token, NFT or
+     contract is official unless it is announced on the official pages above.
+  5. Using the game, its content or its accounts to impersonate the copyright
+     holder or to suggest endorsement or partnership.
+  6. Removing, hiding or altering this notice or any copyright notice in the
+     files.
+
+ENFORCEMENT
+Unauthorized use will be reported to the hosting platform, app store,
+marketplace or registrar concerned, including by DMCA and equivalent takedown
+notices, and may lead to legal action and claims for damages to the extent
+permitted by law.
+
+THIRD-PARTY COMPONENTS
+These keep their own licences and are not claimed by this notice:
+  - Phaser 3.55.2, MIT License (assets/mobile/PHASER-LICENSE.txt)
+  - Space Shooter (Redux) graphics by Kenney (www.kenney.nl), CC0 (license.txt)
+
+PERMISSION REQUESTS AND REPORTS OF COPIES
+  https://x.com/Parrottwit
+
+---------------------------------------------------------------------------
+ΠΝΕΥΜΑΤΙΚΑ ΔΙΚΑΙΩΜΑΤΑ
+Copyright (c) 2026 Galaxy King Dog (Liolee). Με την επιφύλαξη παντός δικαιώματος.
+Επιτρέπεται μόνο το προσωπικό, μη εμπορικό παιχνίδι στις επίσημες σελίδες.
+Απαγορεύεται χωρίς προηγούμενη γραπτή άδεια η αντιγραφή, αναδημοσίευση,
+τροποποίηση, αποσυμπίληση, εμπορική εκμετάλλευση του παιχνιδιού ή μέρους του,
+καθώς και η χρήση των ονομάτων, των χαρακτήρων ή του υλικού του για tokens,
+NFT ή άλλα έργα. Κάθε παραβίαση θα αναφέρεται για αφαίρεση και μπορεί να
+οδηγήσει σε νομικά μέτρα.

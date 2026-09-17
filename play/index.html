@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
+  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
+  <meta name="copyright" content="Copyright (c) 2026 Galaxy King Dog (Liolee). All rights reserved. Unauthorized copying, modification, redistribution or rehosting is prohibited.">
+  <base href="../">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#06120e">
+  <title>Play Robin — Galaxy King Dog</title>
+  <meta name="description" content="Play Robin free with keyboard controls on your computer or the analog joystick on your phone.">
+  <link rel="icon" href="assets/site/star.svg" type="image/svg+xml">
+  <style>
+    :root{color-scheme:dark;font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif;background:#06120e;color:#eff9ef}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:28px 20px;background:radial-gradient(ellipse at top,#173925,transparent 65%)}
+    main{width:100%;max-width:640px}.eyebrow{color:#b6e487;font-size:12px;letter-spacing:.2em;font-weight:750}h1{font-size:clamp(36px,8vw,56px);letter-spacing:-.045em;line-height:1.08;margin:18px 0}p{color:#b0c8b6}.choices{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:30px 0 20px}.choice{display:flex;flex-direction:column;gap:8px;padding:22px;border:1px solid #618269;border-radius:18px;background:#10251b;color:#eff9ef;text-decoration:none;min-height:140px}.choice strong{font-size:23px}.choice span{color:#b0c8b6;font-size:14px}.choice:hover{border-color:#d3fa8a;background:#193923}.choice:focus-visible{outline:3px solid #91e9dd;outline-offset:5px}.note{font-size:13px;color:#91ae99}#play-status{min-height:1.6em}noscript p{color:#d3fa8a}@media(max-width:430px){.choices{grid-template-columns:1fr}.choice{min-height:110px;padding:18px}}
+    .skins{border:1px solid #618269;border-radius:14px;padding:12px 16px;margin:0 0 18px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}.skins legend{padding:0 6px;color:#b6e487;font-size:12px;letter-spacing:.16em;font-weight:750}.skins label{display:flex;gap:8px;align-items:center;cursor:pointer;color:#eff9ef}.skins input{width:18px;height:18px;accent-color:#d3fa8a}
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">✦ ROBIN / FREE ARCADE</p>
+    <h1>Your next wave.</h1>
+    <p id="play-status" role="status" aria-live="polite">Choose your controls.</p>
+    <nav class="choices" aria-label="Choose how to play">
+      <a class="choice" id="play-desktop" data-play-mode="desktop" href="galaxian.html?skin=robin-cat-v6&amp;voice=1"><strong>Computer</strong><span>Arrow keys to move. Space to fire.</span></a>
+      <a class="choice" id="play-mobile" data-play-mode="mobile" href="mobile/index.html"><strong>Phone &amp; tablet</strong><span>Analog joystick. Auto or manual fire.</span></a>
+    </nav>
+    <fieldset class="skins" aria-label="Choose a skin">
+      <legend>Skin</legend>
+      <label><input type="radio" name="skin" value="robin-cat-v6" checked><span>Robin Wood</span></label>
+      <label><input type="radio" name="skin" value="robin-hood"><span>Robin Hood</span></label>
+      <label><input type="radio" name="skin" value="robin-moon"><span>Robin Moon</span></label>
+      <label><input type="radio" name="skin" value="robin-sailor-smoon"><span>Robin Sailor Smoon</span></label>
+      <label><input type="radio" name="skin" value="robin-ginger"><span>Robin Ginger</span></label>
+      <label><input type="radio" name="skin" value="robin-frost"><span>Robin Frost</span></label>
+    </fieldset>
+    <p class="note">Free · No wallet · Switch controls with the Mode link in the game.</p>
+    <p class="note">The skin applies on computer and on phone.</p>
+    <p class="note">© 2026 Galaxy King Dog (Liolee). All rights reserved. Unauthorized copying, modification, redistribution or rehosting is prohibited. <a href="COPYRIGHT.txt" style="color:#b6e487">Copyright notice</a></p>
+    <noscript><p>Choose a mode above. Enable JavaScript to play.</p></noscript>
+  </main>
+  <script src="src/play_launcher.js?v=1"></script>
+</body>
+</html>

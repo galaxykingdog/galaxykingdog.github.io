@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
+  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    // Phones get the touch-control edition unless the player chose this page.
+    (function () {
+      try {
+        var params = new URLSearchParams(location.search);
+        if (/(^|\.)gamejolt\.(net|com)$/i.test(location.hostname) || params.get('mode') === 'desktop') return;
+        try { if (localStorage.getItem('gkd.play.controls.v1') === 'desktop') return; } catch (_) {}
+        var nav = navigator, ua = nav.userAgent || '';
+        var phone = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(ua) || (/Mac/i.test(nav.platform || ua) && nav.maxTouchPoints > 1)
+          || (matchMedia('(pointer: coarse)').matches && nav.maxTouchPoints > 0 && !matchMedia('(hover: hover)').matches);
+        if (!phone) return;
+        params.delete('mode');
+        var query = params.toString();
+        location.replace('mobile/index.html' + (query ? '?' + query : ''));
+      } catch (_) {}
+    })();
+  </script>  <link rel="icon" href="data:," />
+  <title>Galaxy King Dog — Free Arcade Edition</title>
+  <style>
+    html, body { width:100%; height:100%; overflow:hidden; }
+    body { margin:0; background:#000; color:#fff; font-family:Arial,sans-serif; }
+    #game-container { width:100vw; height:100vh; display:flex; align-items:center; justify-content:center; }
+    #mode-tag {
+      position: fixed; top: 8px; left: 8px; z-index: 9999;
+      font:700 12px 'Courier New',monospace; color:#7dffbd;
+      background:rgba(0,0,0,.72); border:1px solid rgba(0,255,150,.38);
+      border-radius: 8px; padding: 6px 10px;
+      pointer-events:none;
+    }
+    #mode-switch { position:fixed;right:8px;bottom:76px;z-index:9999;color:#b9e8c9;background:#071810e6;border:1px solid #527c60;border-radius:8px;padding:9px 12px;font:12px Arial,sans-serif;text-decoration:none; }
+    #mode-switch:focus-visible { outline:3px solid #91e9dd;outline-offset:3px; }
+  </style>
+</head>
+<body>
+  <div id="mode-tag">ROBIN CAT · FREE ARCADE · ARROWS + SPACE · R RESTART</div>
+  <a id="mode-switch" href="play/index.html?mode=choose" aria-label="Choose desktop or mobile controls">Mode · PC / Mobile</a>
+  <div id="game-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+  <script src="src/chain/gkd_whitepaper_spec.js"></script>
+  <script>
+    // Free playtest edition: no wallet, fee, verifier, or remote leaderboard.
+    window.GKD_DISABLE_GLOBAL_LEADERBOARD = true;
+    window.CHAIN = Object.freeze({ enabled: false, requireWalletToStart: false });
+  </script>
+
+  <script src="src/scoring_rules.js?v=1.7.2"></script>
+  <script src="src/main_runtime_patch.js?v=1.7.2"></script>
+  <script src="src/robin_voice_lines.js?v=1.7.19-robin-paperhands"></script>
+  <script src="src/robin_voice.js?v=1.7.20-robin-every-clear"></script>
+  <script src="src/robin_weapon_fx.js?v=1.7.20-robin-arrows"></script>
+  <script src="src/robin_personality_motion.js?v=1.7.20-robin-arrows"></script>
+  <script src="src/robin_cape_fx.js?v=1.7.20-robin-arrows"></script>
+  <script src="src/invasion_story.js?v=invasion-2"></script>
+  <script src="src/invasion_enemy_fx.js?v=invasion-2"></script>
+  <script src="src/invasion_objectives.js?v=invasion-2"></script>
+  <script src="src/invasion_presentation.js?v=invasion-2"></script>
+  <script src="src/arcade_features.js?v=invasion-2"></script>
+  <script src="src/enemy_motion.js?v=1.7.2"></script>
+  <script src="src/main_galaxian.js?v=invasion-2"></script>
+  <script src="src/local_play_controls.js?v=2"></script>
+</body>
+</html>

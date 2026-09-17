@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
+  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#091610">
+  <title>Automatic Pool Mechanism — `gkd_chain` | Galaxy King Dog</title>
+  <meta name="description" content="Supporting source documentation for the Galaxy King Dog Solana design.">
+  
+  <link rel="icon" type="image/svg+xml" href="../../../assets/site/star.svg">
+  <link rel="stylesheet" href="../../../src/site/site.css?v=robin-paper-4">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="wrap header-inner">
+    <a class="brand" href="../../../whitepaper.html" aria-label="Galaxy King Dog whitepaper"><span class="brand-star" aria-hidden="true">✦</span><span>GALAXY KING DOG<small>WHITEPAPER / ROBIN</small></span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="../../../whitepaper.html#robin">Prologue</a>
+      <a href="../../../whitepaper.html#design" aria-current="page">Design</a>
+      <a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet</a>
+      <a class="button small" href="https://gamejolt.com/games/galaxy-king-dog/1084669">Play Game Jolt <span class="arrow" aria-hidden="true">↗</span></a>
+    </nav>
+  </div></header>
+  <main id="main"><header class="reader-hero"><div class="wrap"><p class="eyebrow">Galaxy King Dog / Supporting design document</p><h1>Automatic Pool Mechanism — `gkd_chain`</h1><div class="reader-meta"><a href="../../../whitepaper.html">← Whitepaper and current release</a><a href="pool_mechanism.md" download>Download original Markdown ↓</a></div></div></header><div class="reading-surface"><div class="wrap reader-layout"><aside class="contents"><nav aria-label="Table of contents"><p class="eyebrow">In this document</p><a href="#fund-accounts-program-owned-pdas-no-admin-withdraw">Fund accounts (program-owned PDAs, no admin withdraw)</a><a href="#money-in">Money in</a><a href="#checkpoints-permissionless-one-time">Checkpoints (permissionless, one-time)</a><a href="#state-additions-vs-gate-e-v0-1">State additions vs Gate E v0.1</a><a href="#build">Build</a><a href="#pending-before-mainnet-deferred-do-not-deploy-yet">Pending before mainnet (deferred — do not deploy yet)</a><a class="contents-back" href="../../../whitepaper.html">↑ Whitepaper</a></nav></aside><article class="prose"><aside class="status-note"><strong>Solana design documentation</strong><p>This source document describes the Solana implementation. It does not describe the currently playable Robinhood Testnet prototype. <a href="../../../whitepaper.html">Read the current-release note.</a></p></aside><p>On-chain implementation of the locked whitepaper v1.7 pool + checkpoint payout rules.
+Builds on Gate E (proof registry). <strong>Not yet deployed</strong> — see &quot;Pending before mainnet&quot;.</p>
+<h2 id="fund-accounts-program-owned-pdas-no-admin-withdraw">Fund accounts (program-owned PDAs, no admin withdraw)</h2>
+<ul>
+<li><strong>Game Pool</strong> — <code>Account&lt;Pool&gt;</code>, seeds <code>[&quot;pool&quot;]</code>. Receives entry fees. Funds can only
+leave through the checkpoint rules below.</li>
+<li><strong>Charity Pool</strong> — <code>Account&lt;CharityPool&gt;</code>, seeds <code>[&quot;charity&quot;]</code>. Receives the charity share
+of every creator payout.</li>
+</ul>
+<p>Both are created once by <code>initialize_pools</code> (admin). Lamports move out by direct
+program-owned lamport debits (<code>pay_lamports</code>), keeping each PDA rent-exempt.</p>
+<h2 id="money-in">Money in</h2>
+<p><code>deposit_entry_fee(amount)</code> — the player signs a <code>system_program::transfer</code> of <code>amount</code>
+(≥ <code>MIN_FEE_LAMPORTS</code> = 270_000) into the Game Pool PDA and bumps <code>pool.total_deposited</code>.</p>
+<h2 id="checkpoints-permissionless-one-time">Checkpoints (permissionless, one-time)</h2>
+<p>A season must be <code>close_season</code>-d (admin gate = &quot;condition met&quot;) before its payout can run.
+Anyone can then trigger the payout; it pays exactly once via a claimed flag.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th>Trigger</th>
+<th>Split (of distributable pool)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>checkpoint_farm_season_end</code></td>
+<td>season closed</td>
+<td>70% retained · 20% champion · 10% creator payout</td>
+</tr>
+<tr>
+<td><code>checkpoint_world_record</code></td>
+<td><code>record_break_count &gt; paid_record_breaks</code></td>
+<td>70% retained · 20% record breaker · 10% creator payout — once <strong>per break</strong></td>
+</tr>
+<tr>
+<td><code>checkpoint_human_season_end</code></td>
+<td>season 32 closed</td>
+<td>30% carried to Chaos · 40% Human Champion · 30% creator payout</td>
+</tr>
+<tr>
+<td><code>checkpoint_chaos_season_end</code></td>
+<td>season 33 closed</td>
+<td>67% Chaos Champion · 33% creator payout (distributes full pool incl. carry)</td>
+</tr>
+</tbody>
+</table></div>
+<p>&quot;Distributable&quot; = pool lamports − rent-exempt minimum − (for non-Chaos) the <code>carried_chaos</code>
+reserve. Integer-division remainders stay retained in the pool.</p>
+<h3 id="creator-payout-auto-split-applied-to-every-creator-payout-slice">Creator payout auto-split (applied to every &quot;creator payout&quot; slice)</h3>
+<p><code>distribute_creator_payout(amount)</code>:</p>
+<ul>
+<li>49% → creator wallet (<code>config.creator_wallet</code>)</li>
+<li>51% → Charity Pool, but <strong>20% of that</strong> is immediately recycled back to the Game Pool
+(left in the pool by construction), so Charity nets 51% × 80% and the Game Pool keeps
+51% × 20%.</li>
+</ul>
+<p>Recipient wallets are validated on-chain: <code>creator</code> must equal <code>config.creator_wallet</code>,
+and <code>champion</code>/<code>record_holder</code> must equal the stored winner pubkey.</p>
+<h2 id="state-additions-vs-gate-e-v0-1">State additions vs Gate E v0.1</h2>
+<ul>
+<li><code>SeasonState</code>: <code>farm_payout_claimed</code>, <code>human_payout_claimed</code>, <code>chaos_payout_claimed</code>.</li>
+<li><code>RecordState</code>: <code>paid_record_breaks</code>.</li>
+<li>New <code>Pool</code> (<code>total_deposited</code>, <code>total_paid_out</code>, <code>carried_chaos</code>) and <code>CharityPool</code>
+(<code>total_in</code>, <code>total_recycled</code>, <code>total_out</code>).</li>
+</ul>
+<h2 id="build">Build</h2>
+<p>The bundled SBF cargo (1.82) cannot parse <code>edition2024</code> manifests, so <code>jobserver</code> is pinned
+to <code>=0.1.32</code> in <code>programs/gkd_chain/Cargo.toml</code> to keep <code>getrandom 0.3 → wasip2 → wit-bindgen</code>
+out of the tree.</p>
+<p>On Windows the Anchor 0.32 CLI mis-proxies the SBF toolchain. Build the <code>.so</code> directly:</p>
+<pre><code class="language-bash">rustup toolchain link 1.84.1-sbpf-solana-v1.51 &quot;$HOME/.cache/solana/v1.51/platform-tools/rust&quot;
+export PATH=&quot;$HOME/.cargo/bin:$PATH&quot;   # rustup proxy cargo must precede any standalone cargo
+cd programs/gkd_chain &amp;&amp; cargo-build-sbf --skip-tools-install
+</code></pre>
+<p>Host type-check (no SBF toolchain needed): <code>cargo check -p gkd_chain</code>.</p>
+<h2 id="pending-before-mainnet-deferred-do-not-deploy-yet">Pending before mainnet (deferred — do not deploy yet)</h2>
+<ol>
+<li><strong>Founder/creator wallet</strong> — supplied by the owner. Set it as <code>creator_wallet</code> in
+<code>initialize_config</code> and update the front-end <code>chain_config.js</code> / whitepaper spec.</li>
+<li><strong>Program id</strong> — generate the real program keypair, sync <code>declare_id!</code> + <code>Anchor.toml</code>
+(current <code>target/deploy</code> keypair is a throwaway and differs from the source id).</li>
+<li><strong>Cluster</strong> — switch <code>Anchor.toml [provider]</code> and <code>chain_config.js</code> to <code>mainnet-beta</code>,
+fund the deploy keypair with real SOL.</li>
+<li><strong>Front-end wiring</strong> — replace the raw <code>poolRecipient</code> transfer in <code>chain_client.js</code>
+with a <code>deposit_entry_fee</code> instruction call against the deployed program + IDL.</li>
+<li><strong>Audit</strong> — independent review of pool/checkpoint math before real funds.</li>
+</ol>
+</article></div></div></main>
+  <footer class="site-footer"><div class="wrap footer-inner">
+    <span>© 2026 Galaxy King Dog</span>
+    <span class="footer-signoff">Aim beyond the next reward.</span>
+    <div class="footer-links"><a href="../../../whitepaper.html">Whitepaper</a><a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Game Jolt ↗</a><a href="/play/">Choose controls ↗</a><a href="/mobile/?v=mobile-6">Mobile ↗</a><a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet ↗</a></div>
+  </div></footer>
+</body>
+</html>

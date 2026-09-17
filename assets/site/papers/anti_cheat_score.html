@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
+  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#091610">
+  <title>Anti-cheat: strict verifier-signed on-chain score | Galaxy King Dog</title>
+  <meta name="description" content="Supporting source documentation for the Galaxy King Dog Solana design.">
+  
+  <link rel="icon" type="image/svg+xml" href="../../../assets/site/star.svg">
+  <link rel="stylesheet" href="../../../src/site/site.css?v=robin-paper-4">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="wrap header-inner">
+    <a class="brand" href="../../../whitepaper.html" aria-label="Galaxy King Dog whitepaper"><span class="brand-star" aria-hidden="true">✦</span><span>GALAXY KING DOG<small>WHITEPAPER / ROBIN</small></span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="../../../whitepaper.html#robin">Prologue</a>
+      <a href="../../../whitepaper.html#design" aria-current="page">Design</a>
+      <a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet</a>
+      <a class="button small" href="https://gamejolt.com/games/galaxy-king-dog/1084669">Play Game Jolt <span class="arrow" aria-hidden="true">↗</span></a>
+    </nav>
+  </div></header>
+  <main id="main"><header class="reader-hero"><div class="wrap"><p class="eyebrow">Galaxy King Dog / Supporting design document</p><h1>Anti-cheat: strict verifier-signed on-chain score</h1><div class="reader-meta"><a href="../../../whitepaper.html">← Whitepaper and current release</a><a href="anti_cheat_score.md" download>Download original Markdown ↓</a></div></div></header><div class="reading-surface"><div class="wrap reader-layout"><aside class="contents"><nav aria-label="Table of contents"><p class="eyebrow">In this document</p><a href="#trust-model-two-layers">Trust model (two layers)</a><a href="#how-the-on-chain-check-works">How the on-chain check works</a><a href="#cross-component-layout-must-stay-in-sync">Cross-component layout (must stay in sync)</a><a href="#deploy-checklist">Deploy checklist</a><a href="#top-3-leaderboard-matches-on-chain-by-construction">Top-3 leaderboard (matches on-chain by construction)</a><a href="#remaining-anti-cheat-boundary">Remaining anti-cheat boundary</a><a class="contents-back" href="../../../whitepaper.html">↑ Whitepaper</a></nav></aside><article class="prose"><aside class="status-note"><strong>Solana design documentation</strong><p>This source document describes the Solana implementation. It does not describe the currently playable Robinhood Testnet prototype. <a href="../../../whitepaper.html">Read the current-release note.</a></p></aside><p>Goal: <strong>the final score recorded on-chain is exactly what the configured verifier accepted.</strong> The
+chain signature guarantee is cryptographic. The current off-chain gameplay guarantee is a strict,
+persistent event ledger with bounded validation; it is not yet a full authoritative physics replay.</p>
+<h2 id="trust-model-two-layers">Trust model (two layers)</h2>
+<ol>
+<li><strong>Off-chain authority — the live anti-cheat ledger (Gate D).</strong> Ledger v2 explicitly accounts for
+kills, Galaxian dive values, boss-hit points, wave bonuses, gifts, bombs and extra lives. It
+rejects any checkpoint/final score that differs from its event total, permanently binds one
+verified entry transaction to one run ticket, and persists active/finalized sessions across
+restarts. A modified client can still fabricate a plausible event stream; authoritative replay or
+server-hosted simulation is required before real-value Mainnet rewards.</li>
+</ol>
+<p>All score-producing gameplay paths and verifier checks consume <code>src/scoring_rules.js</code>. The browser
+has one score mutation entrypoint, and that entrypoint emits the corresponding ledger event. Burst
+limits accept a complete 48-enemy carried formation in one frame and reset at each canonical wave,
+while duplicate enemy ids, per-wave budgets, exact point values and final score equality remain
+strict. Any rejected event invalidates browser finalization and reports the first rejected type,
+wave and frame instead of allowing a later generic score mismatch.
+2. <strong>On-chain enforcement — verifier ed25519 signature.</strong> <code>submit_verified_run</code> requires the verifier
+to have signed the exact score being recorded, so even though anyone may <em>send</em> the submit
+transaction, only a verifier-signed score is accepted.</p>
+<h2 id="how-the-on-chain-check-works">How the on-chain check works</h2>
+<ul>
+<li>
+<p><code>set_verifier(pubkey)</code> (admin) stores the trusted verifier ed25519 key in <code>config.verifier_pubkey</code>.
+Once set (non-default), enforcement is mandatory.</p>
+</li>
+<li>
+<p>The verifier signs a canonical, fixed-layout message bound to the run:</p>
+<pre><code>&quot;GKD_RUN_V1&quot; | run_hash(32) | player(32) | season_id(2 LE) | score(8 LE) | fee(8 LE) | entry_slot(8 LE)
+</code></pre>
+</li>
+<li>
+<p>The submit transaction includes a self-contained <strong>Solana Ed25519 precompile</strong> instruction over
+<code>(verifier_pubkey, canonical_message, signature)</code> before <code>submit_verified_run</code>. The runtime rejects
+the whole tx if that signature is invalid.</p>
+</li>
+<li>
+<p><code>submit_verified_run</code> scans only earlier, already-executed instructions. This safely tolerates
+wallet-added ComputeBudget instructions while still requiring an exact binding to
+<code>config.verifier_pubkey</code> and the canonical message rebuilt from the submit args. Mismatched
+pubkey/message ⇒ <code>WrongVerifier</code> / <code>VerifierMsgMismatch</code>.</p>
+</li>
+</ul>
+<p>Result: to record a score on-chain you need the verifier's private key over <em>that</em> score — which a
+cheating client does not have. Changing any signed field (score, player, run, fee, slot) invalidates
+the signature.</p>
+<h2 id="cross-component-layout-must-stay-in-sync">Cross-component layout (must stay in sync)</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>canonical message + ed25519 introspection</td>
+<td><code>programs/gkd_chain/src/lib.rs</code> (<code>canonical_run_message</code>, <code>verify_verifier_signature</code>)</td>
+</tr>
+<tr>
+<td>verifier signs canonical message</td>
+<td><code>verifier/server.js</code> (<code>buildChainMessage</code>, <code>/verify</code> → <code>chain_msg_b64</code> / <code>chain_sig_b64</code>)</td>
+</tr>
+<tr>
+<td>browser submit tx attaches Ed25519 ix + sysvar</td>
+<td><code>src/chain/chain_client.js</code> (<code>submitVerifiedRun</code>)</td>
+</tr>
+<tr>
+<td>CLI submit parity</td>
+<td><code>tools/gate_e_submit_run.js</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>The Ed25519 instruction byte layout was verified to match the on-chain parser (pubkey @ offset 16,
+message @ offset 112). The signed score is the <strong>ledger-accepted</strong> score, so on-chain == validated.</p>
+<h2 id="deploy-checklist">Deploy checklist</h2>
+<ol>
+<li>Generate the ignored local key with <code>npm run verifier:key:init</code>; strict/production startup fails
+closed if <code>VERIFIER_SECRET_KEY_B64</code> is absent.</li>
+<li>Keep <code>REQUIRE_ENTRY_TX=true</code>, <code>STRICT_GATE_D=true</code>, <code>ALLOW_BROWSER_COMPAT=false</code>, and durable
+<code>LEDGER_STATE_FILE</code> storage.</li>
+<li>Call <code>set_verifier(&lt;verifier pubkey&gt;)</code> after <code>initialize_config</code>.</li>
+<li>Keep the legacy memo relay disabled; the player wallet submits the signed RunRecord transaction.</li>
+<li>For Mainnet, move the verifier key to HSM/KMS-backed signing and replace the single-host JSON
+state file with an operationally durable database/replicated store.</li>
+</ol>
+<h2 id="top-3-leaderboard-matches-on-chain-by-construction">Top-3 leaderboard (matches on-chain by construction)</h2>
+<p><code>submit_verified_run</code> also feeds the verified score into a global <code>Leaderboard</code> PDA
+(<code>[&quot;leaderboard&quot;]</code>, top-3, sorted descending) via <code>lb_insert</code>. Because it uses the <strong>same signed
+score</strong> that is recorded, the displayed leaderboard can never disagree with the on-chain record.
+Each entry stores <code>{ score, player (wallet), name[16] }</code>. The front-end reads and renders it in a
+top-left panel (<code>ChainClient.fetchLeaderboard</code> / <code>refreshLeaderboard</code> in
+<code>src/chain/chain_client.js</code>; <code>showLeaderboard</code> in <code>chain_config.js</code>). The name is a cosmetic,
+unsigned display field; the wallet is the authoritative (signed) identifier.</p>
+<h2 id="remaining-anti-cheat-boundary">Remaining anti-cheat boundary</h2>
+<p>The schema-2 replay verifier currently proves package/hash/checkpoint consistency; it does not
+independently execute Phaser physics. The event ledger prevents raw score injection and catches
+duplicate/impossible accounting, but a custom client can manufacture plausible timed events. Do not
+enable real-value Mainnet mining until an independent audit approves either a deterministic
+authoritative simulation, a server-hosted gameplay authority, or an equivalent anti-bot design.</p>
+</article></div></div></main>
+  <footer class="site-footer"><div class="wrap footer-inner">
+    <span>© 2026 Galaxy King Dog</span>
+    <span class="footer-signoff">Aim beyond the next reward.</span>
+    <div class="footer-links"><a href="../../../whitepaper.html">Whitepaper</a><a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Game Jolt ↗</a><a href="/play/">Choose controls ↗</a><a href="/mobile/?v=mobile-6">Mobile ↗</a><a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet ↗</a></div>
+  </div></footer>
+</body>
+</html>

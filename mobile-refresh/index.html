@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
+  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
+  <base href="/">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#06120e">
+  <title>Update Robin — Galaxy King Dog</title>
+  <link rel="icon" href="assets/site/star.svg" type="image/svg+xml">
+  <style>
+    :root{color-scheme:dark;font:16px/1.6 system-ui,sans-serif;color:#edf6eb;background:#06120e}
+    *{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center;padding:28px 20px;background:radial-gradient(ellipse at 50% 0,#183b28,transparent 65%)}
+    main{width:min(460px,100%);padding:32px;border:1px solid #416a4d;border-radius:24px;background:#0b1b13;box-shadow:0 20px 60px #0005}
+    .brand{font-size:11px;color:#d3fa8a;letter-spacing:.18em;font-weight:800}
+    h1{font-size:clamp(30px,8vw,42px);line-height:1.1;letter-spacing:-.04em;margin:18px 0}
+    p{color:#b7cbbd;margin:16px 0}.note{font-size:13px;color:#91ae9a}
+    button{display:block;width:100%;font:inherit;font-weight:800;border:0;border-radius:12px;background:#d3fa8a;color:#0b2512;min-height:52px;padding:12px;cursor:pointer;margin-top:25px}
+    button:disabled{opacity:.55;cursor:wait}a{color:#d3fa8a;text-underline-offset:3px}button:focus-visible,a:focus-visible{outline:3px solid #95e6e1;outline-offset:4px}
+    #mobile-refresh-status{min-height:3.2em;font-size:14px;margin-bottom:0}[hidden]{display:none!important}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand">✦ ROBIN / FREE ARCADE</div>
+    <h1>Bring Robin up to date.</h1>
+    <p>Get the red arcade FIRE button and the new expanded view.</p>
+    <p class="note">Finish your current run first. Your saved best scores stay on this device.</p>
+    <button id="mobile-refresh" type="button">Update &amp; play</button>
+    <p id="mobile-refresh-status" role="status" aria-live="polite">Connect to the internet, then tap Update &amp; play.</p>
+    <a id="mobile-refresh-play" href="mobile/" hidden>Open the updated game</a>
+    <noscript><p>Enable JavaScript to update and play Robin.</p></noscript>
+  </main>
+  <script src="src/mobile/mobile_refresh.js?v=1"></script>
+</body>
+</html>

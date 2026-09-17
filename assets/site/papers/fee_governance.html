@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
+  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#091610">
+  <title>Fee Governance — weekly $0.10 peg + 2/3 multisig | Galaxy King Dog</title>
+  <meta name="description" content="Supporting source documentation for the Galaxy King Dog Solana design.">
+  
+  <link rel="icon" type="image/svg+xml" href="../../../assets/site/star.svg">
+  <link rel="stylesheet" href="../../../src/site/site.css?v=robin-paper-4">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="wrap header-inner">
+    <a class="brand" href="../../../whitepaper.html" aria-label="Galaxy King Dog whitepaper"><span class="brand-star" aria-hidden="true">✦</span><span>GALAXY KING DOG<small>WHITEPAPER / ROBIN</small></span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="../../../whitepaper.html#robin">Prologue</a>
+      <a href="../../../whitepaper.html#design" aria-current="page">Design</a>
+      <a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet</a>
+      <a class="button small" href="https://gamejolt.com/games/galaxy-king-dog/1084669">Play Game Jolt <span class="arrow" aria-hidden="true">↗</span></a>
+    </nav>
+  </div></header>
+  <main id="main"><header class="reader-hero"><div class="wrap"><p class="eyebrow">Galaxy King Dog / Supporting design document</p><h1>Fee Governance — weekly $0.10 peg + 2/3 multisig</h1><div class="reader-meta"><a href="../../../whitepaper.html">← Whitepaper and current release</a><a href="fee_governance.md" download>Download original Markdown ↓</a></div></div></header><div class="reading-surface"><div class="wrap reader-layout"><aside class="contents"><nav aria-label="Table of contents"><p class="eyebrow">In this document</p><a href="#rules">Rules</a><a href="#weekly-auto-repeg-refresh-fee">Weekly auto-repeg — refresh_fee</a><a href="#state">State</a><a href="#instructions">Instructions</a><a href="#front-end-wiring-autopool">Front-end wiring (autopool)</a><a href="#price-oracle-intentionally-off-chain">Price oracle — intentionally off-chain</a><a href="#no-pool-withdrawal-guarantee">&quot;No pool withdrawal&quot; guarantee</a><a class="contents-back" href="../../../whitepaper.html">↑ Whitepaper</a></nav></aside><article class="prose"><aside class="status-note"><strong>Solana design documentation</strong><p>This source document describes the Solana implementation. It does not describe the currently playable Robinhood Testnet prototype. <a href="../../../whitepaper.html">Read the current-release note.</a></p></aside><p>The entry fee targets <strong>~$0.10</strong> and is <strong>re-pegged weekly</strong> from the live SOL/USD price via a
+permissionless Pyth-backed crank. A 2/3 multisig can additionally override the fee and pause/unpause,
+but neither path can <strong>ever</strong> withdraw pool funds. <strong>Not yet deployed.</strong></p>
+<h2 id="rules">Rules</h2>
+<ul>
+<li>Fee target: <strong>$0.10</strong> (<code>FEE_TARGET_USD_MICROS = 100_000</code>, stored in <code>FeeGov.target_usd_micros</code>).</li>
+<li><strong>Weekly</strong> repeg from SOL/USD (<code>FEE_UPDATE_MIN_INTERVAL_SECONDS = 7 days</code>), permissionless crank.</li>
+<li>Default bootstrap fee: <strong>270,000 lamports</strong> (≈ $0.10 at ~$370/SOL); the enforced hard floor is a
+tiny dust guard (<code>FEE_ABSOLUTE_MIN_LAMPORTS = 1_000</code>) so the peg can move down if SOL appreciates.</li>
+<li>Multisig (<strong>2/3</strong>) may override the fee and pause/unpause; <strong>cannot</strong> withdraw pool funds.</li>
+</ul>
+<h2 id="weekly-auto-repeg-refresh-fee">Weekly auto-repeg — <code>refresh_fee</code></h2>
+<p><code>refresh_fee(ctx)</code> is permissionless: anyone may crank it once the weekly cadence elapses. It reads
+the SOL/USD <strong>Pyth</strong> price account (validated against <code>FeeGov.pyth_sol_usd</code>, max age 1h) and sets</p>
+<pre><code>normal_fee_lamports = target_usd_micros · 10^(-expo) · 1000 / price   (clamped to the dust floor)
+</code></pre>
+<p>e.g. target $0.10, SOL = $370 (price 37_000_000_000, expo −8) → ~270,270 lamports. The fee account
+(<code>config.normal_fee_lamports</code>) is what <code>deposit_entry_fee</code> enforces, so the whole game pays the
+current pegged price. <code>initialize_fee_gov(..., pyth_sol_usd)</code> records which price account to trust.</p>
+<blockquote>
+<p>Oracle note: built against <code>pyth-sdk-solana</code> (legacy price-account format). For mainnet, point
+<code>pyth_sol_usd</code> at the correct SOL/USD feed; migrating to the Pyth pull receiver (<code>PriceUpdateV2</code>)
+is a clean future hardening if using sponsored pull feeds.</p>
+</blockquote>
+<h2 id="state">State</h2>
+<ul>
+<li><code>FeeGov</code> — <code>[&quot;fee_gov&quot;]</code>: <code>members[3]</code>, <code>threshold</code>, <code>target_usd_micros</code>, <code>last_fee_update_ts</code>,
+<code>proposal_count</code>.</li>
+<li><code>FeeProposal</code> — <code>[&quot;fee_proposal&quot;, nonce]</code>: <code>new_fee_lamports</code>, <code>approved_mask</code> (member bitmap),
+<code>approvals</code>, <code>executed</code>.</li>
+</ul>
+<h2 id="instructions">Instructions</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th>Who</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>initialize_fee_gov(members, threshold, target_usd_micros, pyth_sol_usd)</code></td>
+<td>admin</td>
+<td>Installs the multisig + the trusted SOL/USD oracle.</td>
+</tr>
+<tr>
+<td><code>refresh_fee()</code></td>
+<td>anyone</td>
+<td><strong>Weekly</strong> re-peg of the fee to $0.10 from the Pyth SOL/USD price.</td>
+</tr>
+<tr>
+<td><code>propose_fee_update(nonce, new_fee_lamports)</code></td>
+<td>member</td>
+<td>Manual override proposal; proposer auto-approves.</td>
+</tr>
+<tr>
+<td><code>approve_fee_update(nonce)</code></td>
+<td>member</td>
+<td>Adds an approval (idempotent per member via bitmap).</td>
+</tr>
+<tr>
+<td><code>execute_fee_update(nonce)</code></td>
+<td>anyone</td>
+<td>Applies the override once <code>approvals ≥ threshold</code> <strong>and</strong> ≥ 7 days since the last update.</td>
+</tr>
+<tr>
+<td><code>multisig_set_paused(paused)</code></td>
+<td>member</td>
+<td>Emergency pause/unpause.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="front-end-wiring-autopool">Front-end wiring (autopool)</h2>
+<p>The browser entry payment now invokes <code>deposit_entry_fee</code> so the fee lands in the <strong>program-owned
+Game Pool PDA</strong> (the autopool), not a placeholder wallet. See <a href="pool_mechanism.html">POOL_MECHANISM.md</a>
+for the deposit instruction; <code>src/chain/chain_config.js</code> exposes <code>programId</code> + <code>usePoolProgram</code>, and
+<code>src/chain/chain_client.js</code> builds the instruction (PDA derivation + Anchor discriminator) in-browser.
+It activates once the program is deployed on the active cluster; set <code>usePoolProgram=false</code> to fall
+back to a plain transfer for pre-deploy testing.</p>
+<p><code>deposit_entry_fee</code> now requires <code>amount ≥ config.normal_fee_lamports</code> (the current multisig-set
+fee), which is always ≥ the hard floor.</p>
+<h2 id="price-oracle-intentionally-off-chain">Price oracle — intentionally off-chain</h2>
+<p>The whitepaper lists Pyth SOL/USD, Switchboard SOL/USD, <strong>and a Coinbase/Kraken human verification
+log</strong> as price sources. The USD→lamports targeting is therefore performed by the multisig members
+off-chain (per the human verification log) when they propose a fee; the program enforces what it
+can on-chain: the <strong>hard floor</strong>, the <strong>monthly cadence</strong>, and the <strong>2/3 threshold</strong>. Adding a live
+Pyth/Switchboard feed read as an extra on-chain guard is a possible future hardening step.</p>
+<h2 id="no-pool-withdrawal-guarantee">&quot;No pool withdrawal&quot; guarantee</h2>
+<p>There is no instruction that lets the multisig (or anyone) move Game Pool funds outside the locked
+checkpoint rules — the only outflows are the checkpoint payouts and the governance-directed charity
+routing. The multisig's powers are limited to the fee value and the pause flag.</p>
+</article></div></div></main>
+  <footer class="site-footer"><div class="wrap footer-inner">
+    <span>© 2026 Galaxy King Dog</span>
+    <span class="footer-signoff">Aim beyond the next reward.</span>
+    <div class="footer-links"><a href="../../../whitepaper.html">Whitepaper</a><a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Game Jolt ↗</a><a href="/play/">Choose controls ↗</a><a href="/mobile/?v=mobile-6">Mobile ↗</a><a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet ↗</a></div>
+  </div></footer>
+</body>
+</html>

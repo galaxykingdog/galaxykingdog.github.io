@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
+  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#091610">
+  <title>On-chain Token Mining — $420POP emission | Galaxy King Dog</title>
+  <meta name="description" content="Supporting source documentation for the Galaxy King Dog Solana design.">
+  
+  <link rel="icon" type="image/svg+xml" href="../../../assets/site/star.svg">
+  <link rel="stylesheet" href="../../../src/site/site.css?v=robin-paper-4">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="wrap header-inner">
+    <a class="brand" href="../../../whitepaper.html" aria-label="Galaxy King Dog whitepaper"><span class="brand-star" aria-hidden="true">✦</span><span>GALAXY KING DOG<small>WHITEPAPER / ROBIN</small></span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="../../../whitepaper.html#robin">Prologue</a>
+      <a href="../../../whitepaper.html#design" aria-current="page">Design</a>
+      <a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet</a>
+      <a class="button small" href="https://gamejolt.com/games/galaxy-king-dog/1084669">Play Game Jolt <span class="arrow" aria-hidden="true">↗</span></a>
+    </nav>
+  </div></header>
+  <main id="main"><header class="reader-hero"><div class="wrap"><p class="eyebrow">Galaxy King Dog / Supporting design document</p><h1>On-chain Token Mining — $420POP emission</h1><div class="reader-meta"><a href="../../../whitepaper.html">← Whitepaper and current release</a><a href="token_mining.md" download>Download original Markdown ↓</a></div></div></header><div class="reading-surface"><div class="wrap reader-layout"><aside class="contents"><nav aria-label="Table of contents"><p class="eyebrow">In this document</p><a href="#mint">Mint</a><a href="#units">Units</a><a href="#emission-flow">Emission flow</a><a href="#parameter-that-still-needs-a-whitepaper-founder-lock">Parameter that still needs a whitepaper/founder lock</a><a href="#not-yet-implemented-future-steps">Not yet implemented (future steps)</a><a href="#build-verify">Build / verify</a><a class="contents-back" href="../../../whitepaper.html">↑ Whitepaper</a></nav></aside><article class="prose"><aside class="status-note"><strong>Solana design documentation</strong><p>This source document describes the Solana implementation. It does not describe the currently playable Robinhood Testnet prototype. <a href="../../../whitepaper.html">Read the current-release note.</a></p></aside><p>On-chain implementation of the whitepaper v1.7 farming/emission (&quot;mining&quot;) of the <code>$420POP</code>
+SPL token. Builds on the proof registry (Gate E) and the pool mechanism. <strong>Not yet deployed.</strong></p>
+<h2 id="mint">Mint</h2>
+<p><code>initialize_token</code> (admin, once) creates the <code>$420POP</code> SPL mint as a PDA (<code>seeds = [&quot;mint&quot;]</code>,
+<code>decimals = 9</code>) whose <strong>mint authority is the <code>[&quot;mint_authority&quot;]</code> PDA</strong>. No human ever holds
+mint authority — tokens can only be issued by <code>mint_farm_reward</code> under the locked caps. The mint
+pubkey is stored in <code>GameConfig.mint</code>.</p>
+<h2 id="units">Units</h2>
+<p><code>mint_cap</code>, <code>minted_count</code>, and <code>reward_per_run</code> are all in <strong>base units</strong> (whole tokens ×
+10⁹). When seeding a season from the whitepaper caps (e.g. <code>HUMAN_SEASON_CAPS[0] = 1_050_000_013</code>
+tokens), multiply by 10⁹ before passing to <code>initialize_season</code>.</p>
+<h2 id="emission-flow">Emission flow</h2>
+<pre><code>verified run (RunRecord, score &gt;= Mode-B target)  -&gt;  mint_farm_reward  -&gt;  $420POP to player ATA
+</code></pre>
+<p><code>mint_farm_reward(ctx)</code> — permissionless (anyone may relay/pay fees), but tokens always go to the
+run's recorded <code>player</code>:</p>
+<ul>
+<li>requires <code>run.passed</code>, <code>!run.reward_minted</code>, matching season, and <code>player == run_record.player</code>;</li>
+<li>mints <code>min(season.reward_per_run, mint_cap − minted_count)</code> so the cap is <strong>exact</strong>;</li>
+<li>increments <code>minted_count</code>, sets <code>run.reward_minted = true</code> (one reward per run);</li>
+<li>mints into the player's associated token account (created on demand by the payer).</li>
+</ul>
+<h3 id="halving-schedule">Halving schedule</h3>
+<p>Each season's total emission is bounded by its <code>mint_cap</code>. Seeding the 32 Human seasons from
+<code>HUMAN_SEASON_CAPS</code> (a Bitcoin-style halving curve summing to 2.1B tokens) and season 33 from the
+Chaos cap (300,000 tokens) reproduces the locked emission. The program enforces &quot;never exceed the
+cap&quot;; the curve itself lives in the per-season <code>mint_cap</code> values the admin sets.</p>
+<h3 id="mode-b-dynamic-difficulty-bitcoin-style">Mode B dynamic difficulty (Bitcoin-style)</h3>
+<p>The minimum score behaves like mining difficulty: it rises as the epoch's supply mints out, and the
+check happens <strong>at mint time</strong>, against the supply <em>now</em> — mirroring proof-of-work:</p>
+<ul>
+<li><strong>Recording gate</strong> — <code>submit_verified_run</code> requires <code>score ≥ season.score_target</code> (the epoch's
+base minimum) so a run is valid / eligible for the leaderboard and records.</li>
+<li><strong>Mining gate</strong> — <code>mint_farm_reward</code> requires <code>run.score ≥ mode_b_target(score_target, minted_count, mint_cap)</code>, evaluated against the <strong>current</strong> <code>minted_count</code>. An integer
+reimplementation of the locked <code>ceil(T_base · m(progress))</code> curve: 1.0× up to 80% minted, ramping
+to 1.15× at 95%, 1.35× at 100%.</li>
+</ul>
+<p>So a run that beat the base minimum (and is recorded) may still be unable to mint if the epoch has
+filled further and difficulty rose past its score — exactly like a block that no longer meets the
+current difficulty. Difficulty resets per epoch via each season's <code>score_target</code> + <code>mint_cap</code>.</p>
+<p>Unit tests in <code>programs/gkd_chain/src/lib.rs</code> (<code>cargo test -p gkd_chain</code>) prove the difficulty curve,
+exact-cap minting, and that the mining gate enforces current difficulty.</p>
+<h2 id="parameter-that-still-needs-a-whitepaper-founder-lock">Parameter that still needs a whitepaper/founder lock</h2>
+<p><code>reward_per_run</code> (the per-qualifying-run block reward) is <strong>not</strong> pinned in the spec files we have,
+so it is a <strong>per-season parameter</strong> set at <code>initialize_season</code> (env <code>GKD_SEASON_REWARD</code> in
+<code>tools/gate_e_submit_run.js</code>). The program guarantees the cap regardless of its value; the exact
+economic figure should be confirmed against the whitepaper before mainnet.</p>
+<h2 id="not-yet-implemented-future-steps">Not yet implemented (future steps)</h2>
+<ul>
+<li>&quot;Final Human token requires a new World Record&quot; special-case gating.</li>
+<li>NFTs / marked tokens for first player, champions, record breakers, final winner.</li>
+<li>Charity governance voting (eligibility = farmed ≥ 1 token).</li>
+</ul>
+<h2 id="build-verify">Build / verify</h2>
+<p>Same workaround as the pool mechanism (see <a href="pool_mechanism.html">POOL_MECHANISM.md</a>). After adding
+<code>anchor-spl</code>, both <code>cargo check -p gkd_chain</code> (host) and <code>cargo-build-sbf --skip-tools-install</code>
+(SBF <code>.so</code>) pass.</p>
+</article></div></div></main>
+  <footer class="site-footer"><div class="wrap footer-inner">
+    <span>© 2026 Galaxy King Dog</span>
+    <span class="footer-signoff">Aim beyond the next reward.</span>
+    <div class="footer-links"><a href="../../../whitepaper.html">Whitepaper</a><a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Game Jolt ↗</a><a href="/play/">Choose controls ↗</a><a href="/mobile/?v=mobile-6">Mobile ↗</a><a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet ↗</a></div>
+  </div></footer>
+</body>
+</html>

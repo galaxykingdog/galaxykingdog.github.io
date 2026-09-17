@@ -1,0 +1,613 @@
+{
+  "schema": 1,
+  "version": "63b81beb6472b07651261e85",
+  "scope": "/mobile/",
+  "entry": "/mobile/",
+  "count": 120,
+  "totalBytes": 7702136,
+  "voiceCount": 60,
+  "assets": [
+    {
+      "url": "/assets/arrow_player_v2.png",
+      "sha256": "b37ce897940e60e72e7b820a418e9590002139142cd0cedf47b2686de07bfd89",
+      "bytes": 1511
+    },
+    {
+      "url": "/assets/assets1.png",
+      "sha256": "5b3dab5fd45ec4e5c2f1e04798a6bfeb802fb4086c93992c352c45e5438f863a",
+      "bytes": 1670
+    },
+    {
+      "url": "/assets/assets2.png",
+      "sha256": "a697967a6b98580c9dd30caa0202a370456240ce1c1e2fd51f9adec7be342819",
+      "bytes": 1363
+    },
+    {
+      "url": "/assets/assets3.png",
+      "sha256": "b43219d05713d8ff9edb9c66e8ee711be51a9ebb4c52607714b411ba148bc548",
+      "bytes": 1422
+    },
+    {
+      "url": "/assets/backround1.jpg",
+      "sha256": "770b1b3360ef78d46a19d815ea06b511a74e41cb44c708430c0e654701f08de9",
+      "bytes": 44659
+    },
+    {
+      "url": "/assets/bgm_galaxy_mystery_loop.wav",
+      "sha256": "685b44f651cc25cddd88f5c15af22a64bf72be7008d9a3c19c976c6f9458e9fa",
+      "bytes": 1510692
+    },
+    {
+      "url": "/assets/boom.png",
+      "sha256": "98937dd0d23af950935703908c2db5c6fcb866e455a8f392e83269de2bad503c",
+      "bytes": 1224
+    },
+    {
+      "url": "/assets/bullet_enemy.png",
+      "sha256": "d8f0dc4e35a7e447350d4c78523e825c0af1426228ca31d5727d13ae2824b22e",
+      "bytes": 317
+    },
+    {
+      "url": "/assets/bullet_player.png",
+      "sha256": "17b041968c9b095dcbe38045c9de7d41ed07d58bc6aad00320a71e609b719e80",
+      "bytes": 322
+    },
+    {
+      "url": "/assets/enemy_blue.png",
+      "sha256": "cc7b9a801283f90e1ca023bb5162ca655482b95ebac52817e82e29317766a634",
+      "bytes": 4351
+    },
+    {
+      "url": "/assets/enemy_flagship.png",
+      "sha256": "4d33abf614a915947821c376407c98255eee635e013b65fffd642fe91bbe8b63",
+      "bytes": 3512
+    },
+    {
+      "url": "/assets/enemy_purple.png",
+      "sha256": "4d0b99d616b0658e1bb8937894d2bf92677166b3c3533686a9d130e7e6577e3a",
+      "bytes": 6501
+    },
+    {
+      "url": "/assets/enemy_red.png",
+      "sha256": "5e6ec5ee508c8053527571e5cdb24f008e5fbc676186b08593102856d8de694c",
+      "bytes": 1878
+    },
+    {
+      "url": "/assets/explosion.png",
+      "sha256": "1aa079894cab544c7a6641f06af5440d9181cb5f1b9eccf823de97ba0257f72b",
+      "bytes": 611
+    },
+    {
+      "url": "/assets/gameover.png",
+      "sha256": "322d6ead1689b55d2272ae0b706b64f621fa14adb3eca6ebe5cb4d382a086075",
+      "bytes": 102082
+    },
+    {
+      "url": "/assets/mobile/PHASER-LICENSE.txt",
+      "sha256": "7daf539dfe294d96c756418f4206aca95a282a7040137662ba4b72840eaf1e08",
+      "bytes": 1099
+    },
+    {
+      "url": "/assets/mobile/icon-192.png",
+      "sha256": "6cd6364453e02a2b2b8025eac933c0447f3f55cd2ed794c3f80d6513b9f7f92f",
+      "bytes": 1980
+    },
+    {
+      "url": "/assets/mobile/icon-512.png",
+      "sha256": "f26ef56c62f166be22647211a1a134b5721422e1062ed3b4e4980b34888b7caf",
+      "bytes": 5239
+    },
+    {
+      "url": "/assets/mobile/icon-maskable-512.png",
+      "sha256": "bbd6862ba0694b38c67449f00a020c7b997701981e0174f1981757a54ea6b24a",
+      "bytes": 2874
+    },
+    {
+      "url": "/assets/mobile/phaser-3.55.2.min.js",
+      "sha256": "ff5c7868da7461bb2bf0609d55ff5aeb23c6a18c5080d40e314b3805afa82c3d",
+      "bytes": 1042822
+    },
+    {
+      "url": "/assets/mobile/robin_up_runtime.json",
+      "sha256": "0d0bb122e05afb6d5963063df24f3da57037e7a414b8684ea512b344510fd229",
+      "bytes": 12785
+    },
+    {
+      "url": "/assets/mobile/robin_up_runtime.png",
+      "sha256": "cda8e5fd4a60a8b1958c6a560a6ecc956318f40f64fa6e3cf364fd9be0b432c9",
+      "bytes": 1466407
+    },
+    {
+      "url": "/assets/robin-cat-v1-mobile/robin_up_runtime.json?v=3",
+      "sha256": "409bc9eefa084e0b3c337035534ee8549ea60bd4dd56664431db39944ed361d9",
+      "bytes": 7268
+    },
+    {
+      "url": "/assets/robin-cat-v1-mobile/robin_up_runtime.png?v=3",
+      "sha256": "ca41ee6fa31c43d958d40880908f0579b2c7e72032e4b2ec466645366960290f",
+      "bytes": 337494
+    },
+    {
+      "url": "/assets/robin-frost-v1-mobile/robin_up_runtime.json?v=3",
+      "sha256": "409bc9eefa084e0b3c337035534ee8549ea60bd4dd56664431db39944ed361d9",
+      "bytes": 7268
+    },
+    {
+      "url": "/assets/robin-frost-v1-mobile/robin_up_runtime.png?v=3",
+      "sha256": "dc7d1f89ee1f2734b90b80c88a8b0a3c6939fad9e20935e8dde672a82d58affb",
+      "bytes": 313876
+    },
+    {
+      "url": "/assets/robin-hood-v1-mobile/robin_up_runtime.json?v=3",
+      "sha256": "409bc9eefa084e0b3c337035534ee8549ea60bd4dd56664431db39944ed361d9",
+      "bytes": 7268
+    },
+    {
+      "url": "/assets/robin-hood-v1-mobile/robin_up_runtime.png?v=3",
+      "sha256": "d5f51f9d87cc29b4369c2bb874d45d0c80624ec11d55de607d0f398dc05505df",
+      "bytes": 265171
+    },
+    {
+      "url": "/assets/robin-moon-v1-mobile/robin_up_runtime.json?v=3",
+      "sha256": "409bc9eefa084e0b3c337035534ee8549ea60bd4dd56664431db39944ed361d9",
+      "bytes": 7268
+    },
+    {
+      "url": "/assets/robin-moon-v1-mobile/robin_up_runtime.png?v=3",
+      "sha256": "2e0bfc9a6414e7cf9f5ba3a958fc23118681f9be950323e53dc12a995e465082",
+      "bytes": 209706
+    },
+    {
+      "url": "/assets/robin-sailor-smoon-v1-mobile/robin_up_runtime.json?v=3",
+      "sha256": "409bc9eefa084e0b3c337035534ee8549ea60bd4dd56664431db39944ed361d9",
+      "bytes": 7268
+    },
+    {
+      "url": "/assets/robin-sailor-smoon-v1-mobile/robin_up_runtime.png?v=3",
+      "sha256": "3524e7de84a4226a167450b35d1043c76fba3ba1fd6f6cef150f8a30b4bc2f0e",
+      "bytes": 302822
+    },
+    {
+      "url": "/assets/sfx_enemy_dive_loop.wav",
+      "sha256": "ed8873090fbc28d082cabe47f4a841c0d7367c200585fc75d4a516fb4dc47ccf",
+      "bytes": 105884
+    },
+    {
+      "url": "/assets/sfx_enemy_move_loop.wav",
+      "sha256": "17c8944cc8daf5107a21024b02890a6a8a0b469fd0be2bcce90ff3875c2eabb3",
+      "bytes": 88244
+    },
+    {
+      "url": "/assets/sfx_laser1.ogg",
+      "sha256": "1f6a6ac59a9a191318463f9112f2dcad352ae958d5ddbda26c4964c45f269195",
+      "bytes": 14563
+    },
+    {
+      "url": "/assets/ship.png",
+      "sha256": "9af49f523472a524b4b31194820d93d21aeec9ec1a92638cedb2ebde9c90ecbe",
+      "bytes": 1056
+    },
+    {
+      "url": "/assets/site/star.svg",
+      "sha256": "1f5c5eab04244353c2a2a8cd96cc2049f2efdd0de879defe8c882637e000d431",
+      "bytes": 194
+    },
+    {
+      "url": "/assets/start_game.png",
+      "sha256": "70d898270f95e118a03008a69c53407ba465335a994d199084d10213d7ec609a",
+      "bytes": 30956
+    },
+    {
+      "url": "/manifest.mobile.webmanifest",
+      "sha256": "3764fce9e9fa954deaaa67bd62d209fe0d5f5114f5e889f0d8e194bed9b6df8f",
+      "bytes": 871
+    },
+    {
+      "url": "/mobile/",
+      "sha256": "4f0076265327abbec5dc1a449d08a282b09320cd22ebc88b9cd924819fe0706a",
+      "bytes": 6842,
+      "sourceUrl": "/assets/mobile/offline-shell.txt"
+    },
+    {
+      "url": "/mobile/index.html",
+      "sha256": "4f0076265327abbec5dc1a449d08a282b09320cd22ebc88b9cd924819fe0706a",
+      "bytes": 6842,
+      "sourceUrl": "/assets/mobile/offline-shell.txt"
+    },
+    {
+      "url": "/src/arcade_features.js?v=invasion-2",
+      "sha256": "6f9009049e44e5a1be3322d51190b620a3108d83d22ae1093091835cd786315d",
+      "bytes": 57648
+    },
+    {
+      "url": "/src/chain/gkd_whitepaper_spec.js",
+      "sha256": "a3173afc5be527dbf4602b5bff848e674443527ac9c03d780d40b7842cff3c79",
+      "bytes": 5369
+    },
+    {
+      "url": "/src/enemy_motion.js?v=1.7.2",
+      "sha256": "8bd891107d6ee0bafb0c92939ed5c1cac00c7179a65ec81894ce7c1e5712daed",
+      "bytes": 4762
+    },
+    {
+      "url": "/src/invasion_enemy_fx.js?v=invasion-2",
+      "sha256": "6b2b55059e7ed5db9ad5ad1104ef81f7ceb5f9000a7f8a21b10f71826d0aa172",
+      "bytes": 15777
+    },
+    {
+      "url": "/src/invasion_objectives.js?v=invasion-2",
+      "sha256": "b9f293dbc4a1e205105c0dbcb57b9c93a7800cb89ce49891278913d54ed7e2ed",
+      "bytes": 11672
+    },
+    {
+      "url": "/src/invasion_presentation.js?v=invasion-2",
+      "sha256": "c964285c3a8d9b0ac1df69594e2ec2ff6aded185bb1a7396d13f2ace71c3fe4d",
+      "bytes": 10590
+    },
+    {
+      "url": "/src/invasion_story.js?v=invasion-2",
+      "sha256": "3b91e0a23bb0aa9b80b1ebcea699231b25fba0cf9a65b3afc95c806d3c968572",
+      "bytes": 9685
+    },
+    {
+      "url": "/src/main_galaxian.js?v=invasion-2",
+      "sha256": "0086d08740b41410ef500dcee8d2e46569f8528e4a67b4b0102d89c1fc5eefae",
+      "bytes": 236419
+    },
+    {
+      "url": "/src/main_runtime_patch.js?v=1.7.2",
+      "sha256": "336683300ac448fee8a6e9c9194f37a4f4ee2eb824de9d70c0d749665aaf99da",
+      "bytes": 11057
+    },
+    {
+      "url": "/src/mobile/mobile.css?v=mobile-10",
+      "sha256": "0cb372b3ddb4c1fab15aa03684b7229f321811a0b364fedfa64951e4d35b7996",
+      "bytes": 16865
+    },
+    {
+      "url": "/src/mobile/mobile_app.js?v=mobile-10",
+      "sha256": "b463314bf14b3cd7911d69d7081c84386b6fdb4a02ec2b8e22832b34aa0bc6cb",
+      "bytes": 21645
+    },
+    {
+      "url": "/src/mobile/mobile_input.js?v=mobile-6",
+      "sha256": "cb26d148a3f39ea18595e542e339dc0db9187c6a46df498a85352bf9660e5926",
+      "bytes": 5330
+    },
+    {
+      "url": "/src/mobile/mobile_performance.js?v=mobile-6",
+      "sha256": "d0a5f56f342034eea51d9a9cbc3d60b51f6370da8a21e23542658daae2c5e102",
+      "bytes": 1171
+    },
+    {
+      "url": "/src/robin_cape_fx.js?v=1.7.20-robin-arrows",
+      "sha256": "4ba9c52126f2d441f472443f4081cbbbc05fb99a9506d191a161aafbdd85f33b",
+      "bytes": 6580
+    },
+    {
+      "url": "/src/robin_personality_motion.js?v=1.7.20-robin-arrows",
+      "sha256": "be69d6dd614ee89108774495077e170ffd7f92dc0ecb53b276aa294a3aef5dbd",
+      "bytes": 6601
+    },
+    {
+      "url": "/src/robin_voice.js?v=1.7.20-robin-every-clear",
+      "sha256": "e8ad12f421e722e48184a1b8b795010b6e916cab531af581b2226e70404533d3",
+      "bytes": 14079
+    },
+    {
+      "url": "/src/robin_voice_lines.js?v=1.7.19-robin-paperhands",
+      "sha256": "1db841e73b797bd013e3373c7af9cfb6a6e7f4a934b8b78a2f896723190be810",
+      "bytes": 11659
+    },
+    {
+      "url": "/src/robin_weapon_fx.js?v=1.7.20-robin-arrows",
+      "sha256": "36c1a1196e15efafb1288dc2844ac4b79c819137b81d0ed5562254fef64713fc",
+      "bytes": 10344
+    },
+    {
+      "url": "/src/scoring_rules.js?v=1.7.2",
+      "sha256": "f4613c15ed1ab86034c389fd5cbcaddde88a8c72aa904742b96cdb1ffa448370",
+      "bytes": 3378
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/bomb.ogg?v=c5176819c1e95d2a",
+      "sha256": "c5176819c1e95d2a47a08d46d4cbaf7957d4e538e921cbcfff7c506e569b7d8c",
+      "bytes": 17617
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/boss_defeated.ogg?v=8122238b341e6b48",
+      "sha256": "8122238b341e6b4804db200ce3110f9f93a639d04b07300d91804b6c72556955",
+      "bytes": 17125
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/boss_defeated_2.ogg?v=acd42fc1c31890e2",
+      "sha256": "acd42fc1c31890e26bbd29a28b0a1849fdf46c5fcb131759ca723372d6a3be01",
+      "bytes": 24362
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/boss_defeated_3.ogg?v=fe5a306a90410328",
+      "sha256": "fe5a306a9041032806f2a937d74dadfb8bb024c58e33515ab86c73162868c47e",
+      "bytes": 20953
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/boss_enter.ogg?v=035e98dd27dbc28f",
+      "sha256": "035e98dd27dbc28f57eedf640282dddc423954b18bc93f4d2239400d57061e3f",
+      "bytes": 28027
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/boss_enter_2.ogg?v=21e96b0ec9ca37a9",
+      "sha256": "21e96b0ec9ca37a915ba0f386994447c68a7131bfd37eba5fdcdb625defa8723",
+      "bytes": 25999
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/boss_enter_3.ogg?v=382e5128c810c14a",
+      "sha256": "382e5128c810c14ab21c9fb5596f846301f1e4c87d1189e082edf2520e07f4ab",
+      "bytes": 18755
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/boss_rage.ogg?v=a46aa3941e31f550",
+      "sha256": "a46aa3941e31f550fef8418077a6bcf069c0be521651653624e64889b3732e4b",
+      "bytes": 26330
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/boss_rage_2.ogg?v=f476dbc7e6fa3924",
+      "sha256": "f476dbc7e6fa3924fbfab8262d34a49621c82d3185a1f5c1c633e6a28cd0f4d5",
+      "bytes": 29358
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/boss_rage_3.ogg?v=92b5de8abb3ab144",
+      "sha256": "92b5de8abb3ab1443c9b066fc84bd88d21529a5658f3ac4e29344de840d14d3a",
+      "bytes": 19594
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/clear_1.ogg?v=8d54f9e1e85e0f12",
+      "sha256": "8d54f9e1e85e0f12dcddb4cd7624366b16ed90eae133bce33e19ed5af4655c68",
+      "bytes": 19116
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/clear_2.ogg?v=e4e605ba9f3703e1",
+      "sha256": "e4e605ba9f3703e1f735ed803183fa31b78da0f9885cb985c170125b55b61d60",
+      "bytes": 17346
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/clear_3.ogg?v=78772ecfc1884927",
+      "sha256": "78772ecfc1884927b90975cd1fa68b13778e48606474fe646ac0525629f7ee83",
+      "bytes": 24094
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/clear_4.ogg?v=febc9af21110a990",
+      "sha256": "febc9af21110a990eed5cc7b452e36c6e5fe854eee46ea2060b5d5fa19c16507",
+      "bytes": 26423
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/dual.ogg?v=cf9d4b6fe8010dee",
+      "sha256": "cf9d4b6fe8010dee91db03eb7b0a5ab1f9ba40bcbfee074a7b353b368e766630",
+      "bytes": 19211
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/dual_2.ogg?v=d121a9e55b006861",
+      "sha256": "d121a9e55b00686127cf495060926bd864b73adaaee66a4c1dca70ebe7817527",
+      "bytes": 19230
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/final_boss_defeated.ogg?v=9c624a76f1be619a",
+      "sha256": "9c624a76f1be619a3eb3edcec9c045d9dbdd764e774de14642c5a63f9f7039fa",
+      "bytes": 20263
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/final_boss_defeated_2.ogg?v=16efde7586a358e7",
+      "sha256": "16efde7586a358e7f09fa683e297128080cbaf608a37c786bd4338c303772594",
+      "bytes": 22286
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/final_boss_enter.ogg?v=0960c7889a77b3d3",
+      "sha256": "0960c7889a77b3d3324e188ccd1f3fa137e4ab2c4eddaf9b3f38d0a41c1d1335",
+      "bytes": 20265
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/final_boss_enter_2.ogg?v=a7ee768a88c3b6fb",
+      "sha256": "a7ee768a88c3b6fb65f7950bf10a8b4b3b6c06483e3f127e97f055c79d7febf6",
+      "bytes": 25228
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/game_over_1.ogg?v=0ec015fa173c1b44",
+      "sha256": "0ec015fa173c1b44207fec72ae474f4d58a38d3a82c96a594b6fcc3511d8f24a",
+      "bytes": 19903
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/game_over_2.ogg?v=f708ee4deecb2780",
+      "sha256": "f708ee4deecb278042b6de7e2fd7261381d54c017461fdf939a8b0185253a201",
+      "bytes": 16731
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/game_over_3.ogg?v=e79fa382fd80223a",
+      "sha256": "e79fa382fd80223a655d1299d06be0b3c63be253f2c37dfb017ea3e025820a85",
+      "bytes": 24311
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/game_over_4.ogg?v=fcd27fc3f4aaa1b3",
+      "sha256": "fcd27fc3f4aaa1b341fa27c9fff5fdb3afdab8db3e8e1f3631b0b9c836398708",
+      "bytes": 16321
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/hit.ogg?v=1b846291078bbf05",
+      "sha256": "1b846291078bbf05ae4075450b279ee4cc9ee1fad5b8ecddc9165360d292729d",
+      "bytes": 21828
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/hit_2.ogg?v=478dece97d959ea6",
+      "sha256": "478dece97d959ea67dbfed3b396d9fdb37da2e3920a561509dd9fbd1b1e21c70",
+      "bytes": 19514
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/hit_3.ogg?v=d6099982ecf54e1c",
+      "sha256": "d6099982ecf54e1c56a43630c066151f68ac08bca63bd1fd827a76ccea8e5c29",
+      "bytes": 20674
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/laser.ogg?v=9297fcd989dd69d8",
+      "sha256": "9297fcd989dd69d84458cc84d279357bec199a8e3f90cbe9eed73dd70fcf805a",
+      "bytes": 21207
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/laser_2.ogg?v=bd993cd948405fe3",
+      "sha256": "bd993cd948405fe30058b315809b1cd583fecf5079e7ec8649c4c058f68a92cd",
+      "bytes": 21734
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/laser_3.ogg?v=c94939239e1ac238",
+      "sha256": "c94939239e1ac238586809759d478a96e6be76cd9928ee2e6ab3f0b59b8330b4",
+      "bytes": 20904
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/last_life.ogg?v=9858e1c2ecf6d646",
+      "sha256": "9858e1c2ecf6d6467b52beffd925094964b93b329b39cfe4c41b5c78281418e6",
+      "bytes": 21946
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/last_life_2.ogg?v=1945726469827a7a",
+      "sha256": "1945726469827a7a392eebd45180ed1cd2eb50fa8fccc5d80f4955f6c9d88e01",
+      "bytes": 21899
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/last_life_3.ogg?v=c5bc872070abab96",
+      "sha256": "c5bc872070abab96afb93b92d040382180fd1c1974b97bc33eff4c543295063e",
+      "bytes": 27404
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/life.ogg?v=dece5288160881ee",
+      "sha256": "dece5288160881ee42e25bc24e644e2f5bd28ff86ec7e65c27001757d04a87ac",
+      "bytes": 22110
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/life_2.ogg?v=b06a18fa2546b828",
+      "sha256": "b06a18fa2546b8285f7d37d07165287cd90acdd215be2eacfc180f8c14e6e5fc",
+      "bytes": 25769
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/rapid.ogg?v=10c1973cf48fca14",
+      "sha256": "10c1973cf48fca1472c6d05d1d7dd257d92f8bdbafdc5845893f26612433c8e2",
+      "bytes": 20074
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/rapid_2.ogg?v=3e87795c2249c02a",
+      "sha256": "3e87795c2249c02ac3f87ab1799995449d95941979b2f5da05be5d5d308bd6b4",
+      "bytes": 16251
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/rapid_3.ogg?v=deabe709922afb59",
+      "sha256": "deabe709922afb59e70d9dda0f5299cd1f5255b5843748a4573044c90d2cf843",
+      "bytes": 28101
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/shield.ogg?v=b2712dde6a757dfe",
+      "sha256": "b2712dde6a757dfe9ecad55a2c48e97887b09ef3cd755ad2e149bd3aed9e4641",
+      "bytes": 22198
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/shield_2.ogg?v=b9f3cb4c0bde9526",
+      "sha256": "b9f3cb4c0bde95260b9fb58f7a6c03b678707cb80fba8c415b6f6f9cef851aee",
+      "bytes": 22812
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/shield_3.ogg?v=f2f77d2e2841bacc",
+      "sha256": "f2f77d2e2841baccae15f3c0663861a5fb04cd68f7dfe109b475de68fa890821",
+      "bytes": 23005
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/speed.ogg?v=3f83177b06ce7014",
+      "sha256": "3f83177b06ce701487a7c87843f072980ddef812dceecd4905c388dae21856b4",
+      "bytes": 17807
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/speed_2.ogg?v=497ac55da83a2866",
+      "sha256": "497ac55da83a2866247779560b57d8cc0c48fc34efd1d24fb2fc8ed2919e5bd4",
+      "bytes": 21774
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/speed_3.ogg?v=ab2819e49a163902",
+      "sha256": "ab2819e49a163902e51927c47db3161f8ed21a60ad79a7e7cc3eee0779c72d8e",
+      "bytes": 24335
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/spread.ogg?v=b96668bd59b0cb8c",
+      "sha256": "b96668bd59b0cb8c0923cf0b9da15c5465e221384cf11fccda8b8af21d80cf32",
+      "bytes": 18517
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/spread_2.ogg?v=84bc03608818c2ee",
+      "sha256": "84bc03608818c2ee7782bebf87d4bc17f2e50fc2924857fdfc89381632f3d187",
+      "bytes": 24784
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/start_1.ogg?v=222de4926dd5c153",
+      "sha256": "222de4926dd5c1539e58bfa5befbec31c0b30adcfe15be676ad69d6152762b1e",
+      "bytes": 17989
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/start_2.ogg?v=81ebf3316053aa17",
+      "sha256": "81ebf3316053aa17244e8442b5f194895875271053d79430e2bd33f2b43a18c8",
+      "bytes": 17411
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/triple.ogg?v=d05cff72f092565e",
+      "sha256": "d05cff72f092565e547f638344cd051c7953e7452e3a0f3e0bfc49ba7eaad178",
+      "bytes": 18679
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/triple_2.ogg?v=386a5310ec99091b",
+      "sha256": "386a5310ec99091b7f3f1b8f0a6383dce42d2e8bd9c4cd037d48029989111b21",
+      "bytes": 24844
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/triple_3.ogg?v=48e5717ffdc8f70c",
+      "sha256": "48e5717ffdc8f70cb1f262d21a4d740a5a354735aeabd3dc9599704d29515391",
+      "bytes": 27718
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/wave_early_1.ogg?v=0968b09de03e1812",
+      "sha256": "0968b09de03e1812fa0bc142b904df766c32074319f02c7571583b7abf4b672f",
+      "bytes": 17928
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/wave_early_2.ogg?v=0c3aad27b1405905",
+      "sha256": "0c3aad27b1405905003c4a619499a02e2285bce35f6c51d717a1e9b355991438",
+      "bytes": 20487
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/wave_early_3.ogg?v=3d99afe9649c49b7",
+      "sha256": "3d99afe9649c49b73a3114ee124165de5b3d6ec9ed46e585d24a222e0c3a6c6d",
+      "bytes": 27049
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/wave_late_1.ogg?v=e256ab0c86b7e95d",
+      "sha256": "e256ab0c86b7e95dcdb230835c7581ae8512790fe202d70b766eab44592ce3d2",
+      "bytes": 18503
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/wave_late_2.ogg?v=88ff067ed83a1db1",
+      "sha256": "88ff067ed83a1db15842aa8f8530ee276764cfc685ad996feaad838dfb34d581",
+      "bytes": 23033
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/wave_late_3.ogg?v=25d5cb29f36cc55a",
+      "sha256": "25d5cb29f36cc55a4e2e7571d034c2a64050d893ec3c8f8b4a5b553b3aa718a0",
+      "bytes": 26588
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/wave_mid_1.ogg?v=cc81c9a3ba5c8dff",
+      "sha256": "cc81c9a3ba5c8dff7def87c432fc0b7357c2fa803d8166faaf80b5fc5bec03b2",
+      "bytes": 17865
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/wave_mid_2.ogg?v=eed992920ba74202",
+      "sha256": "eed992920ba74202459df42d595f5da5f96d4d003473fbc815d269be7898583e",
+      "bytes": 23669
+    },
+    {
+      "url": "/assets/voice/robin/en/robin-local-v3/wave_mid_3.ogg?v=81b42fb6699cdfc5",
+      "sha256": "81b42fb6699cdfc5ddee73b960e828bb2bb22bd7067818fbb42d16f9f8f9b5de",
+      "bytes": 20065
+    }
+  ]
+}

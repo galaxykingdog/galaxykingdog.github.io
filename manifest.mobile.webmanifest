@@ -1,0 +1,20 @@
+{
+  "id": "/mobile/",
+  "name": "Galaxy King Dog — Free Arcade",
+  "short_name": "Galaxy King Dog",
+  "description": "Robin's free arcade adventure. Play with touch controls, save your scores on this device, and keep playing offline after the game is saved.",
+  "lang": "en",
+  "start_url": "/mobile/",
+  "scope": "/mobile/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#050b0a",
+  "theme_color": "#091610",
+  "categories": ["games", "entertainment"],
+  "prefer_related_applications": false,
+  "icons": [
+    { "src": "/assets/mobile/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/mobile/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/mobile/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

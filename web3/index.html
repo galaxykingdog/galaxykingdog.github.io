@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
+  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script><base href="../"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#06120e"><title>Robin Web3 — Choose your network</title><link rel="icon" href="assets/site/star.svg"><link rel="stylesheet" href="src/chain/web3.css"></head>
+<body class="web3-home"><main class="web3-card">
+<nav><a href="whitepaper.html">✦ ROBIN</a><a href="play/index.html?mode=choose">Free arcade ↗</a></nav>
+<p class="eyebrow">GALAXY KING DOG / TESTNET ARCADE</p><h1>One Robin.<br>Two frontiers.</h1>
+<p class="intro">Dodge the invasion. Break the signal. Record your run on your chosen network.</p>
+<form id="web3-choice">
+<fieldset><legend>01 / Your network</legend><div class="network-grid">
+<label class="network-card"><input type="radio" name="network" value="solana" checked><span><strong>Solana</strong><small>Devnet · Test SOL · Solana wallet</small></span></label>
+<label class="network-card"><input type="radio" name="network" value="robinhood"><span><strong>Robinhood</strong><small>Testnet · Test ETH · EVM wallet</small></span></label>
+</div></fieldset>
+<fieldset><legend>02 / Your controls</legend><div class="control-grid"><label><input type="radio" name="mode" value="desktop" checked> Computer <small>Arrows + Space</small></label><label><input type="radio" name="mode" value="mobile"> Phone / tablet <small>Analog joystick + Fire</small></label></div></fieldset>
+<label class="skin-label" for="web3-skin">03 / Your Robin</label><select id="web3-skin" name="skin"><option value="robin-cat-v6">Robin Wood</option><option value="robin-hood">Robin Hood</option><option value="robin-moon">Robin Moon</option><option value="robin-sailor-smoon">Robin Sailor Smoon</option><option value="robin-ginger">Robin Ginger</option><option value="robin-frost">Robin Frost</option></select>
+<button class="web3-primary" type="submit">Enter the arcade <span>↗</span></button>
+</form><p class="web3-note">Test networks only. Test tokens have no monetary value. Your wallet reviews the entry before each new run. On a phone, open the game in your wallet's browser.</p><p class="web3-note">Scores and rewards belong to their selected network. The free arcade needs no wallet.</p><noscript>JavaScript is required to play.</noscript>
+</main></body><script src="src/chain/web3_launcher.js"></script></html>

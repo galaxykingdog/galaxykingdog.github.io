@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
+  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#091610">
+  <title>Security notes &amp; risk register — gkd_chain | Galaxy King Dog</title>
+  <meta name="description" content="Supporting source documentation for the Galaxy King Dog Solana design.">
+  
+  <link rel="icon" type="image/svg+xml" href="../../../assets/site/star.svg">
+  <link rel="stylesheet" href="../../../src/site/site.css?v=robin-paper-4">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="wrap header-inner">
+    <a class="brand" href="../../../whitepaper.html" aria-label="Galaxy King Dog whitepaper"><span class="brand-star" aria-hidden="true">✦</span><span>GALAXY KING DOG<small>WHITEPAPER / ROBIN</small></span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="../../../whitepaper.html#robin">Prologue</a>
+      <a href="../../../whitepaper.html#design" aria-current="page">Design</a>
+      <a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet</a>
+      <a class="button small" href="https://gamejolt.com/games/galaxy-king-dog/1084669">Play Game Jolt <span class="arrow" aria-hidden="true">↗</span></a>
+    </nav>
+  </div></header>
+  <main id="main"><header class="reader-hero"><div class="wrap"><p class="eyebrow">Galaxy King Dog / Supporting design document</p><h1>Security notes &amp; risk register — gkd_chain</h1><div class="reader-meta"><a href="../../../whitepaper.html">← Whitepaper and current release</a><a href="security_notes.md" download>Download original Markdown ↓</a></div></div></header><div class="reading-surface"><div class="wrap reader-layout"><aside class="contents"><nav aria-label="Table of contents"><p class="eyebrow">In this document</p><a href="#reviewed-covered-with-tests">Reviewed &amp; covered (with tests)</a><a href="#risks-required-hardening">Risks &amp; required hardening</a><a href="#must-do-before-mainnet-with-real-funds">Must-do before mainnet with real funds</a><a href="#what-does-not-need-a-wallet-safe-to-do-now">What does NOT need a wallet (safe to do now)</a><a href="#robinhood-chain-key-separation">Robinhood Chain key separation</a><a class="contents-back" href="../../../whitepaper.html">↑ Whitepaper</a></nav></aside><article class="prose"><aside class="status-note"><strong>Solana design documentation</strong><p>This source document describes the Solana implementation. It does not describe the currently playable Robinhood Testnet prototype. <a href="../../../whitepaper.html">Read the current-release note.</a></p></aside><p>Honest pre-deploy review of the on-chain program. This is <strong>not</strong> a substitute for an independent
+audit; it records what was reviewed, the known risks, and what must happen before mainnet with real
+funds. No wallet is required to act on any of this.</p>
+<h2 id="reviewed-covered-with-tests">Reviewed &amp; covered (with tests)</h2>
+<ul>
+<li><strong>No fund-withdrawal path.</strong> There is no instruction that moves Game Pool funds outside the locked
+checkpoint rules / governance charity routing. The fee multisig and admin cannot withdraw.</li>
+<li><strong>Lamport moves stay rent-exempt.</strong> Payouts draw from <code>distributable_balance = balance − rent_min</code>
+(and minus the carried-Chaos reserve for non-Chaos checkpoints), so PDAs never drop below rent.</li>
+<li><strong>Value-conserving splits.</strong> <code>creator_split_amounts</code> is unit-tested: <code>creator + charity_net + recycled == amount</code>, never over-pays. Checkpoint percentages tested to never exceed the
+distributable amount. <code>pct</code> is u128-internally and overflow-safe.</li>
+<li><strong>Exact, Bitcoin-style mining.</strong> Per-epoch cap minting is exact; the minimum score (difficulty)
+rises with minted supply and is enforced at mint time. Unit-tested.</li>
+<li><strong>Checkpoints are one-time</strong> via claimed flags / <code>paid_record_breaks</code>; PDAs (<code>run</code>, <code>award</code>,
+<code>vote</code>) use <code>init</code> to prevent duplicates.</li>
+<li><strong>Score is tamper-proof on-chain.</strong> <code>submit_verified_run</code> verifies the verifier's ed25519
+signature over a canonical, score-bound message via the Ed25519 precompile. Replay-safe (the
+message binds the unique <code>run_hash</code>, and the run PDA is single-init).</li>
+</ul>
+<h2 id="risks-required-hardening">Risks &amp; required hardening</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Sev</th>
+<th>Risk</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>High (ops)</strong></td>
+<td><code>authority</code> (admin) is one key with broad powers: closes seasons (gates payouts), sets verifier, whitelists charities, pauses, runs all init. It cannot withdraw funds, but it is a central point.</td>
+<td>Make <code>authority</code> a <strong>multisig (Squads)</strong> before mainnet.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>High (ops)</strong></td>
+<td>The <strong>verifier key</strong> is a trusted oracle — the on-chain score is whatever it signs. A leaked key ⇒ forged scores/rewards.</td>
+<td>Keep the verifier key in an HSM / hardened host; rotate via <code>set_verifier</code>.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>High (anti-cheat)</strong></td>
+<td>The persistent v2 verifier accounts explicit gameplay events and blocks raw score inflation, but it does <strong>not</strong> independently replay Phaser physics. A modified client can attempt to submit a plausible fabricated event stream.</td>
+<td>Before mainnet rewards, run gameplay authoritatively on the verifier or add deterministic replay/input attestation that the verifier independently validates. Audit that design.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>High (ops)</strong></td>
+<td>JSON persistence is restart-safe on one machine but is not production-grade coordination, backup, or tamper-resistant storage.</td>
+<td>Use a durable transactional database, restricted service identity, backups, monitoring, idempotency, and HSM/KMS-backed signing.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Medium</td>
+<td><strong>Token-weighted voting is snapshot-less</strong> — moving tokens between wallets can multiply voting weight.</td>
+<td>Add a balance snapshot or vote-time token lock/escrow before enabling governance.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Medium</td>
+<td><strong>Oracle trust</strong>: built on legacy <code>pyth-sdk-solana</code>; a wrong/stale feed mis-prices the fee (fails safe at 1h max age, dust-floor clamp).</td>
+<td>Point <code>pyth_sol_usd</code> at the correct mainnet SOL/USD feed; consider the Pyth pull receiver (<code>PriceUpdateV2</code>).</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Low</td>
+<td><strong>Leaderboard name is unsigned</strong> (cosmetic); a submitter could attach any name to a real score. Wallet is authoritative.</td>
+<td>Sign the name into the canonical message if display integrity matters.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Low</td>
+<td><strong>Record-breaker NFT</strong> validates the <em>current</em> <code>record_holder</code> (no per-break history).</td>
+<td>Award promptly per break, or store per-break holders.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Low</td>
+<td><strong>Season close is admin-driven</strong> (&quot;condition met&quot; gate).</td>
+<td>Acceptable; tighten with time/emission-based auto-close later if desired.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="must-do-before-mainnet-with-real-funds">Must-do before mainnet with real funds</h2>
+<ol>
+<li><strong>Independent security audit</strong> of <code>programs/gkd_chain</code>.</li>
+<li>Replace client-trusted event accounting with audited authoritative simulation or independently
+verified deterministic replay before score-derived mainnet rewards are enabled.</li>
+<li>Complete the remaining live Devnet money-path suite: checkpoint payout, charity governance, NFT
+award, Pyth re-peg, failure recovery, and replay/concurrency tests. Browser entry → ledger →
+verifier signature → on-chain RunRecord → leaderboard is already live-proven on Devnet.</li>
+<li>Set <code>authority</code> to a multisig; use a dedicated production RPC; move verifier signing to HSM/KMS
+and state to a durable database; finalize the mainnet program id and Pyth feed.</li>
+<li>Re-run <code>cargo test -p gkd_chain</code> and a fresh <code>cargo-build-sbf</code> from the audited commit.</li>
+</ol>
+<h2 id="what-does-not-need-a-wallet-safe-to-do-now">What does NOT need a wallet (safe to do now)</h2>
+<ul>
+<li>This review + the test suite (done).</li>
+<li>More tests / fuzzing of the money math.</li>
+<li>IDL generation, client integration, front-end polish.</li>
+<li>A devnet dry-run using a <strong>free throwaway devnet keypair</strong> (no founder/real wallet needed; only
+free devnet SOL).</li>
+</ul>
+<h2 id="robinhood-chain-key-separation">Robinhood Chain key separation</h2>
+<ul>
+<li>The EVM verifier secret is server-only in ignored <code>verifier/.env</code>.</li>
+<li>The EVM deployer is a separate encrypted keystore in ignored <code>secrets/</code>; it is never embedded in the verifier or browser.</li>
+<li>Browser code contains only chain IDs, public RPC/explorer URLs, contract address, ABI, and verifier address.</li>
+<li>Robinhood V2 score submission is relayed server-side only after the same strict verifier produces and revalidates the EIP-712 proof. The player wallet still owns and signs the paid entry and free run-start authorization.</li>
+<li>The public relay endpoint cannot alter the signed player, run, replay, version, score, fee, entry transaction, or entry block; current and legacy replays are rejected on-chain.</li>
+<li>Robinhood Mainnet stays disabled until independent audit, multisig ownership, production RPC, monitoring, and a fresh deployment.</li>
+</ul>
+</article></div></div></main>
+  <footer class="site-footer"><div class="wrap footer-inner">
+    <span>© 2026 Galaxy King Dog</span>
+    <span class="footer-signoff">Aim beyond the next reward.</span>
+    <div class="footer-links"><a href="../../../whitepaper.html">Whitepaper</a><a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Game Jolt ↗</a><a href="/play/">Choose controls ↗</a><a href="/mobile/?v=mobile-6">Mobile ↗</a><a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet ↗</a></div>
+  </div></footer>
+</body>
+</html>

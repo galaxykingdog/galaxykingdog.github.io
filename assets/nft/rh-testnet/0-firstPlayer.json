@@ -1,0 +1,28 @@
+{
+  "name": "Galaxy King Dog — First Player",
+  "description": "The first verified player of Galaxy King Dog on Robinhood Chain. Robinhood Chain Testnet award with no monetary value.",
+  "image": "https://galaxykingdogs.netlify.app/assets/nft/rh-testnet/baby_metatron.png",
+  "attributes": [
+    {
+      "trait_type": "Milestone",
+      "value": "First Player"
+    },
+    {
+      "trait_type": "Award kind",
+      "value": 0
+    },
+    {
+      "trait_type": "Network",
+      "value": "Robinhood Chain Testnet"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "https://galaxykingdogs.netlify.app/assets/nft/rh-testnet/baby_metatron.png",
+        "type": "image/png"
+      }
+    ]
+  },
+  "external_url": "https://galaxykingdogs.netlify.app/robinhood.html"
+}

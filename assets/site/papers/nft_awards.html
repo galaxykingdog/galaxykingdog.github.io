@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
+  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#091610">
+  <title>On-chain NFT Awards — metatron set | Galaxy King Dog</title>
+  <meta name="description" content="Supporting source documentation for the Galaxy King Dog Solana design.">
+  
+  <link rel="icon" type="image/svg+xml" href="../../../assets/site/star.svg">
+  <link rel="stylesheet" href="../../../src/site/site.css?v=robin-paper-4">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="wrap header-inner">
+    <a class="brand" href="../../../whitepaper.html" aria-label="Galaxy King Dog whitepaper"><span class="brand-star" aria-hidden="true">✦</span><span>GALAXY KING DOG<small>WHITEPAPER / ROBIN</small></span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="../../../whitepaper.html#robin">Prologue</a>
+      <a href="../../../whitepaper.html#design" aria-current="page">Design</a>
+      <a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet</a>
+      <a class="button small" href="https://gamejolt.com/games/galaxy-king-dog/1084669">Play Game Jolt <span class="arrow" aria-hidden="true">↗</span></a>
+    </nav>
+  </div></header>
+  <main id="main"><header class="reader-hero"><div class="wrap"><p class="eyebrow">Galaxy King Dog / Supporting design document</p><h1>On-chain NFT Awards — metatron set</h1><div class="reader-meta"><a href="../../../whitepaper.html">← Whitepaper and current release</a><a href="nft_awards.md" download>Download original Markdown ↓</a></div></div></header><div class="reading-surface"><div class="wrap reader-layout"><aside class="contents"><nav aria-label="Table of contents"><p class="eyebrow">In this document</p><a href="#award-kinds">Award kinds</a><a href="#award-nft-kind-discriminator-name-symbol-uri">award_nft(kind, discriminator, name, symbol, uri)</a><a href="#parameter-that-needs-an-ops-decision">Parameter that needs an ops decision</a><a href="#known-limitation">Known limitation</a><a class="contents-back" href="../../../whitepaper.html">↑ Whitepaper</a></nav></aside><article class="prose"><aside class="status-note"><strong>Solana design documentation</strong><p>This source document describes the Solana implementation. It does not describe the currently playable Robinhood Testnet prototype. <a href="../../../whitepaper.html">Read the current-release note.</a></p></aside><p>On-chain minting of the whitepaper-locked award NFTs, as true Metaplex NFTs (SPL mint, supply 1,
+0 decimals, metadata + master edition). Builds on the token-mining work. <strong>Not yet deployed.</strong></p>
+<h2 id="award-kinds">Award kinds</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>kind</th>
+<th>const</th>
+<th>NFT image (whitepaper)</th>
+<th>recipient validated against</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>AWARD_FIRST_PLAYER</code></td>
+<td><code>baby_metatron.png</code></td>
+<td><code>config.first_player</code> (first verified player)</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>AWARD_SEASON_CHAMPION</code></td>
+<td><code>season_champion_metatron.png</code></td>
+<td>closed farm season <code>champion_wallet</code> (seasons 1–31)</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>AWARD_RECORD_BREAKER</code></td>
+<td><code>record_breaker_metatron.png</code></td>
+<td><code>record_state.record_holder</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>AWARD_HUMAN_CHAMPION</code></td>
+<td><code>human_metatron.png</code></td>
+<td>season 32 <code>champion_wallet</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>AWARD_CHAOS_CHAMPION</code></td>
+<td><code>final_galaxy_metatron_defender.png</code></td>
+<td>season 33 <code>champion_wallet</code></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="award-nft-kind-discriminator-name-symbol-uri"><code>award_nft(kind, discriminator, name, symbol, uri)</code></h2>
+<p>Permissionless (anyone may relay/pay) — the recipient is always the on-chain-recorded winner for
+the given <code>kind</code>. The <code>[&quot;award&quot;, kind, discriminator]</code> PDA (<code>AwardRecord</code>) is <code>init</code>-ed each call,
+so every award can be minted <strong>at most once</strong>:</p>
+<ul>
+<li>season/human/chaos champion → <code>discriminator = season_id</code>, requires <code>season.is_closed</code>;</li>
+<li>record breaker → <code>discriminator</code> is the 1-based break index (<code>1..=record_break_count</code>);</li>
+<li>first player → <code>discriminator = 0</code>.</li>
+</ul>
+<p>The mint authority is the <code>[&quot;mint_authority&quot;]</code> PDA (shared with $420POP), so no human can mint or
+alter these NFTs. The PDA signs <code>mint_to</code>, <code>create_metadata_accounts_v3</code>, and
+<code>create_master_edition_v3</code> (max_supply 0 ⇒ non-fungible).</p>
+<h3 id="client-responsibility-pre-create-the-nft-mint">Client responsibility: pre-create the NFT mint</h3>
+<p>To keep the instruction's BPF stack frame under the 4 KB limit, the program does <strong>not</strong> <code>init</code>
+the mint. The client creates a fresh mint first (decimals 0, supply 0, mint &amp; freeze authority =
+the <code>mint_authority</code> PDA) and passes it in; the program validates those properties, mints 1 to the
+recipient's ATA, then attaches metadata + master edition. A typical client tx:</p>
+<ol>
+<li><code>SystemProgram.createAccount</code> + <code>Token.initializeMint2</code> (authority = mint_authority PDA),</li>
+<li><code>award_nft(...)</code> against the program.</li>
+</ol>
+<h2 id="parameter-that-needs-an-ops-decision">Parameter that needs an ops decision</h2>
+<p><code>name</code> / <code>symbol</code> / <code>uri</code> are passed in because the off-chain metadata JSON + image hosting
+(Arweave/IPFS for the metatron PNGs in <a href="design-artwork.zip" download="design-artwork.zip" title="Download the five original design artwork files">src/assets</a>) is an ops decision, exactly like
+<code>reward_per_run</code>. The program enforces <em>who</em> receives <em>which</em> award; the artwork URI is supplied at
+call time.</p>
+<h2 id="known-limitation">Known limitation</h2>
+<p>The record-breaker award is validated against the <strong>current</strong> <code>record_state.record_holder</code>. Per-break
+holder history is not stored, so awarding an old break to a since-superseded holder is not supported.
+Award record breaks promptly (one NFT per <code>record_break_count</code> value).</p>
+</article></div></div></main>
+  <footer class="site-footer"><div class="wrap footer-inner">
+    <span>© 2026 Galaxy King Dog</span>
+    <span class="footer-signoff">Aim beyond the next reward.</span>
+    <div class="footer-links"><a href="../../../whitepaper.html">Whitepaper</a><a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Game Jolt ↗</a><a href="/play/">Choose controls ↗</a><a href="/mobile/?v=mobile-6">Mobile ↗</a><a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet ↗</a></div>
+  </div></footer>
+</body>
+</html>

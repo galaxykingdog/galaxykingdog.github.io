@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
+  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
+  <meta name="copyright" content="Copyright (c) 2026 Galaxy King Dog (Liolee). All rights reserved. Unauthorized copying, modification, redistribution or rehosting is prohibited.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#091610">
+  <title>Whitepaper — Robin, the game and its rules | Galaxy King Dog</title>
+  <meta name="description" content="Meet Robin in Dead Grid, open the public arcade, and read the 13 September 2026 development update alongside the historical Solana whitepaper.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Whitepaper — Robin, the game and its rules | Galaxy King Dog">
+  <meta property="og:description" content="Meet Robin in Dead Grid, open the public arcade, and read the 13 September 2026 development update alongside the historical Solana whitepaper.">
+  <meta property="og:image" content="https://galaxykingdogs.netlify.app/assets/site/robin-whitepaper-hero-v3.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="assets/site/star.svg">
+  <link rel="stylesheet" href="src/site/site.css?v=robin-paper-5">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="wrap header-inner">
+    <a class="brand" href="whitepaper.html" aria-label="Galaxy King Dog whitepaper"><span class="brand-star" aria-hidden="true">✦</span><span>GALAXY KING DOG<small>WHITEPAPER / ROBIN</small></span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="whitepaper.html#robin">Prologue</a>
+      <a href="whitepaper.html#design" aria-current="page">Design</a>
+      <a href="/robinhood.html?voice=1">Testnet</a>
+      <a class="button small" href="https://gamejolt.com/games/galaxy-king-dog/1084669">Open Game Jolt <span class="arrow" aria-hidden="true">↗</span></a>
+    </nav>
+  </div></header>
+  <main id="main">
+  <header class="reader-hero paper-hero"><div class="wrap">
+    <div class="paper-hero-top">
+      <div class="hero-copy"><p class="eyebrow">Galaxy King Dog / Whitepaper</p><h1>Skill is<br>the signal.</h1><p class="reader-deck">Robin’s world. The game’s rules.<br>Your next run.</p>
+        <div class="hero-action"><a class="button" href="https://gamejolt.com/games/galaxy-king-dog/1084669">Open Game Jolt <span aria-hidden="true">↗</span></a><p>Open the game page for its current<br>build and availability.</p></div>
+        <a class="hero-story-link" href="#current-state">Development update · 13 September 2026 <span aria-hidden="true">↓</span></a>
+        <a class="hero-story-link" href="#robin">Meet Robin in Dead Grid <span aria-hidden="true">↓</span></a>
+        <a class="hero-story-link" href="#play">Choose a skin and play in the browser <span aria-hidden="true">↓</span></a>
+      </div>
+      <figure class="hero-art"><img src="assets/site/robin-whitepaper-hero-v3.png" width="1122" height="1402" fetchpriority="high" decoding="async" alt="Robin, an orange cat archer in a green hood, draws a cyan arrow above the rain-soaked city."><figcaption><span>ROBIN / THE PROLOGUE</span><span>Dead Grid, after dark.</span></figcaption></figure>
+    </div>
+    <section class="play-section" id="play" aria-labelledby="play-title">
+      <div class="play-heading"><h2 id="play-title">Choose your next run.</h2><a href="/play/?mode=choose">Choose your controls and skin <span aria-hidden="true">↗</span></a></div>
+      <fieldset class="play-skins">
+        <legend>Skin</legend>
+        <label><input type="radio" name="home-skin" value="robin-cat-v6" checked> Robin Wood</label>
+        <label><input type="radio" name="home-skin" value="robin-hood"> Robin Hood</label>
+        <label><input type="radio" name="home-skin" value="robin-moon"> Robin Moon</label>
+        <label><input type="radio" name="home-skin" value="robin-sailor-smoon"> Robin Sailor Smoon</label>
+        <label><input type="radio" name="home-skin" value="robin-ginger"> Robin Ginger</label>
+        <label><input type="radio" name="home-skin" value="robin-frost"> Robin Frost</label>
+        <span class="play-skins-note">Applies on desktop, mobile and testnet.</span>
+      </fieldset>
+      <div class="play-options">
+        <a class="play-card featured" href="https://gamejolt.com/games/galaxy-king-dog/1084669"><span class="play-kind">01 / Game page</span><h3>Game Jolt</h3><p>Open Game Jolt for the current build and project updates.</p><span class="play-card-action">Open Game Jolt <span aria-hidden="true">↗</span></span></a>
+        <a class="play-card" href="/galaxian.html?voice=1"><span class="play-kind">02 / Web · PC</span><h3>Desktop arcade</h3><p>Keyboard controls. Choose Robin and start a browser run.</p><span class="play-card-action">Play on PC <span aria-hidden="true">↗</span></span></a>
+        <a class="play-card" href="/mobile/?v=mobile-6"><span class="play-kind">03 / Web · Mobile</span><h3>Mobile arcade</h3><p>Touch controls, a red FIRE button and expanded view.</p><span class="play-card-action">Play on your phone <span aria-hidden="true">↗</span></span></a>
+        <a class="play-card" href="/robinhood.html?voice=1"><span class="play-kind">04 / Existing testnet</span><h3>Robinhood</h3><p>Existing testnet preview, separate from the undeployed reward candidate.</p><span class="play-card-action">Enter Testnet <span aria-hidden="true">↗</span></span></a>
+      </div>
+      <p class="play-help">Still seeing an older mobile version? <a href="/mobile-refresh/">Update the mobile arcade.</a></p>
+    </section>
+    <div class="reader-meta"><span>Solana design · v1.8 / Robin prologue</span><a href="assets/site/whitepaper.md" download>Download whitepaper ↓</a></div>
+  </div></header>
+  <div class="reading-surface"><div class="wrap reader-layout"><aside class="contents"><nav aria-label="Table of contents"><p class="eyebrow">In this paper</p><a href="#robin">Robin / Prologue</a><a href="#current-state">Current state</a><a href="#1-overview">1. Overview</a><a href="#2-gameplay-determinism">2. Gameplay &amp; determinism</a><a href="#3-trust-model-as-implemented">3. Trust model (as implemented)</a><a href="#4-entry-fee-weekly-0-10-peg">4. Entry fee — weekly $0.10 peg</a><a href="#5-game-pool-checkpoint-payouts">5. Game Pool &amp; checkpoint payouts</a><a href="#6-token-mining-420pop">6. Token mining — $420POP</a><a href="#7-nfts-marked-tokens">7. NFTs &amp; marked tokens</a><a href="#8-charity-pool-governance">8. Charity Pool &amp; governance</a><a href="#9-security-decentralization">9. Security &amp; decentralization</a><a href="#10-status">10. Status</a><a class="contents-back" href="whitepaper.html">↑ Whitepaper</a></nav></aside><article class="prose" aria-label="Galaxy King Dog whitepaper">
+<aside class="status-note wrap" id="current-state" aria-label="Development status on 13 September 2026"><strong>Development update · 13 September 2026</strong><p><b>Robinhood is the development priority. The reward candidate remains local and undeployed; no project mainnet release is deployed or enabled.</b> Twenty targeted local test suites passed. An actual local HTTP test completed an authenticated test entry, server-issued seed, gameplay replay, signed proof, recorded run and one test-only fixture token. This is local evidence, not a live token launch or an independent audit.</p><p>Holders advise through a 99-day ballot. After finalization, the sole project administrator chooses the charity recipient with a public reason. Payment must match the reviewed decision. An unpaid decision can be corrected before payment confirms; failed transfers leave its allocation reserved. Saving authorizes anyone to pay, and completed transfers cannot be recalled. <a href="assets/site/papers/charity_governance.html#rh-candidate">Read the candidate charity policy.</a></p><p>The separate 5% buyback allocation is intended for a meme-token treasury governed by its own community. No production token, treasury or governance addresses are bound yet. NFT artwork and metadata templates are local; publication is pending.</p><p>Next: independent contract and replay review, a real hosting rehearsal with Android and wallet checks, verified administrator custody and recipient/token addresses, and NFT publication. The public arcade and historical testnet remain separate from this candidate. The Solana v1.8 material below is historical reference.</p></aside>
+    <section class="robin-prologue" id="robin" aria-labelledby="robin-title"><p class="eyebrow">Fiction / Robin’s world</p><h2 id="robin-title">Robin: Dead Grid</h2><p>The city gave points for everything except fixing it.</p><figure class="story-art"><img src="assets/site/robin-dead-grid-v3.png" width="1672" height="941" loading="lazy" decoding="async" alt="Robin and canine companions beside a rain-soaked canal, with a cyan line reaching a warmly lit clinic."><figcaption><span>01 / Dead Grid</span><span>A light across the canal.</span></figcaption></figure>
+<p>Under neon towers, delivery dogs chased green arrows for streaks and badges. The arrows led in circles. Across the canal, a clinic had been dark for three nights.</p>
+<p>“Lovely dashboard,” Robin said. “Shame about the lights.”</p>
+<p>The cat climbed an abandoned rail gantry with her bow. For six evenings, she practiced sending a thread between two broken pylons. Arrows drowned. Her paws blistered. She learned to loosen her grip and wait out the passing trains.</p>
+<p>A terrier mechanic found a working circuit. Two couriers brought cable instead of chasing another bonus.</p>
+<p>On the seventh evening, Robin’s arrow crossed the water. The couriers hauled the cable along her thread; the mechanic made the connection.</p>
+<p>The clinic lit up.</p>
+<p>Their screens offered nothing. From the opposite window, a nurse flashed a lamp twice.</p>
+<p>Robin raised two fingers, then passed the bow to the terrier.</p>
+</section>
+    <section id="design" aria-label="Design and release status"><aside class="status-note" aria-label="Public arcade and historical whitepaper scope"><strong>Public arcade, local candidate, historical design.</strong><p>The arcade links above remain separate from the local Robinhood reward work. <a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Open Game Jolt</a> for that game page’s current build and availability. This documentation update does not activate new rewards or replace the existing testnet.</p><p>The Solana v1.8 text below records an earlier design. Its economy, governance and security statements are historical reference, not claims about today’s public arcade or the undeployed Robinhood candidate.</p><p><a href="/robinhood.html?voice=1">Open the existing testnet prototype.</a></p></aside><p>Historical Solana v1.8 implementation notes, retained for reference. For the frozen numeric constants see
+<a href="assets/site/papers/whitepaper_implementation_lock_v1_7.html">WHITEPAPER_IMPLEMENTATION_LOCK_V1_7.md</a>; per-subsystem
+details are linked throughout.</p>
+<h2 id="1-overview">1. Overview</h2>
+<p>Galaxy King Dog is a skill-based arcade space shooter with a non-custodial, rule-enforced economy on
+Solana. Players pay a small SOL entry fee, compete for high scores across 33 seasons, farm the
+<code>$420POP</code> SPL token under a Bitcoin-style halving schedule, and win SOL payouts and NFTs. Every
+recorded score and payout is constrained by on-chain rules — there is no admin withdrawal, no hidden
+minting, and no discretionary reward.</p>
+<h2 id="2-gameplay-determinism">2. Gameplay &amp; determinism</h2>
+<p>The engine runs at a fixed timestep with seeded RNG (no <code>Math.random</code>). Each run records per-frame
+inputs, frame deltas, and the seed, and produces a Proof-of-Play package containing:</p>
+<ul>
+<li>a <strong>replay hash</strong> (inputs + seed + checkpoints),</li>
+<li>a <strong>version hash</strong> (the exact game build/ruleset),</li>
+<li>a <strong>run hash</strong> binding player, season, fee, ticket and result.</li>
+</ul>
+<p>This makes a run reproducible and its identity tamper-evident.</p>
+<h2 id="3-trust-model-as-implemented">3. Trust model (as implemented)</h2>
+<p>Gameplay is client-side and skill-based; trust in the <em>score</em> is established in two layers:</p>
+<ol>
+<li><strong>Off-chain authority — live anti-cheat ledger.</strong> The verifier validates each scoring event as it
+occurs (challenge–response, hash-chained events, rate/plausibility limits) and produces the
+authoritative <code>accepted_score</code>. The client never simply asserts a score.</li>
+<li><strong>On-chain enforcement — verifier signature.</strong> The verifier signs a canonical, score-bound
+message; <code>submit_verified_run</code> verifies that ed25519 signature against the trusted verifier key
+using the Solana Ed25519 precompile. Only a verifier-signed score can be recorded on-chain.</li>
+</ol>
+<p>See <a href="assets/site/papers/anti_cheat_score.html">ANTI_CHEAT_SCORE.md</a>. A fully independent, bit-for-bit deterministic replay
+gate is a <strong>future hardening</strong> (the current resimulation core is schema-2 hash/checkpoint, not a 1:1
+replay).</p>
+<h2 id="4-entry-fee-weekly-0-10-peg">4. Entry fee — weekly $0.10 peg</h2>
+<p>Entry costs a target of <strong>$0.10</strong> in SOL. The fee is stored in lamports and <strong>re-pegged weekly</strong> by a
+permissionless crank that reads a Pyth SOL/USD feed (<code>refresh_fee</code>), so it tracks the dollar target
+as SOL moves. A 2/3 multisig may also override the fee and pause the program, but <strong>cannot withdraw
+pool funds</strong> — there is no such instruction. See <a href="assets/site/papers/fee_governance.html">FEE_GOVERNANCE.md</a>.</p>
+<h2 id="5-game-pool-checkpoint-payouts">5. Game Pool &amp; checkpoint payouts</h2>
+<p>All entry fees flow into a program-owned <strong>Game Pool PDA</strong> (<code>deposit_entry_fee</code>). Funds leave only
+through permissionless, one-time checkpoints, each splitting the distributable balance by locked
+rules:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Checkpoint</th>
+<th>Split</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Farm season end</td>
+<td>70% retained · 20% champion · 10% creator payout</td>
+</tr>
+<tr>
+<td>World record break</td>
+<td>70% retained · 20% breaker · 10% creator payout (every break)</td>
+</tr>
+<tr>
+<td>Human season end (S32)</td>
+<td>30% carried to Chaos · 40% human champion · 30% creator payout</td>
+</tr>
+<tr>
+<td>Chaos season end (S33)</td>
+<td>67% chaos champion · 33% creator payout</td>
+</tr>
+</tbody>
+</table></div>
+<p>Every <strong>creator payout</strong> is auto-split <strong>49% creator / 51% Charity Pool</strong>, and <strong>20% of the charity
+share recycles back</strong> into the Game Pool. See <a href="assets/site/papers/pool_mechanism.html">POOL_MECHANISM.md</a>.</p>
+<h2 id="6-token-mining-420pop">6. Token mining — <code>$420POP</code></h2>
+<p><code>$420POP</code> (9 decimals) is minted by a program PDA; no human holds mint authority. Emission follows a
+Bitcoin-style halving: 33 seasons, ~2.1B tokens across the 32 human seasons and a fixed 300,000 cap
+for the Chaos season. Each qualifying run mints a per-season block reward, exact to the season cap.</p>
+<p>Difficulty is <strong>proof-of-work-like</strong>: the minimum score required to mint rises with the already-minted
+supply (Mode B) and is checked <strong>at mint time</strong> — a run that beat the base minimum but not the current
+difficulty can no longer mine. The final human token requires a new world record. See
+<a href="assets/site/papers/token_mining.html">TOKEN_MINING.md</a>.</p>
+<h2 id="7-nfts-marked-tokens">7. NFTs &amp; marked tokens</h2>
+<p>True Metaplex NFTs reward milestones — first player (<code>baby_metatron</code>, once ever), season champion
+(one per season, seasons 1–31), record breaker (one for every new world record), human champion
+(<code>human_metatron</code>, season 32), and chaos champion (<code>final_galaxy_metatron_defender</code>, season 33).
+The same milestone can never be awarded twice — a one-time PDA keyed by award kind plus season or record
+number blocks duplicates — and every NFT is minted by the program PDA. See <a href="assets/site/papers/nft_awards.html">NFT_AWARDS.md</a>.</p>
+<h2 id="8-charity-pool-governance">8. Charity Pool &amp; governance</h2>
+<p>The Charity Pool accumulates the charity share of creator payouts. Its destination is decided by
+<strong>token-weighted governance</strong> at two gates only — end of human emission and end of Chaos. Eligibility
+requires having farmed ≥ 1 <code>$420POP</code>; quorum is 10,000 weighted votes; duration is 99 days; a tie
+triggers a re-vote; below quorum the funds remain in the Charity Pool. The winner must be a
+whitelisted, verified charity operator. See <a href="assets/site/papers/charity_governance.html">CHARITY_GOVERNANCE.md</a>.</p>
+<h2 id="9-security-decentralization">9. Security &amp; decentralization</h2>
+<ul>
+<li><strong>No withdrawal path</strong>; pool/charity moves are rule-enforced and keep PDAs rent-exempt.</li>
+<li><strong>Value-conserving splits</strong> and exact-cap minting (unit-tested).</li>
+<li>Known centralization to harden before mainnet: the <strong>admin authority</strong> is a single key (it cannot
+withdraw funds but gates season closing, the verifier key, the whitelist and pause) and the
+<strong>verifier key</strong> is a trusted oracle. Recommended: multisig admin, HSM-held verifier key, a
+governance balance snapshot, and an <strong>independent audit</strong>. See <a href="assets/site/papers/security_notes.html">SECURITY_NOTES.md</a>.</li>
+</ul>
+<h2 id="10-status">10. Status</h2>
+<p>Implemented and tested (off-chain): the full program (27 instructions), the verifier signing path,
+and the front-end wiring (entry fee → Pool PDA, on-chain top-3 leaderboard). Pending: program
+deployment and the operational hardening above. See <a href="assets/site/papers/deploy.html">DEPLOY.md</a>.</p>
+</section>
+    <p class="paper-source">The Robin prologue is fiction. The original technical v1.8 text is preserved as historical Solana reference. <a href="assets/site/whitepaper-v1.8.md" download>Download the historical technical document and current status note.</a></p>
+  </article></div></div>
+</main>
+  <footer class="site-footer"><div class="wrap footer-inner">
+    <span>© 2026 Galaxy King Dog (Liolee). All rights reserved. <a href="COPYRIGHT.txt">Copyright notice</a></span>
+    <span class="footer-signoff">Aim beyond the next reward.</span>
+    <div class="footer-links"><a href="whitepaper.html">Whitepaper</a><a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Game Jolt ↗</a><a href="/play/?mode=choose">Controls &amp; skin ↗</a><a href="/mobile/?v=mobile-6">Mobile ↗</a><a href="/robinhood.html?voice=1">Testnet ↗</a></div>
+  </div></footer>
+<script>
+(function () {
+  'use strict';
+  // Same key the play launcher writes, so a choice made here is the one the
+  // game reads, whichever page the player enters from.
+  var KEY = 'gkd.play.skin.v1';
+  var SKINS = ['robin-cat-v6', 'robin-hood', 'robin-moon', 'robin-sailor-smoon', 'robin-ginger', 'robin-frost'];
+  var ENTRY = /^\/(galaxian(\.html)?|robinhood(\.html)?|mobile\/)/;
+  var inputs = [].slice.call(document.querySelectorAll('input[name="home-skin"]'));
+  if (!inputs.length) return;
+  var saved = null;
+  try { saved = window.localStorage.getItem(KEY); } catch (_) { /* Private browsers deny storage. */ }
+  var skin = SKINS.indexOf(saved) >= 0 ? saved : SKINS[0];
+  function apply() {
+    var links = [].slice.call(document.querySelectorAll('a[href]'));
+    for (var i = 0; i < links.length; i += 1) {
+      var href = links[i].getAttribute('href') || '';
+      if (!ENTRY.test(href)) continue;
+      try {
+        var url = new URL(href, location.href);
+        url.searchParams.set('skin', skin);
+        links[i].setAttribute('href', url.pathname + url.search + url.hash);
+      } catch (_) { /* A malformed href is left exactly as the page wrote it. */ }
+    }
+  }
+  for (var j = 0; j < inputs.length; j += 1) {
+    inputs[j].checked = inputs[j].value === skin;
+    inputs[j].addEventListener('change', function (event) {
+      if (!event.target.checked || SKINS.indexOf(event.target.value) < 0) return;
+      skin = event.target.value;
+      try { window.localStorage.setItem(KEY, skin); } catch (_) { /* Choice still applies to this visit. */ }
+      apply();
+    });
+  }
+  apply();
+})();
+</script>
+</body>
+</html>

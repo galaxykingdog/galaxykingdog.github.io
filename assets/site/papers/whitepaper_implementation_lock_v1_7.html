@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
+  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#091610">
+  <title>Galaxy King Dog — Whitepaper Implementation Lock v1.7 | Galaxy King Dog</title>
+  <meta name="description" content="Supporting source documentation for the Galaxy King Dog Solana design.">
+  
+  <link rel="icon" type="image/svg+xml" href="../../../assets/site/star.svg">
+  <link rel="stylesheet" href="../../../src/site/site.css?v=robin-paper-4">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="wrap header-inner">
+    <a class="brand" href="../../../whitepaper.html" aria-label="Galaxy King Dog whitepaper"><span class="brand-star" aria-hidden="true">✦</span><span>GALAXY KING DOG<small>WHITEPAPER / ROBIN</small></span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="../../../whitepaper.html#robin">Prologue</a>
+      <a href="../../../whitepaper.html#design" aria-current="page">Design</a>
+      <a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet</a>
+      <a class="button small" href="https://gamejolt.com/games/galaxy-king-dog/1084669">Play Game Jolt <span class="arrow" aria-hidden="true">↗</span></a>
+    </nav>
+  </div></header>
+  <main id="main"><header class="reader-hero"><div class="wrap"><p class="eyebrow">Galaxy King Dog / Supporting design document</p><h1>Galaxy King Dog — Whitepaper Implementation Lock v1.7</h1><div class="reader-meta"><a href="../../../whitepaper.html">← Whitepaper and current release</a><a href="whitepaper_implementation_lock_v1_7.md" download>Download original Markdown ↓</a></div></div></header><div class="reading-surface"><div class="wrap reader-layout"><aside class="contents"><nav aria-label="Table of contents"><p class="eyebrow">In this document</p><a href="#implemented-in-repo">Implemented in repo</a><a href="#locked-chain-constants">Locked chain constants</a><a href="#locked-proof-of-play-fields">Locked proof-of-play fields</a><a href="#locked-split-rules">Locked split rules</a><a href="#locked-governance">Locked governance</a><a href="#locked-nft-file-names">Locked NFT file names</a><a href="#local-check">Local check</a><a class="contents-back" href="../../../whitepaper.html">↑ Whitepaper</a></nav></aside><article class="prose"><aside class="status-note"><strong>Solana design documentation</strong><p>This source document describes the Solana implementation. It does not describe the currently playable Robinhood Testnet prototype. <a href="../../../whitepaper.html">Read the current-release note.</a></p></aside><p>Locked date: 2025-12-17<br />
+Source: Galaxy King Dog Whitepaper v1.6 + v1.7 addendum. The addendum is authoritative where season/supply notes conflict.</p>
+<blockquote>
+<p><strong>v1.8 addendum (implemented).</strong> Two clarifications now reflect the built program — see
+<a href="../../../whitepaper.html">WHITEPAPER.md</a>:</p>
+<ul>
+<li><strong>Entry fee:</strong> targets <strong>$0.10</strong> and is <strong>re-pegged weekly</strong> from a Pyth SOL/USD feed
+(permissionless crank). 270,000 lamports below is the bootstrap value / dust floor, not a fixed
+price; the 2/3 multisig may override but can never withdraw pool funds.</li>
+<li><strong>Trust model:</strong> the on-chain score is enforced by the <strong>verifier's ed25519 signature</strong> (Ed25519
+precompile) over the ledger-accepted score, not by independent replay. Full bit-for-bit
+resimulation remains a future hardening (see the verifier-mode note below).</li>
+</ul>
+</blockquote>
+<h2 id="implemented-in-repo">Implemented in repo</h2>
+<ul>
+<li><code>src/chain/gkd_whitepaper_spec.js</code> is the canonical implementation constants file.</li>
+<li><code>src/chain/chain_config.js</code> reads the locked spec for token, creator wallet, season, split, fee, and pool context.</li>
+<li><code>index.html</code> loads the spec before chain config and chain client.</li>
+<li><code>verifier/test_whitepaper_spec.js</code> locks the constants with tests.</li>
+</ul>
+<h2 id="locked-chain-constants">Locked chain constants</h2>
+<ul>
+<li>Token: <code>$420POP</code></li>
+<li>Decimals: <code>9</code></li>
+<li>Devnet creator wallet: <code>8qCpYyRjdG8Y1jW5fu77XZ3qkWErgABhscEuuY4mRjnr</code></li>
+<li>Mainnet creator wallet: unset until the audited mainnet deployment is initialized</li>
+<li>Game Pool target: program-owned PDA, seed <code>pool</code></li>
+<li>Human emission ends at Season <code>32</code></li>
+<li>Season <code>33</code> is Chaos</li>
+<li>Chaos cap: <code>300,000 $420POP</code></li>
+<li>Initial fee floor: <code>270,000</code> lamports</li>
+</ul>
+<h2 id="locked-proof-of-play-fields">Locked proof-of-play fields</h2>
+<p>The browser run package and verifier already use schema <code>2</code> with:</p>
+<ul>
+<li><code>player_pubkey</code></li>
+<li><code>fee_lamports</code></li>
+<li><code>entry_sig</code></li>
+<li><code>entry_slot</code></li>
+<li><code>final_score</code></li>
+<li><code>season_id</code></li>
+<li><code>replay_hash</code></li>
+<li><code>version_hash</code></li>
+<li><code>run_hash</code></li>
+<li><code>checkpoint_chain_final</code></li>
+<li><code>last_checkpoint</code></li>
+</ul>
+<p>Verifier mode remains <code>schema2_hash_checkpoint</code> until full Phaser-identical strict resimulation is implemented.</p>
+<h2 id="locked-split-rules">Locked split rules</h2>
+<ul>
+<li>Creator payout auto-split: <code>49%</code> creator wallet / <code>51%</code> Charity Pool.</li>
+<li>Charity Pool donation recycle: <code>20%</code> back to Game Pool.</li>
+<li>Farm season end: <code>70%</code> retained / <code>20%</code> season winner / <code>10%</code> creator payout.</li>
+<li>World record break: <code>70%</code> retained / <code>20%</code> record breaker / <code>10%</code> creator payout, paid on every world-record break.</li>
+<li>Human season end: <code>30%</code> carried to Chaos / <code>40%</code> Human Champion / <code>30%</code> creator payout.</li>
+<li>Chaos end: <code>67%</code> Chaos Champion / <code>33%</code> creator payout.</li>
+</ul>
+<h2 id="locked-governance">Locked governance</h2>
+<ul>
+<li>Charity vote only twice: end Human emission and end Chaos.</li>
+<li>Eligibility: farmed at least one <code>$420POP</code>.</li>
+<li>Quorum: <code>10,000</code> votes.</li>
+<li>Duration: <code>99</code> days.</li>
+<li>Tie: re-vote.</li>
+<li>Failed quorum: funds remain in Charity Pool.</li>
+<li>Chosen operator must be a whitelisted verified charity organization.</li>
+</ul>
+<h2 id="locked-nft-file-names">Locked NFT file names</h2>
+<ul>
+<li><code>baby_metatron.png</code></li>
+<li><code>season_champion_metatron.png</code></li>
+<li><code>record_breaker_metatron.png</code></li>
+<li><code>human_metatron.png</code></li>
+<li><code>final_galaxy_metatron_defender.png</code></li>
+</ul>
+<h2 id="local-check">Local check</h2>
+<p>Run:</p>
+<pre><code class="language-powershell">cd &quot;C:\Users\spirc\Desktop\dogww&quot;
+node verifier/test_whitepaper_spec.js
+npm.cmd run test:verifier
+</code></pre>
+</article></div></div></main>
+  <footer class="site-footer"><div class="wrap footer-inner">
+    <span>© 2026 Galaxy King Dog</span>
+    <span class="footer-signoff">Aim beyond the next reward.</span>
+    <div class="footer-links"><a href="../../../whitepaper.html">Whitepaper</a><a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Game Jolt ↗</a><a href="/play/">Choose controls ↗</a><a href="/mobile/?v=mobile-6">Mobile ↗</a><a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet ↗</a></div>
+  </div></footer>
+</body>
+</html>

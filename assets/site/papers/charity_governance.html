@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
+  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#091610">
+  <title>Charity decisions and holder advice | Galaxy King Dog</title>
+  <meta name="description" content="The undeployed Robinhood charity candidate: advisory holders, a sole administrator and public decisions, alongside historical Solana documentation.">
+  
+  <link rel="icon" type="image/svg+xml" href="../../../assets/site/star.svg">
+  <link rel="stylesheet" href="../../../src/site/site.css?v=robin-paper-4">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="wrap header-inner">
+    <a class="brand" href="../../../whitepaper.html" aria-label="Galaxy King Dog whitepaper"><span class="brand-star" aria-hidden="true">✦</span><span>GALAXY KING DOG<small>WHITEPAPER / ROBIN</small></span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="../../../whitepaper.html#robin">Prologue</a>
+      <a href="../../../whitepaper.html#design" aria-current="page">Design</a>
+      <a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet</a>
+      <a class="button small" href="https://gamejolt.com/games/galaxy-king-dog/1084669">Open Game Jolt <span class="arrow" aria-hidden="true">↗</span></a>
+    </nav>
+  </div></header>
+  <main id="main"><aside class="status-note wrap" id="rh-candidate" aria-label="Robinhood candidate status"><strong>RH candidate update · 13 September 2026 · Not deployed</strong><p>Robinhood is the development priority, but this reward candidate remains local and undeployed. No project mainnet release is deployed or enabled. Twenty targeted local suites passed, including an actual local HTTP flow from authenticated test entry and server-issued seed through replay, signed proof, recorded run and one test-only fixture token. These results are not an independent audit or a live rollout.</p><p>Holders advise through one 99-day ballot at each Human or Chaos gate. After finalization, the sole project administrator reviews the visible result and chooses the final charity recipient with a public reason. Ties or insufficient quorum do not require another ballot. Ballot candidates are sealed, while the administrator may choose a recipient outside that list. The contract does not establish an organization's charitable identity.</p><p>Saving a decision authorizes anyone to pay its original charity allocation. Payment must match the reviewed recipient and reason. An unpaid decision may be corrected before payment confirms. Failed transfers leave the allocation unpaid and reserved, separate from player and creator credits; completed payments cannot be recalled. No holder committee, extra timelock or automatic DAO transition is included.</p><p>The separate 5% buyback allocation is intended for a meme-token treasury governed by its own community. No production token, treasury or governance addresses are bound yet. This treasury is separate from the administrator's charity decisions. NFT artwork and metadata templates remain local and unpublished.</p><p>Before launch: independent contract and replay review, a real hosting rehearsal with Android and wallet checks, verified administrator custody and charity/token addresses, and NFT publication. The public arcade and existing testnet are separate from this candidate. The Solana v1.7 material below is preserved historical design, not the current RH charity policy. <a href="charity_governance.md">Download the current policy and historical notes.</a></p></aside><header class="reader-hero"><div class="wrap"><p class="eyebrow">Galaxy King Dog / Supporting design document</p><h1>Charity decisions and holder advice</h1><div class="reader-meta"><a href="../../../whitepaper.html">← Whitepaper and current release</a><a href="charity_governance.md" download>Download original Markdown ↓</a></div></div></header><div class="reading-surface"><div class="wrap reader-layout"><aside class="contents"><nav aria-label="Table of contents"><p class="eyebrow">In this document</p><a href="#rh-candidate">Current RH candidate</a><a href="#locked-rules-v1-7">Historical rules (v1.7)</a><a href="#instructions">Instructions</a><a href="#accounts-pdas">Accounts / PDAs</a><a href="#voting-finalize">Voting &amp; finalize</a><a href="#known-limitations-documented-pre-audit">Known limitations (documented, pre-audit)</a><a class="contents-back" href="../../../whitepaper.html">↑ Whitepaper</a></nav></aside><article class="prose"><aside class="status-note"><strong>Historical Solana v1.7 reference</strong><p>The preserved material below describes the earlier Solana design. It is not the current RH charity policy or a statement about today's public arcade. <a href="../../../whitepaper.html#current-state">Read the current status.</a></p></aside><p>On-chain implementation of the whitepaper v1.7 charity governance: token-weighted votes that
+direct the Charity Pool to a whitelisted charity operator. <strong>Not yet deployed.</strong></p>
+<h2 id="locked-rules-v1-7">Locked rules (v1.7)</h2>
+<ul>
+<li>Votes happen at <strong>two gates only</strong>: <code>end_human_emission</code> (gate 0, after season 32 closes) and
+<code>end_chaos</code> (gate 1, after season 33 closes).</li>
+<li><strong>Eligibility</strong>: voter must hold ≥ 1 whole $420POP.</li>
+<li><strong>Token-weighted</strong>: vote weight = the voter's whole-token $420POP balance.</li>
+<li><strong>Quorum</strong>: 10,000 total weighted votes.</li>
+<li><strong>Duration</strong>: 99 days.</li>
+<li><strong>Tie</strong>: re-vote (admin opens a new <code>round</code>).</li>
+<li><strong>Failed quorum</strong>: funds remain in the Charity Pool.</li>
+<li><strong>Operator</strong> must be a whitelisted verified charity.</li>
+</ul>
+<h2 id="instructions">Instructions</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th>Who</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>whitelist_charity(operator, name)</code></td>
+<td>admin</td>
+<td>Adds a verified operator (<code>[&quot;charity_op&quot;, operator]</code> PDA).</td>
+</tr>
+<tr>
+<td><code>open_charity_vote(gate, round)</code></td>
+<td>admin</td>
+<td>Opens a 99-day vote; requires the gate's season closed. Quorum = 10k.</td>
+</tr>
+<tr>
+<td><code>cast_charity_vote()</code></td>
+<td>any eligible holder</td>
+<td>One token-weighted vote per wallet per proposal.</td>
+</tr>
+<tr>
+<td><code>finalize_charity_vote()</code></td>
+<td>permissionless</td>
+<td>After close: routes Charity Pool to the winner, or marks failed-quorum / tie.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="accounts-pdas">Accounts / PDAs</h2>
+<ul>
+<li><code>CharityProposal</code> — <code>[&quot;proposal&quot;, gate, round]</code>. Tracks window, quorum, <code>total_votes</code>, and the
+<strong>top-two</strong> tallies (<code>leading_votes</code> / <code>second_votes</code>) so an exact tie is detectable at finalize.</li>
+<li><code>OperatorTally</code> — <code>[&quot;tally&quot;, proposal, operator]</code>. Accumulated weight per operator (<code>init_if_needed</code>).</li>
+<li><code>VoteReceipt</code> — <code>[&quot;vote&quot;, proposal, voter]</code>. <code>init</code> ⇒ one vote per wallet per proposal.</li>
+<li><code>WhitelistedCharity</code> — <code>[&quot;charity_op&quot;, operator]</code>. Operator + active flag + name.</li>
+</ul>
+<h2 id="voting-finalize">Voting &amp; finalize</h2>
+<p><code>cast_charity_vote</code> reads the voter's $420POP token account (mint must equal <code>config.mint</code>, owner
+must be the voter), computes <code>weight = amount / 10⁹</code>, requires <code>weight ≥ 1</code>, writes a <code>VoteReceipt</code>,
+adds the weight to the operator's tally and the proposal total, and updates the top-two tracker.</p>
+<p><code>finalize_charity_vote</code> (after <code>end_ts</code>):</p>
+<ul>
+<li><code>total_votes &lt; quorum</code> → <code>failed_quorum = true</code>, funds stay in the Charity Pool;</li>
+<li><code>leading_votes == second_votes</code> → <code>tie = true</code>, admin must <code>open_charity_vote</code> with a new <code>round</code>;</li>
+<li>otherwise the winner = <code>leading_operator</code> (re-checked against the passed operator + whitelist) and
+the Charity Pool's distributable balance is transferred to the operator wallet.</li>
+</ul>
+<h2 id="known-limitations-documented-pre-audit">Known limitations (documented, pre-audit)</h2>
+<ul>
+<li><strong>Snapshot-less weighting</strong>: weight is the <em>current</em> balance, so tokens moved between wallets can
+be re-used to vote from multiple wallets. A balance snapshot or vote-time token lock/escrow is the
+hardening step before mainnet.</li>
+<li>Quorum unit is whole-token weight (10,000), matching the token-weighted default; confirm against
+the whitepaper if a one-wallet-one-vote interpretation was intended instead.</li>
+</ul>
+</article></div></div></main>
+  <footer class="site-footer"><div class="wrap footer-inner">
+    <span>© 2026 Galaxy King Dog</span>
+    <span class="footer-signoff">Aim beyond the next reward.</span>
+    <div class="footer-links"><a href="../../../whitepaper.html">Whitepaper</a><a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Game Jolt ↗</a><a href="/play/">Choose controls ↗</a><a href="/mobile/?v=mobile-6">Mobile ↗</a><a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet ↗</a></div>
+  </div></footer>
+</body>
+</html>

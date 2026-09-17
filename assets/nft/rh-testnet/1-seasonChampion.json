@@ -1,0 +1,28 @@
+{
+  "name": "Galaxy King Dog — Season Champion",
+  "description": "Awarded to the recorded champion of a completed Human farming season, seasons 1 through 31. Robinhood Chain Testnet award with no monetary value.",
+  "image": "https://galaxykingdogs.netlify.app/assets/nft/rh-testnet/season_champion_metatron.jpg",
+  "attributes": [
+    {
+      "trait_type": "Milestone",
+      "value": "Season Champion"
+    },
+    {
+      "trait_type": "Award kind",
+      "value": 1
+    },
+    {
+      "trait_type": "Network",
+      "value": "Robinhood Chain Testnet"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "https://galaxykingdogs.netlify.app/assets/nft/rh-testnet/season_champion_metatron.jpg",
+        "type": "image/jpeg"
+      }
+    ]
+  },
+  "external_url": "https://galaxykingdogs.netlify.app/robinhood.html"
+}

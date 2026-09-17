@@ -1,0 +1,172 @@
+{
+  "frames": {
+    "0": {
+      "frame": {
+        "x": 40,
+        "y": 10,
+        "w": 332,
+        "h": 417
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 56,
+        "y": 17,
+        "w": 332,
+        "h": 417
+      },
+      "sourceSize": {
+        "w": 444,
+        "h": 444
+      }
+    },
+    "1": {
+      "frame": {
+        "x": 487,
+        "y": 10,
+        "w": 345,
+        "h": 417
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 50,
+        "y": 17,
+        "w": 345,
+        "h": 417
+      },
+      "sourceSize": {
+        "w": 444,
+        "h": 444
+      }
+    },
+    "2": {
+      "frame": {
+        "x": 988,
+        "y": 30,
+        "w": 315,
+        "h": 397
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 64,
+        "y": 37,
+        "w": 315,
+        "h": 397
+      },
+      "sourceSize": {
+        "w": 444,
+        "h": 444
+      }
+    },
+    "3": {
+      "frame": {
+        "x": 1415,
+        "y": 10,
+        "w": 344,
+        "h": 417
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 50,
+        "y": 17,
+        "w": 344,
+        "h": 417
+      },
+      "sourceSize": {
+        "w": 444,
+        "h": 444
+      }
+    },
+    "4": {
+      "frame": {
+        "x": 51,
+        "y": 450,
+        "w": 353,
+        "h": 416
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 46,
+        "y": 18,
+        "w": 353,
+        "h": 416
+      },
+      "sourceSize": {
+        "w": 444,
+        "h": 444
+      }
+    },
+    "5": {
+      "frame": {
+        "x": 526,
+        "y": 450,
+        "w": 330,
+        "h": 416
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 57,
+        "y": 18,
+        "w": 330,
+        "h": 416
+      },
+      "sourceSize": {
+        "w": 444,
+        "h": 444
+      }
+    },
+    "6": {
+      "frame": {
+        "x": 951,
+        "y": 450,
+        "w": 307,
+        "h": 416
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 68,
+        "y": 18,
+        "w": 307,
+        "h": 416
+      },
+      "sourceSize": {
+        "w": 444,
+        "h": 444
+      }
+    },
+    "7": {
+      "frame": {
+        "x": 1397,
+        "y": 450,
+        "w": 339,
+        "h": 416
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 52,
+        "y": 18,
+        "w": 339,
+        "h": 416
+      },
+      "sourceSize": {
+        "w": 444,
+        "h": 444
+      }
+    }
+  },
+  "meta": {
+    "image": "player_robin_cat_sheet_v2.png",
+    "size": {
+      "w": 1774,
+      "h": 887
+    },
+    "scale": "1"
+  }
+}

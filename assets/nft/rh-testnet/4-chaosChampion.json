@@ -1,0 +1,28 @@
+{
+  "name": "Galaxy King Dog — Chaos Champion",
+  "description": "Awarded to the recorded champion when the Chaos season closes. Robinhood Chain Testnet award with no monetary value.",
+  "image": "https://galaxykingdogs.netlify.app/assets/nft/rh-testnet/final_galaxy_metatron_defender.jpg",
+  "attributes": [
+    {
+      "trait_type": "Milestone",
+      "value": "Chaos Champion"
+    },
+    {
+      "trait_type": "Award kind",
+      "value": 4
+    },
+    {
+      "trait_type": "Network",
+      "value": "Robinhood Chain Testnet"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "https://galaxykingdogs.netlify.app/assets/nft/rh-testnet/final_galaxy_metatron_defender.jpg",
+        "type": "image/jpeg"
+      }
+    ]
+  },
+  "external_url": "https://galaxykingdogs.netlify.app/robinhood.html"
+}
