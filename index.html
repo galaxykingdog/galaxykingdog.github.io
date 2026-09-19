@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net https://static.cloudflareinsights.com/beacon.min.js; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev https://cloudflareinsights.com; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
   <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
   <meta name="copyright" content="Copyright (c) 2026 Galaxy King Dog (Liolee). All rights reserved. Unauthorized copying, modification, redistribution or rehosting is prohibited.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -406,7 +406,7 @@ not evidence of returns, partnerships or gameplay captures.</p>
   <footer class="site-footer"><div class="wrap footer-inner">
     <span>© 2026 Galaxy King Dog (Liolee). All rights reserved. <a href="assets/site/copyright.txt">Copyright notice</a></span>
     <span class="footer-signoff">Aim beyond the next reward.</span>
-    <div class="footer-links"><a class="x-link x-footer" href="https://x.com/Parrottwit" target="_blank" rel="noopener noreferrer" aria-label="Follow Robin on X, @Parrottwit (opens in a new tab)"><svg class="x-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.9 2H22l-7.7 8.8L23 22h-6.8l-5.3-7L4.8 22H1.7l8-9.2L1 2h7l4.8 6.3L18.9 2ZM17.8 20h1.7L7 4H5.2l12.6 16Z"/></svg><span>X · @Parrottwit</span><span aria-hidden="true">↗</span></a><a href="whitepaper.html">Whitepaper</a><a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Game Jolt ↗</a><a href="/play/?mode=choose">Controls &amp; skin ↗</a><a href="/mobile/?v=mobile-6">Mobile ↗</a><a href="/robinhood.html?voice=1">Testnet ↗</a></div>
+    <div class="footer-links"><a href="/privacy.html">Privacy</a><a class="x-link x-footer" href="https://x.com/Parrottwit" target="_blank" rel="noopener noreferrer" aria-label="Follow Robin on X, @Parrottwit (opens in a new tab)"><svg class="x-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.9 2H22l-7.7 8.8L23 22h-6.8l-5.3-7L4.8 22H1.7l8-9.2L1 2h7l4.8 6.3L18.9 2ZM17.8 20h1.7L7 4H5.2l12.6 16Z"/></svg><span>X · @Parrottwit</span><span aria-hidden="true">↗</span></a><a href="whitepaper.html">Whitepaper</a><a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Game Jolt ↗</a><a href="/play/?mode=choose">Controls &amp; skin ↗</a><a href="/mobile/?v=mobile-6">Mobile ↗</a><a href="/robinhood.html?voice=1">Testnet ↗</a></div>
   </div></footer>
 <script>
 (function () {
@@ -445,5 +445,6 @@ not evidence of returns, partnerships or gameplay captures.</p>
   apply();
 })();
 </script>
+<script data-gkd-web-analytics="cloudflare">(function(){if(location.hostname!=="galaxykingdog.github.io"||location.protocol!=="https:"||navigator.onLine===false||navigator.doNotTrack==="1"||window.doNotTrack==="1"||navigator.globalPrivacyControl===true)return;var s=document.createElement("script");s.type="module";s.async=true;s.src="https://static.cloudflareinsights.com/beacon.min.js";s.setAttribute("data-cf-beacon","{\"token\": \"fc2c3c6326874ea1b6d6319604369dbd\", \"spa\": false}");document.body.appendChild(s);})();</script>
 </body>
 </html>

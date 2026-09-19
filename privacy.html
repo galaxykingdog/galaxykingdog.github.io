@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net https://static.cloudflareinsights.com/beacon.min.js; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev https://cloudflareinsights.com; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
+  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Website privacy | Galaxy King Dog</title>
+<link rel="icon" href="/assets/site/star.svg" type="image/svg+xml">
+<style>body{margin:0;background:#07130f;color:#eef2e7;font:18px/1.7 system-ui,sans-serif}main{max-width:760px;margin:auto;padding:48px 24px}h1{line-height:1.15;font-size:clamp(32px,6vw,52px)}h2{font-size:24px;margin-top:36px}a{color:#ccfa8c}small{color:#b8c9be}</style>
+</head><body><main>
+<a href="/">← Galaxy King Dog</a>
+<h1>Website privacy</h1><small>Updated 19 September 2026 · galaxykingdog.github.io</small>
+<h2>Understanding visits</h2>
+<p>We use Cloudflare Web Analytics on this website and its free browser arcade to understand page views, visits, referring websites, device and browser types, countries and page performance. The dashboard is accessible through our Cloudflare account.</p>
+<p>Cloudflare states that this service does not use analytics cookies, local storage or individual visitor fingerprinting. Like any external service, it receives the network request needed to deliver its script and process the measurement. See <a href="https://developers.cloudflare.com/web-analytics/about/">Cloudflare Web Analytics</a> and <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare’s privacy policy</a>.</p>
+<p>Our integration does not send gameplay scores, player names, wallet addresses, transactions, chat messages or control inputs as analytics events. It is limited to this hostname. It is not included in the Android package, Game Jolt package, local previews or the separate Testnet service.</p>
+<h2>Your choices</h2>
+<p>We skip analytics when your browser sends a Do Not Track or Global Privacy Control signal, or when it reports that it is offline. Cloudflare removes query strings and fragments from the reported page and referrer URLs. Tracking protection can also block the Cloudflare script. The game works without analytics.</p>
+<h2>Game preferences</h2>
+<p>The free arcade may save your selected skin, sound preferences and local best scores on your device. The installed browser app can cache game assets for offline play. These local features are separate from traffic measurement.</p>
+<p>Other hosts and external platforms have their own privacy practices. This notice covers the GitHub Pages website.</p>
+<p><a href="/play/?mode=choose">Play the free arcade</a> · <a href="/whitepaper.html">Whitepaper</a></p>
+</main><script data-gkd-web-analytics="cloudflare">(function(){if(location.hostname!=="galaxykingdog.github.io"||location.protocol!=="https:"||navigator.onLine===false||navigator.doNotTrack==="1"||window.doNotTrack==="1"||navigator.globalPrivacyControl===true)return;var s=document.createElement("script");s.type="module";s.async=true;s.src="https://static.cloudflareinsights.com/beacon.min.js";s.setAttribute("data-cf-beacon","{\"token\": \"fc2c3c6326874ea1b6d6319604369dbd\", \"spa\": false}");document.body.appendChild(s);})();</script>
+</body></html>
