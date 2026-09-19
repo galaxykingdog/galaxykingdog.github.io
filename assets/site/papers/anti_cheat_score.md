@@ -1,3 +1,7 @@
+> Historical Solana design and dated development notes. These rules and deployment statements are not the current RH policy or a live-status report. The current whitepaper takes precedence for RH fees, charity, buyback, administrator control and mainnet readiness.
+
+[Current whitepaper](../../../whitepaper.html)
+
 # Anti-cheat: strict verifier-signed on-chain score
 
 Goal: **the final score recorded on-chain is exactly what the configured verifier accepted.** The

@@ -1,3 +1,7 @@
+> Historical Solana design and dated development notes. These rules and deployment statements are not the current RH policy or a live-status report. The current whitepaper takes precedence for RH fees, charity, buyback, administrator control and mainnet readiness.
+
+[Current whitepaper](../../../whitepaper.html)
+
 # Charity Governance — RH candidate and historical Solana design
 
 ## RH candidate status — 13 September 2026 — not deployed

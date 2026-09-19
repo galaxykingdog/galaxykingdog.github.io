@@ -8,14 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#091610">
   <title>Whitepaper — Robin, the game and its rules | Galaxy King Dog</title>
-  <meta name="description" content="Meet Robin in Dead Grid, open the public arcade, and read the 13 September 2026 development update alongside the historical Solana whitepaper.">
+  <meta name="description" content="Robin’s arcade and the RH-first Web3 design: Testnet evidence, pools, charity, community treasury and mainnet requirements. Updated 19 September 2026.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Whitepaper — Robin, the game and its rules | Galaxy King Dog">
-  <meta property="og:description" content="Meet Robin in Dead Grid, open the public arcade, and read the 13 September 2026 development update alongside the historical Solana whitepaper.">
+  <meta property="og:description" content="Robin’s arcade and the RH-first Web3 design: Testnet evidence, pools, charity, community treasury and mainnet requirements. Updated 19 September 2026.">
   <meta property="og:image" content="https://galaxykingdogs.netlify.app/assets/site/robin-whitepaper-hero-v3.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="assets/site/star.svg">
-  <link rel="stylesheet" href="src/site/site.css?v=robin-paper-5">
+  <link rel="stylesheet" href="src/site/site.css?v=robin-paper-6">
+  <link rel="stylesheet" href="src/site/social-x.css?v=20260917">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -26,6 +27,7 @@
       <a href="whitepaper.html#design" aria-current="page">Design</a>
       <a href="/robinhood.html?voice=1">Testnet</a>
       <a class="button small" href="https://gamejolt.com/games/galaxy-king-dog/1084669">Open Game Jolt <span class="arrow" aria-hidden="true">↗</span></a>
+      <a class="button small outline x-link x-header" href="https://x.com/Parrottwit" target="_blank" rel="noopener noreferrer" aria-label="Follow Robin on X, @Parrottwit (opens in a new tab)"><svg class="x-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.9 2H22l-7.7 8.8L23 22h-6.8l-5.3-7L4.8 22H1.7l8-9.2L1 2h7l4.8 6.3L18.9 2ZM17.8 20h1.7L7 4H5.2l12.6 16Z"/></svg><span>Follow Robin</span><span aria-hidden="true">↗</span></a>
     </nav>
   </div></header>
   <main id="main">
@@ -33,7 +35,12 @@
     <div class="paper-hero-top">
       <div class="hero-copy"><p class="eyebrow">Galaxy King Dog / Whitepaper</p><h1>Skill is<br>the signal.</h1><p class="reader-deck">Robin’s world. The game’s rules.<br>Your next run.</p>
         <div class="hero-action"><a class="button" href="https://gamejolt.com/games/galaxy-king-dog/1084669">Open Game Jolt <span aria-hidden="true">↗</span></a><p>Open the game page for its current<br>build and availability.</p></div>
-        <a class="hero-story-link" href="#current-state">Development update · 13 September 2026 <span aria-hidden="true">↓</span></a>
+        <aside class="x-community" aria-label="Follow Robin on X">
+          <p class="x-community-title">The game is only the beginning.</p>
+          <p class="x-community-copy">Follow Robin’s journey — development updates, new skins and community news.</p>
+          <a class="button small outline x-link" href="https://x.com/Parrottwit" target="_blank" rel="noopener noreferrer" aria-label="Follow Robin on X, @Parrottwit (opens in a new tab)"><svg class="x-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.9 2H22l-7.7 8.8L23 22h-6.8l-5.3-7L4.8 22H1.7l8-9.2L1 2h7l4.8 6.3L18.9 2ZM17.8 20h1.7L7 4H5.2l12.6 16Z"/></svg><span>Follow @Parrottwit</span><span aria-hidden="true">↗</span></a>
+        </aside>
+        <a class="hero-story-link" href="#current-state">Current decisions · 19 September 2026 <span aria-hidden="true">↓</span></a>
         <a class="hero-story-link" href="#robin">Meet Robin in Dead Grid <span aria-hidden="true">↓</span></a>
         <a class="hero-story-link" href="#play">Choose a skin and play in the browser <span aria-hidden="true">↓</span></a>
       </div>
@@ -53,17 +60,16 @@
       </fieldset>
       <div class="play-options">
         <a class="play-card featured" href="https://gamejolt.com/games/galaxy-king-dog/1084669"><span class="play-kind">01 / Game page</span><h3>Game Jolt</h3><p>Open Game Jolt for the current build and project updates.</p><span class="play-card-action">Open Game Jolt <span aria-hidden="true">↗</span></span></a>
-        <a class="play-card" href="/galaxian.html?voice=1"><span class="play-kind">02 / Web · PC</span><h3>Desktop arcade</h3><p>Keyboard controls. Choose Robin and start a browser run.</p><span class="play-card-action">Play on PC <span aria-hidden="true">↗</span></span></a>
-        <a class="play-card" href="/mobile/?v=mobile-6"><span class="play-kind">03 / Web · Mobile</span><h3>Mobile arcade</h3><p>Touch controls, a red FIRE button and expanded view.</p><span class="play-card-action">Play on your phone <span aria-hidden="true">↗</span></span></a>
-        <a class="play-card" href="/robinhood.html?voice=1"><span class="play-kind">04 / Existing testnet</span><h3>Robinhood</h3><p>Existing testnet preview, separate from the undeployed reward candidate.</p><span class="play-card-action">Enter Testnet <span aria-hidden="true">↗</span></span></a>
+        <a class="play-card" href="/galaxian.html?voice=1"><span class="play-kind">02 / Free arcade · PC</span><h3>Desktop arcade</h3><p>Keyboard controls. No wallet or entry fee. Choose Robin and play.</p><span class="play-card-action">Play on PC <span aria-hidden="true">↗</span></span></a>
+        <a class="play-card" href="/mobile/?v=mobile-6"><span class="play-kind">03 / Free arcade · Mobile</span><h3>Mobile arcade</h3><p>Circular joystick, red FIRE button and expanded view. No wallet required.</p><span class="play-card-action">Play on your phone <span aria-hidden="true">↗</span></span></a>
+        <a class="play-card" href="/robinhood.html?voice=1"><span class="play-kind">04 / RH Testnet · V3</span><h3>Robinhood</h3><p>Test ETH entry. On-chain test rewards and milestone NFTs. Mainnet remains disabled.</p><span class="play-card-action">Enter Testnet <span aria-hidden="true">↗</span></span></a>
       </div>
+      <p class="play-help">Also available: <a href="/web3/">Web3 mode chooser</a> · <a href="/solana.html?voice=1">Solana Devnet preview</a>. Both use test networks.</p>
       <p class="play-help">Still seeing an older mobile version? <a href="/mobile-refresh/">Update the mobile arcade.</a></p>
     </section>
-    <div class="reader-meta"><span>Solana design · v1.8 / Robin prologue</span><a href="assets/site/whitepaper.md" download>Download whitepaper ↓</a></div>
+    <div class="reader-meta"><span>Whitepaper v2.0 · RH first · 19 September 2026</span><a href="assets/site/whitepaper.md" download>Download whitepaper ↓</a></div>
   </div></header>
-  <div class="reading-surface"><div class="wrap reader-layout"><aside class="contents"><nav aria-label="Table of contents"><p class="eyebrow">In this paper</p><a href="#robin">Robin / Prologue</a><a href="#current-state">Current state</a><a href="#1-overview">1. Overview</a><a href="#2-gameplay-determinism">2. Gameplay &amp; determinism</a><a href="#3-trust-model-as-implemented">3. Trust model (as implemented)</a><a href="#4-entry-fee-weekly-0-10-peg">4. Entry fee — weekly $0.10 peg</a><a href="#5-game-pool-checkpoint-payouts">5. Game Pool &amp; checkpoint payouts</a><a href="#6-token-mining-420pop">6. Token mining — $420POP</a><a href="#7-nfts-marked-tokens">7. NFTs &amp; marked tokens</a><a href="#8-charity-pool-governance">8. Charity Pool &amp; governance</a><a href="#9-security-decentralization">9. Security &amp; decentralization</a><a href="#10-status">10. Status</a><a class="contents-back" href="whitepaper.html">↑ Whitepaper</a></nav></aside><article class="prose" aria-label="Galaxy King Dog whitepaper">
-<aside class="status-note wrap" id="current-state" aria-label="Development status on 13 September 2026"><strong>Development update · 13 September 2026</strong><p><b>Robinhood is the development priority. The reward candidate remains local and undeployed; no project mainnet release is deployed or enabled.</b> Twenty targeted local test suites passed. An actual local HTTP test completed an authenticated test entry, server-issued seed, gameplay replay, signed proof, recorded run and one test-only fixture token. This is local evidence, not a live token launch or an independent audit.</p><p>Holders advise through a 99-day ballot. After finalization, the sole project administrator chooses the charity recipient with a public reason. Payment must match the reviewed decision. An unpaid decision can be corrected before payment confirms; failed transfers leave its allocation reserved. Saving authorizes anyone to pay, and completed transfers cannot be recalled. <a href="assets/site/papers/charity_governance.html#rh-candidate">Read the candidate charity policy.</a></p><p>The separate 5% buyback allocation is intended for a meme-token treasury governed by its own community. No production token, treasury or governance addresses are bound yet. NFT artwork and metadata templates are local; publication is pending.</p><p>Next: independent contract and replay review, a real hosting rehearsal with Android and wallet checks, verified administrator custody and recipient/token addresses, and NFT publication. The public arcade and historical testnet remain separate from this candidate. The Solana v1.8 material below is historical reference.</p></aside>
-    <section class="robin-prologue" id="robin" aria-labelledby="robin-title"><p class="eyebrow">Fiction / Robin’s world</p><h2 id="robin-title">Robin: Dead Grid</h2><p>The city gave points for everything except fixing it.</p><figure class="story-art"><img src="assets/site/robin-dead-grid-v3.png" width="1672" height="941" loading="lazy" decoding="async" alt="Robin and canine companions beside a rain-soaked canal, with a cyan line reaching a warmly lit clinic."><figcaption><span>01 / Dead Grid</span><span>A light across the canal.</span></figcaption></figure>
+  <div class="reading-surface"><div class="wrap reader-layout"><aside class="contents"><nav aria-label="Table of contents"><p class="eyebrow">In this paper</p><a href="#current-state">Current status</a><a href="#robin">Robin / Prologue</a><a href="#1-play-and-current-status">1. Play and current status</a><a href="#2-robin-the-story-and-gameplay">2. Robin, the story and gameplay</a><a href="#3-rh-testnet-evidence-and-score-verification">3. RH Testnet evidence and score verification</a><a href="#4-paid-entries-fees-and-refunds">4. Paid entries, fees and refunds</a><a href="#5-game-pool-and-the-proportional-5-buyback">5. Game pool and the proportional 5% buyback</a><a href="#6-buyback-tokens-and-the-community-treasury">6. Buyback tokens and the community treasury</a><a href="#7-420pop-supply-seasons-and-migration">7. $420POP supply, seasons and migration</a><a href="#8-charity-holder-advice-administrator-decision">8. Charity: holder advice, administrator decision</a><a href="#9-nfts-and-cosmetic-skins">9. NFTs and cosmetic skins</a><a href="#10-administrator-powers-and-security-boundaries">10. Administrator powers and security boundaries</a><a href="#11-what-remains-before-mainnet">11. What remains before mainnet</a><a href="#12-historical-material-and-decision-precedence">12. Historical material and decision precedence</a><a class="contents-back" href="whitepaper.html">↑ Whitepaper</a></nav></aside><article class="prose" aria-label="Galaxy King Dog whitepaper"><aside class="status-note" id="current-state" aria-label="Status checked 19 September 2026"><strong>19 September 2026 · Free arcade. RH Testnet live. Mainnet disabled.</strong><p>RH V3, test-token minting and milestone NFTs are deployed on Testnet. The active verifier uses an event ledger; independent gameplay replay is not enabled. The buyback route and governance are test fixtures.</p><p>This paper consolidates the current decisions: RH first, proportional 5% buyback, a separate community-voted meme treasury, and administrator-led charity allocation after advisory holder voting. <a href="#11-what-remains-before-mainnet">See the remaining launch gates.</a></p><p>The current demo uses a temporary tunnel. Mainnet has not been migrated. <a href="assets/site/papers/current-status.json">Read the dated verification snapshot.</a></p></aside><section class="robin-prologue" id="robin" aria-labelledby="robin-title"><p class="eyebrow">Fiction / Robin’s world</p><h2 id="robin-title">Robin: Dead Grid</h2><p>The city gave points for everything except fixing it.</p><figure class="story-art"><img src="assets/site/robin-dead-grid-v3.png" width="1672" height="941" loading="lazy" decoding="async" alt="Robin and canine companions connect a cable across a neon-lit canal."><figcaption><span>01 / Dead Grid</span><span>Fictional concept artwork.</span></figcaption></figure>
 <p>Under neon towers, delivery dogs chased green arrows for streaks and badges. The arrows led in circles. Across the canal, a clinic had been dark for three nights.</p>
 <p>“Lovely dashboard,” Robin said. “Shame about the lights.”</p>
 <p>The cat climbed an abandoned rail gantry with her bow. For six evenings, she practiced sending a thread between two broken pylons. Arrows drowned. Her paws blistered. She learned to loosen her grip and wait out the passing trains.</p>
@@ -72,116 +78,335 @@
 <p>The clinic lit up.</p>
 <p>Their screens offered nothing. From the opposite window, a nurse flashed a lamp twice.</p>
 <p>Robin raised two fingers, then passed the bow to the terrier.</p>
-</section>
-    <section id="design" aria-label="Design and release status"><aside class="status-note" aria-label="Public arcade and historical whitepaper scope"><strong>Public arcade, local candidate, historical design.</strong><p>The arcade links above remain separate from the local Robinhood reward work. <a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Open Game Jolt</a> for that game page’s current build and availability. This documentation update does not activate new rewards or replace the existing testnet.</p><p>The Solana v1.8 text below records an earlier design. Its economy, governance and security statements are historical reference, not claims about today’s public arcade or the undeployed Robinhood candidate.</p><p><a href="/robinhood.html?voice=1">Open the existing testnet prototype.</a></p></aside><p>Historical Solana v1.8 implementation notes, retained for reference. For the frozen numeric constants see
-<a href="assets/site/papers/whitepaper_implementation_lock_v1_7.html">WHITEPAPER_IMPLEMENTATION_LOCK_V1_7.md</a>; per-subsystem
-details are linked throughout.</p>
-<h2 id="1-overview">1. Overview</h2>
-<p>Galaxy King Dog is a skill-based arcade space shooter with a non-custodial, rule-enforced economy on
-Solana. Players pay a small SOL entry fee, compete for high scores across 33 seasons, farm the
-<code>$420POP</code> SPL token under a Bitcoin-style halving schedule, and win SOL payouts and NFTs. Every
-recorded score and payout is constrained by on-chain rules — there is no admin withdrawal, no hidden
-minting, and no discretionary reward.</p>
-<h2 id="2-gameplay-determinism">2. Gameplay &amp; determinism</h2>
-<p>The engine runs at a fixed timestep with seeded RNG (no <code>Math.random</code>). Each run records per-frame
-inputs, frame deltas, and the seed, and produces a Proof-of-Play package containing:</p>
-<ul>
-<li>a <strong>replay hash</strong> (inputs + seed + checkpoints),</li>
-<li>a <strong>version hash</strong> (the exact game build/ruleset),</li>
-<li>a <strong>run hash</strong> binding player, season, fee, ticket and result.</li>
-</ul>
-<p>This makes a run reproducible and its identity tamper-evident.</p>
-<h2 id="3-trust-model-as-implemented">3. Trust model (as implemented)</h2>
-<p>Gameplay is client-side and skill-based; trust in the <em>score</em> is established in two layers:</p>
-<ol>
-<li><strong>Off-chain authority — live anti-cheat ledger.</strong> The verifier validates each scoring event as it
-occurs (challenge–response, hash-chained events, rate/plausibility limits) and produces the
-authoritative <code>accepted_score</code>. The client never simply asserts a score.</li>
-<li><strong>On-chain enforcement — verifier signature.</strong> The verifier signs a canonical, score-bound
-message; <code>submit_verified_run</code> verifies that ed25519 signature against the trusted verifier key
-using the Solana Ed25519 precompile. Only a verifier-signed score can be recorded on-chain.</li>
-</ol>
-<p>See <a href="assets/site/papers/anti_cheat_score.html">ANTI_CHEAT_SCORE.md</a>. A fully independent, bit-for-bit deterministic replay
-gate is a <strong>future hardening</strong> (the current resimulation core is schema-2 hash/checkpoint, not a 1:1
-replay).</p>
-<h2 id="4-entry-fee-weekly-0-10-peg">4. Entry fee — weekly $0.10 peg</h2>
-<p>Entry costs a target of <strong>$0.10</strong> in SOL. The fee is stored in lamports and <strong>re-pegged weekly</strong> by a
-permissionless crank that reads a Pyth SOL/USD feed (<code>refresh_fee</code>), so it tracks the dollar target
-as SOL moves. A 2/3 multisig may also override the fee and pause the program, but <strong>cannot withdraw
-pool funds</strong> — there is no such instruction. See <a href="assets/site/papers/fee_governance.html">FEE_GOVERNANCE.md</a>.</p>
-<h2 id="5-game-pool-checkpoint-payouts">5. Game Pool &amp; checkpoint payouts</h2>
-<p>All entry fees flow into a program-owned <strong>Game Pool PDA</strong> (<code>deposit_entry_fee</code>). Funds leave only
-through permissionless, one-time checkpoints, each splitting the distributable balance by locked
-rules:</p>
+</section><section id="design" aria-label="Current design and release status"><p>Version 2.0 · 19 September 2026 · Current decisions and verified scope</p>
+<p>Galaxy King Dog is Robin's arcade: a cat archer, cyberpunk alien hounds and a city
+worth fighting for. The free game comes first. The separate Web3 editions explore
+verifiable runs, a shared game pool, achievement rewards and charity funding.
+<strong>Robinhood is the mainnet development priority. Mainnet migration has not happened.</strong></p>
+<p>This paper replaces conflicting current-policy descriptions in the historical
+Solana v1.8 paper. It distinguishes approved design, deployed test contracts and
+remaining production work. Test-network tokens, NFTs and ETH are experimental;
+they are not mainnet assets or a promise of earnings.</p>
+<h2 id="1-play-and-current-status">1. Play and current status</h2>
 <div class="table-scroll"><table>
 <thead>
 <tr>
-<th>Checkpoint</th>
-<th>Split</th>
+<th>Edition</th>
+<th>What it is</th>
+<th>Status at this review</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Farm season end</td>
-<td>70% retained · 20% champion · 10% creator payout</td>
+<td>Free PC and mobile arcade</td>
+<td>Keyboard or touch play; no wallet or entry fee</td>
+<td>Browser editions available through the current website. Mobile includes a circular joystick, red FIRE button and expanded view.</td>
 </tr>
 <tr>
-<td>World record break</td>
-<td>70% retained · 20% breaker · 10% creator payout (every break)</td>
+<td>Game Jolt</td>
+<td>Separately packaged free arcade</td>
+<td>Use its game page for the available build. This review does not certify online score submission on every hosted version.</td>
 </tr>
 <tr>
-<td>Human season end (S32)</td>
-<td>30% carried to Chaos · 40% human champion · 30% creator payout</td>
+<td>Robinhood Testnet</td>
+<td>EVM wallet, test ETH entry, recorded runs, test rewards and milestone NFTs</td>
+<td>V3 deployed on chain 46630; current gateway and health endpoint respond. Full wallet-connected gameplay was not repeated during this documentation review.</td>
 </tr>
 <tr>
-<td>Chaos season end (S33)</td>
-<td>67% chaos champion · 33% creator payout</td>
+<td>Solana Devnet</td>
+<td>Separate historical Solana program and browser preview</td>
+<td>Program deployed; earlier validation recorded runs and a 1-token reward mint. This is Devnet evidence, not current production readiness.</td>
+</tr>
+<tr>
+<td>Mainnet</td>
+<td>Proposed RH-first economy</td>
+<td>Disabled. Production inputs, independent review and operational launch checks remain incomplete.</td>
 </tr>
 </tbody>
 </table></div>
-<p>Every <strong>creator payout</strong> is auto-split <strong>49% creator / 51% Charity Pool</strong>, and <strong>20% of the charity
-share recycles back</strong> into the Game Pool. See <a href="assets/site/papers/pool_mechanism.html">POOL_MECHANISM.md</a>.</p>
-<h2 id="6-token-mining-420pop">6. Token mining — <code>$420POP</code></h2>
-<p><code>$420POP</code> (9 decimals) is minted by a program PDA; no human holds mint authority. Emission follows a
-Bitcoin-style halving: 33 seasons, ~2.1B tokens across the 32 human seasons and a fixed 300,000 cap
-for the Chaos season. Each qualifying run mints a per-season block reward, exact to the season cap.</p>
-<p>Difficulty is <strong>proof-of-work-like</strong>: the minimum score required to mint rises with the already-minted
-supply (Mode B) and is checked <strong>at mint time</strong> — a run that beat the base minimum but not the current
-difficulty can no longer mine. The final human token requires a new world record. See
-<a href="assets/site/papers/token_mining.html">TOKEN_MINING.md</a>.</p>
-<h2 id="7-nfts-marked-tokens">7. NFTs &amp; marked tokens</h2>
-<p>True Metaplex NFTs reward milestones — first player (<code>baby_metatron</code>, once ever), season champion
-(one per season, seasons 1–31), record breaker (one for every new world record), human champion
-(<code>human_metatron</code>, season 32), and chaos champion (<code>final_galaxy_metatron_defender</code>, season 33).
-The same milestone can never be awarded twice — a one-time PDA keyed by award kind plus season or record
-number blocks duplicates — and every NFT is minted by the program PDA. See <a href="assets/site/papers/nft_awards.html">NFT_AWARDS.md</a>.</p>
-<h2 id="8-charity-pool-governance">8. Charity Pool &amp; governance</h2>
-<p>The Charity Pool accumulates the charity share of creator payouts. Its destination is decided by
-<strong>token-weighted governance</strong> at two gates only — end of human emission and end of Chaos. Eligibility
-requires having farmed ≥ 1 <code>$420POP</code>; quorum is 10,000 weighted votes; duration is 99 days; a tie
-triggers a re-vote; below quorum the funds remain in the Charity Pool. The winner must be a
-whitelisted, verified charity operator. See <a href="assets/site/papers/charity_governance.html">CHARITY_GOVERNANCE.md</a>.</p>
-<h2 id="9-security-decentralization">9. Security &amp; decentralization</h2>
+<p><a href="/play/?mode=choose">Choose PC or mobile</a> ·
+<a href="/robinhood.html?voice=1">RH Testnet</a> ·
+<a href="/solana.html?voice=1">Solana Devnet</a> ·
+<a href="/web3/">Web3 mode chooser</a> ·
+<a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Game Jolt</a> ·
+<a href="https://x.com/Parrottwit">Project updates on X</a> ·
+<a href="https://t.me/GDK_Robin_Chapter">Telegram community</a></p>
+<p>Relative game links in the downloadable paper resolve from its hosted location.
+At this review the working Web3 demo uses a temporary tunnel. It depends on its
+host computer and running services; stable public hosting still needs restoration.
+An older mirror may show older documentation. Treat the date and contract identity
+in this paper as part of every deployment claim.</p>
+<h2 id="2-robin-the-story-and-gameplay">2. Robin, the story and gameplay</h2>
+<p>Robin's Dead Grid prologue is a fictional story about skill becoming useful to
+others. The invasion continues through wave-linked story beats and objectives:
+alien hounds follow a command signal; Robin learns to break the leash. Her English
+voice, cat-versus-dog humour, movement and weapon effects carry that personality
+inside the arcade.</p>
+<p>A boss encounter supplies a random weapon gift <strong>at the start of the fight</strong>.
+This is a gameplay pickup, not a token payment or NFT. The selectable Robin Moon
+and Robin Sailor Smoon are two distinct skins. Costumes and voice do not grant
+financial rewards or substitute for a verified run.</p>
+<h2 id="3-rh-testnet-evidence-and-score-verification">3. RH Testnet evidence and score verification</h2>
+<p>The current RH V3 game is
+<a href="https://explorer.testnet.chain.robinhood.com/address/0xC9023FD8cd6364920CF890dF180883217Ff4944E">0xC9023FD8cd6364920CF890dF180883217Ff4944E</a>.
+Its <a href="https://explorer.testnet.chain.robinhood.com/tx/0x0bda103147e558264656b982aa779c9ad9a516531d9b7f54926bacbba32cad1e">deployment transaction</a>
+is on <strong>Robinhood Testnet, chain 46630</strong>.</p>
+<p>Read-only checks at block <strong>121693161</strong>, on 19 September 2026, found:</p>
 <ul>
-<li><strong>No withdrawal path</strong>; pool/charity moves are rule-enforced and keep PDAs rent-exempt.</li>
-<li><strong>Value-conserving splits</strong> and exact-cap minting (unit-tested).</li>
-<li>Known centralization to harden before mainnet: the <strong>admin authority</strong> is a single key (it cannot
-withdraw funds but gates season closing, the verifier key, the whitelist and pause) and the
-<strong>verifier key</strong> is a trusted oracle. Recommended: multisig admin, HSM-held verifier key, a
-governance balance snapshot, and an <strong>independent audit</strong>. See <a href="assets/site/papers/security_notes.html">SECURITY_NOTES.md</a>.</li>
+<li>Charity policy version 2; configuration sealed; season 1 active; game unpaused.</li>
+<li><strong>3 whole test $420POP</strong> in total supply, with 9 decimals.</li>
+<li>First-player and first-record milestone NFTs already issued.</li>
+<li>A bound buyback executor. Its token, route, price guard and governor are
+<strong>test fixtures</strong>, not a reviewed production market or DAO.</li>
+<li>Contract balance and accounted liabilities both <strong>0.0021087 test ETH</strong>.
+This is a point-in-time accounting observation, not a security audit.</li>
 </ul>
-<h2 id="10-status">10. Status</h2>
-<p>Implemented and tested (off-chain): the full program (27 instructions), the verifier signing path,
-and the front-end wiring (entry fee → Pool PDA, on-chain top-3 leaderboard). Pending: program
-deployment and the operational hardening above. See <a href="assets/site/papers/deploy.html">DEPLOY.md</a>.</p>
-</section>
-    <p class="paper-source">The Robin prologue is fiction. The original technical v1.8 text is preserved as historical Solana reference. <a href="assets/site/whitepaper-v1.8.md" download>Download the historical technical document and current status note.</a></p>
-  </article></div></div>
+<p>The active verifier reports <code>testnet_event_ledger</code> validation, authenticated run
+starts and a persistent ledger. It validates submitted events and signs accepted
+claims. The RH contract checks an EIP-712 verifier signature bound to the run,
+player, paid entry and deployment.</p>
+<p><strong>The active service does not independently replay all game physics.</strong> Its
+<code>authoritative_gameplay</code>, <code>independent_physics_replay</code>, <code>real_value_rewards</code> and
+<code>mainnet_ready</code> flags are false. A separate fixed-timestep, server-seeded replay
+candidate has passed local regressions, including an HTTP-to-contract fixture
+flow. That is not proof it is enabled on the public service or certified for
+production. Replay also does not establish that a human, rather than a bot,
+supplied valid inputs. The score signer remains a trust and availability dependency.</p>
+<p>The earlier <a href="https://explorer.solana.com/tx/fhYwppsjroPG36kJmft35bJBqt6MaUqC337S46WGhDTiP2oC9TKtSWuSnNuirYBxAB79vfVQBhqVZZap4r8DZnh?cluster=devnet">Solana Devnet mint</a>
+is historical evidence for 1 test token. It is separate from the RH token supply.</p>
+<h2 id="4-paid-entries-fees-and-refunds">4. Paid entries, fees and refunds</h2>
+<p>The free arcade has no paid entry. RH Web3 entries use the chain's native ETH,
+with gas paid separately. The current Testnet normal fee is <strong>0.00027 test ETH</strong>;
+its configured final-human-token entry fee is <strong>0.0027 test ETH</strong> and its entry
+timeout is two hours. These are Testnet settings, not approved mainnet pricing.</p>
+<p>An entry deposit begins in escrow. The first successful start moves it into the
+game economy. A retry must reuse the same entry rather than charge again. An
+unused entry can be refunded after expiry; a started or lost game is not
+automatically refundable. Refund and recovery boundaries must be clear before
+launch. An unavailable verifier or missing restored ledger state must not be
+presented as a reason to pay again.</p>
+<p>The historical <strong>$0.10 target and weekly SOL/USD oracle update</strong> belong to the
+Solana design. RH V3 uses configured native-wei fees and has no ETH/USD price
+oracle. Its fees lock at configuration seal. Mainnet needs an explicit reviewed
+pricing policy; a dollar peg cannot be promised by this implementation.</p>
+<h2 id="5-game-pool-and-the-proportional-5-buyback">5. Game pool and the proportional 5% buyback</h2>
+<p>At the first successful start of a paid entry:</p>
+<ul>
+<li><strong>5%</strong>, rounded down in native wei, is reserved once for buyback.</li>
+<li>The remaining <strong>95%</strong> enters the game pool and follows the existing payout
+ratios. This reduces every original share proportionally, including the creator's.</li>
+<li>Unused refunded entries do not fund buyback. Retries and later checkpoints do
+not deduct another 5%.</li>
+</ul>
+<p>The game pool is contract accounting, <strong>not a DEX liquidity pool</strong>. Pending entry
+escrow, game balances, buyback funds, reserved payouts, personal credits and
+charity allocations are accounted for separately.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Checkpoint</th>
+<th>Split of the eligible game-pool balance before the creator sub-split</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ordinary season end, seasons 1–31</td>
+<td>70% retained; 20% champion; 10% creator-and-charity allocation</td>
+</tr>
+<tr>
+<td>Every new world record</td>
+<td>70% retained; 20% original record breaker; 10% creator-and-charity allocation</td>
+</tr>
+<tr>
+<td>Human season end, season 32</td>
+<td>30% carried to Chaos; 40% human champion; 30% creator-and-charity allocation</td>
+</tr>
+<tr>
+<td>Chaos season end, season 33</td>
+<td>67% Chaos champion; 33% creator-and-charity allocation</td>
+</tr>
+</tbody>
+</table></div>
+<p>Each creator-and-charity allocation is split <strong>49% to the creator and 51% to
+charity</strong>. Of that charity portion, <strong>20% recycles into the game pool</strong> and 80%
+is reserved for charity. Integer rounding follows the contract; recycled amounts
+increase retained funds beyond the headline checkpoint percentages.</p>
+<p>For illustration, from 100 units of eligible pool at an ordinary checkpoint:
+20 goes to the champion, 4.9 to the creator, 4.08 to charity and 71.02 remains
+in the game pool. This describes a pool checkpoint, not an immediate split of
+each 100-unit deposit.</p>
+<p>Checkpoint liabilities preserve the original winner and cannot be redirected to
+a later record holder. Claims settle the recorded allocation once. The recycled
+balance remaining after final Chaos is still backed in the game pool. <strong>Its final
+disposition remains a launch decision</strong>; there is no automatic season 34 or admin
+sweep that resolves it.</p>
+<h2 id="6-buyback-tokens-and-the-community-treasury">6. Buyback tokens and the community treasury</h2>
+<p>The buyback target is a <strong>meme token still to be selected</strong>. It is distinct from
+the game's $420POP reward token unless a later explicit decision changes that.
+Purchased tokens go to a <strong>separate treasury for that meme coin's community</strong>.
+They are held for releases approved through community voting. They are not
+burned and do not go to the creator wallet.</p>
+<p>The executor design limits trade size, daily budget, cooldown, quote age,
+deadline and minimum tokens actually received by the treasury. Failed swaps
+revert the allocation. Route recovery uses the treasury's governance and a
+review delay; it does not add a creator withdrawal shortcut.</p>
+<p>A contract named “governance” is not by itself proof of meaningful community
+control. The real token, treasury, voting rules, governor powers, swap liquidity,
+adapter and price guard must be selected and tested together. Transfer taxes,
+rebasing or token blacklists can break assumptions. The current Testnet fixtures
+prove neither market purchases nor production community governance.</p>
+<p>The gameplay pause does not automatically pause buyback execution. No single
+universal emergency switch is claimed.</p>
+<h2 id="7-420pop-supply-seasons-and-migration">7. $420POP supply, seasons and migration</h2>
+<p>The approved direction is <strong>RH first, fresh mainnet seasons, one project supply
+cap of 2,100,300,000 $420POP</strong>, with 9 decimals. Human seasons 1–32 total
+2,100,000,000 tokens; Chaos season 33 adds at most 300,000. The fixed season-cap
+schedule approximately halves human issuance while preserving the exact total.</p>
+<p>The game contract is the RH token's sole minter. Qualified, recorded runs may
+claim rewards once, bounded by each season's remaining cap. The current Testnet
+configuration uses 1 token per qualifying run; this must not be mistaken for
+approved final mainnet reward pacing. In particular, very large early caps at
+that rate make season completion impractical for a short demonstration.</p>
+<p>Mode B checks the score threshold <strong>at reward mint time</strong>: the base target holds
+through 80% of a season's mint cap, rises to 1.15 times base at 95%, then to
+1.35 times base at the cap, rounded up. A previously qualifying score can become
+insufficient before its reward is claimed. The last human token requires a
+world-record run and the corresponding premium entry.</p>
+<p>Mainnet Solana emission stays disabled until a reviewed cross-chain mechanism
+preserves the same project cap. There is no approved second independent full
+supply, automatic bridge or duplicate reward entitlement. Historical Testnet and
+Devnet runs, tokens and NFTs remain test evidence, with <strong>no automatic conversion
+to mainnet balances</strong>. No mainnet token address is announced by this paper.</p>
+<h2 id="8-charity-holder-advice-administrator-decision">8. Charity: holder advice, administrator decision</h2>
+<p>The approved initial RH policy retains the <strong>sole project administrator</strong>.
+Holders advise through a <strong>99-day ballot</strong> at the Human and Chaos charity gates.
+Voting uses snapshot balances, requires at least one whole token previously
+farmed at the snapshot, and counts whole held tokens as weight. Transfers after
+the snapshot cannot reuse that ballot's weight.</p>
+<p>After finalization, the administrator considers the vote and selects the
+recipient with a public reason. The old 10,000-weight quorum and tie result are
+recorded as information; they do not bind the decision or force another ballot.
+An empty charity gate completes sequencing without inventing a payment.</p>
+<p>The ballot candidate list locks at configuration seal. The administrator can
+select a recipient outside that list after the ballot. The contract rejects
+certain destinations, including the creator address, but it cannot prove that
+another address is a genuine charity or is independent of the administrator.
+Recipient identity therefore requires public, off-chain verification.</p>
+<p><strong>Saving a decision authorizes payment immediately; it is not a private draft.</strong>
+Anyone may settle the exact allocation to the approved recipient with its
+matching reason hash. The administrator may revise an unpaid decision, but the
+payment can confirm first. A changed recipient or reason makes a stale settlement
+revert. A failed recipient transfer leaves the allocation reserved. A successful
+transfer to an incorrect payable address cannot be recalled.</p>
+<p>There is no required “admin + 10 holders” committee, additional mandatory
+timelock or automatic DAO transition in this phase. The administrator's role
+does not transfer to the meme community treasury: <strong>charity decisions and
+buyback-treasury voting are different systems</strong>.</p>
+<h2 id="9-nfts-and-cosmetic-skins">9. NFTs and cosmetic skins</h2>
+<p>RH V3 uses <strong>ERC-721 milestone NFTs</strong>. Solana's historical design uses Metaplex
+and program-derived accounts; those descriptions are not interchangeable.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>Award identity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First player</td>
+<td>Once for the deployment's first recorded player</td>
+</tr>
+<tr>
+<td>Season champion</td>
+<td>One per ordinary season, 1–31</td>
+</tr>
+<tr>
+<td>Record breaker</td>
+<td>One per new world-record number, awarded to its original breaker</td>
+</tr>
+<tr>
+<td>Human champion</td>
+<td>Season 32</td>
+</tr>
+<tr>
+<td>Chaos champion</td>
+<td>Season 33</td>
+</tr>
+</tbody>
+</table></div>
+<p>Anyone may relay a valid claim, but the contract determines the eligible recipient.
+The same milestone cannot be issued twice. Later transfer of the NFT does not
+rewrite its original awarded-to history.</p>
+<p>Testnet first-player and first-record awards exist, and all five configured
+metadata endpoints responded during this review. Their URIs are constructor-fixed
+<strong>HTTPS addresses</strong>, which does not make the hosted content immutable. Reviewed
+durable metadata/image publication remains a mainnet gate.</p>
+<p>Free selectable Robin costumes are cosmetic game assets. They are not automatically
+NFTs, paid collectibles or token-holder benefits. No market price, liquidity,
+resale value or financial return is promised for a milestone.</p>
+<h2 id="10-administrator-powers-and-security-boundaries">10. Administrator powers and security boundaries</h2>
+<p>Before launch, configuration sealing freezes season policies, fees and ballot
+candidates; the buyback executor is bound once. Subsequent season activation is
+permissionless under the existing completion guards. The administrator still
+controls pause/resume, verifier replacement and unpaid charity decisions.</p>
+<p>Ownership renunciation is blocked. A deliberate two-step ownership handoff is
+supported. The project does not claim that administrator keys were burned or
+that the system is ownerless. There is no general administrator pool-withdrawal
+function in this V3, but discretionary charity allocation is still a substantial
+trust boundary. A compromised or lost administrator key can cause harm or leave
+operations and allocations stuck.</p>
+<p>Private signing keys belong only on protected services or owner-controlled
+wallets. Making a repository private does not hide JavaScript delivered to a
+browser. Public game bundles must exclude secrets and server-only code, and an
+already exposed key must be rotated rather than merely removed from a new build.</p>
+<p>Local contract, ledger and replay regressions are useful evidence, not an
+independent security audit. Recovering a stale ledger backup requires reconciling
+later chain activity. Current test service availability is not an uptime,
+loss-prevention or mainnet-safety guarantee.</p>
+<h2 id="11-what-remains-before-mainnet">11. What remains before mainnet</h2>
+<p>The two deferred choices requested from the creator are the <strong>creator's public
+wallet address</strong> and the <strong>target meme token with its network and contract
+address</strong>. No private key or recovery phrase should be supplied. Pool balances,
+the token minter and NFTs do not require personal “pool wallets”.</p>
+<p>These two inputs are not the only engineering launch gates:</p>
+<ol>
+<li>Verify administrator custody and recovery, service signing roles, independently
+confirmed charity recipients, and the actual community treasury/governor.</li>
+<li>Finalize native entry pricing, timeouts, all 33 reward amounts and remaining
+targets, and the final Chaos retained-balance policy.</li>
+<li>Select and review real swap liquidity, adapter, price guard and expenditure
+limits; test the complete purchase-to-community-release path.</li>
+<li>Enable and independently review the authoritative gameplay/replay candidate
+on the intended host, with production RPC/TLS, real Android wallets, sustained
+play, outages and ledger restore drills.</li>
+<li>Review contracts and final deployment artifacts independently; publish and
+retrieve durable NFT metadata; verify the exact identities and sealed inputs.</li>
+<li>Approve migration separately. Preserve test history and begin with the approved
+fresh mainnet state. Preparation and documentation do not execute migration.</li>
+</ol>
+<h2 id="12-historical-material-and-decision-precedence">12. Historical material and decision precedence</h2>
+<p>This v2.0 paper is the current policy summary. The <a href="assets/site/whitepaper-v1.8.md">original Solana v1.8
+paper</a> and its <a href="assets/site/papers/whitepaper_implementation_lock_v1_7.html">implementation constants</a>
+remain available as historical reference. They do not override the RH decisions above.</p>
+<p>Specifically superseded for RH are automatic binding charity winners, a mandatory
+holder committee or admin multisig, permanent administrator removal, buyback burns,
+creator receipt of bought meme tokens, and presenting Solana's USD fee peg as an
+RH feature. The fixed pool proportions and milestone categories were retained;
+the 5% buyback deduction and the later governance decisions refine their use.</p>
+<p><a href="assets/site/papers/pool_mechanism.html">Historical pool notes</a> ·
+<a href="assets/site/papers/charity_governance.html">Historical charity notes</a> ·
+<a href="assets/site/papers/nft_awards.html">Historical NFT notes</a> ·
+<a href="assets/site/papers/security_notes.html">Historical security notes</a></p>
+<p>The project is independent; naming a blockchain or platform does not imply its
+endorsement. Robin's prologue and promotional illustrations are fiction/artwork,
+not evidence of returns, partnerships or gameplay captures.</p>
+</section><p class="paper-source">The current technical source and downloadable paper are generated together. Earlier Solana material is preserved as an archive, not current RH policy.</p></article></div></div>
 </main>
   <footer class="site-footer"><div class="wrap footer-inner">
-    <span>© 2026 Galaxy King Dog (Liolee). All rights reserved. <a href="COPYRIGHT.txt">Copyright notice</a></span>
+    <span>© 2026 Galaxy King Dog (Liolee). All rights reserved. <a href="assets/site/copyright.txt">Copyright notice</a></span>
     <span class="footer-signoff">Aim beyond the next reward.</span>
-    <div class="footer-links"><a href="whitepaper.html">Whitepaper</a><a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Game Jolt ↗</a><a href="/play/?mode=choose">Controls &amp; skin ↗</a><a href="/mobile/?v=mobile-6">Mobile ↗</a><a href="/robinhood.html?voice=1">Testnet ↗</a></div>
+    <div class="footer-links"><a class="x-link x-footer" href="https://x.com/Parrottwit" target="_blank" rel="noopener noreferrer" aria-label="Follow Robin on X, @Parrottwit (opens in a new tab)"><svg class="x-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.9 2H22l-7.7 8.8L23 22h-6.8l-5.3-7L4.8 22H1.7l8-9.2L1 2h7l4.8 6.3L18.9 2ZM17.8 20h1.7L7 4H5.2l12.6 16Z"/></svg><span>X · @Parrottwit</span><span aria-hidden="true">↗</span></a><a href="whitepaper.html">Whitepaper</a><a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Game Jolt ↗</a><a href="/play/?mode=choose">Controls &amp; skin ↗</a><a href="/mobile/?v=mobile-6">Mobile ↗</a><a href="/robinhood.html?voice=1">Testnet ↗</a></div>
   </div></footer>
 <script>
 (function () {

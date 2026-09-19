@@ -1,6 +1,10 @@
+> Historical Solana design and dated development notes. These rules and deployment statements are not the current RH policy or a live-status report. The current whitepaper takes precedence for RH fees, charity, buyback, administrator control and mainnet readiness.
+
+[Current whitepaper](../../../whitepaper.html)
+
 # Galaxy King Dog — Whitepaper Implementation Lock v1.7
 
-Locked date: 2025-12-17  
+Locked date: 2025-12-17
 Source: Galaxy King Dog Whitepaper v1.6 + v1.7 addendum. The addendum is authoritative where season/supply notes conflict.
 
 > **v1.8 addendum (implemented).** Two clarifications now reflect the built program — see

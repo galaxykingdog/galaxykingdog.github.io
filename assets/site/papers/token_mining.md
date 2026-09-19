@@ -1,3 +1,7 @@
+> Historical Solana design and dated development notes. These rules and deployment statements are not the current RH policy or a live-status report. The current whitepaper takes precedence for RH fees, charity, buyback, administrator control and mainnet readiness.
+
+[Current whitepaper](../../../whitepaper.html)
+
 # On-chain Token Mining — $420POP emission
 
 On-chain implementation of the whitepaper v1.7 farming/emission ("mining") of the `$420POP`

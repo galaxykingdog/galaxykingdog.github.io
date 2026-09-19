@@ -1,3 +1,7 @@
+> Historical Solana design and dated development notes. These rules and deployment statements are not the current RH policy or a live-status report. The current whitepaper takes precedence for RH fees, charity, buyback, administrator control and mainnet readiness.
+
+[Current whitepaper](../../../whitepaper.html)
+
 # Automatic Pool Mechanism — `gkd_chain`
 
 On-chain implementation of the locked whitepaper v1.7 pool + checkpoint payout rules.

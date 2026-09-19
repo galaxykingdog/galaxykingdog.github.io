@@ -1,3 +1,7 @@
+> Historical Solana design and dated development notes. These rules and deployment statements are not the current RH policy or a live-status report. The current whitepaper takes precedence for RH fees, charity, buyback, administrator control and mainnet readiness.
+
+[Current whitepaper](../../../whitepaper.html)
+
 # Security notes & risk register — gkd_chain
 
 Honest pre-deploy review of the on-chain program. This is **not** a substitute for an independent

@@ -1,3 +1,7 @@
+> Historical Solana design and dated development notes. These rules and deployment statements are not the current RH policy or a live-status report. The current whitepaper takes precedence for RH fees, charity, buyback, administrator control and mainnet readiness.
+
+[Current whitepaper](../../../whitepaper.html)
+
 # On-chain NFT Awards — metatron set
 
 On-chain minting of the whitepaper-locked award NFTs, as true Metaplex NFTs (SPL mint, supply 1,

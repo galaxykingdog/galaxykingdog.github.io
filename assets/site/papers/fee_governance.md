@@ -1,3 +1,7 @@
+> Historical Solana design and dated development notes. These rules and deployment statements are not the current RH policy or a live-status report. The current whitepaper takes precedence for RH fees, charity, buyback, administrator control and mainnet readiness.
+
+[Current whitepaper](../../../whitepaper.html)
+
 # Fee Governance — weekly $0.10 peg + 2/3 multisig
 
 The entry fee targets **~$0.10** and is **re-pegged weekly** from the live SOL/USD price via a

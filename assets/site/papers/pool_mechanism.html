@@ -1,29 +1,17 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
-  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#091610">
-  <title>Automatic Pool Mechanism — `gkd_chain` | Galaxy King Dog</title>
-  <meta name="description" content="Supporting source documentation for the Galaxy King Dog Solana design.">
-  
-  <link rel="icon" type="image/svg+xml" href="../../../assets/site/star.svg">
-  <link rel="stylesheet" href="../../../src/site/site.css?v=robin-paper-4">
-</head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header"><div class="wrap header-inner">
-    <a class="brand" href="../../../whitepaper.html" aria-label="Galaxy King Dog whitepaper"><span class="brand-star" aria-hidden="true">✦</span><span>GALAXY KING DOG<small>WHITEPAPER / ROBIN</small></span></a>
-    <nav class="main-nav" aria-label="Main navigation">
-      <a href="../../../whitepaper.html#robin">Prologue</a>
-      <a href="../../../whitepaper.html#design" aria-current="page">Design</a>
-      <a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet</a>
-      <a class="button small" href="https://gamejolt.com/games/galaxy-king-dog/1084669">Play Game Jolt <span class="arrow" aria-hidden="true">↗</span></a>
-    </nav>
-  </div></header>
-  <main id="main"><header class="reader-hero"><div class="wrap"><p class="eyebrow">Galaxy King Dog / Supporting design document</p><h1>Automatic Pool Mechanism — `gkd_chain`</h1><div class="reader-meta"><a href="../../../whitepaper.html">← Whitepaper and current release</a><a href="pool_mechanism.md" download>Download original Markdown ↓</a></div></div></header><div class="reading-surface"><div class="wrap reader-layout"><aside class="contents"><nav aria-label="Table of contents"><p class="eyebrow">In this document</p><a href="#fund-accounts-program-owned-pdas-no-admin-withdraw">Fund accounts (program-owned PDAs, no admin withdraw)</a><a href="#money-in">Money in</a><a href="#checkpoints-permissionless-one-time">Checkpoints (permissionless, one-time)</a><a href="#state-additions-vs-gate-e-v0-1">State additions vs Gate E v0.1</a><a href="#build">Build</a><a href="#pending-before-mainnet-deferred-do-not-deploy-yet">Pending before mainnet (deferred — do not deploy yet)</a><a class="contents-back" href="../../../whitepaper.html">↑ Whitepaper</a></nav></aside><article class="prose"><aside class="status-note"><strong>Solana design documentation</strong><p>This source document describes the Solana implementation. It does not describe the currently playable Robinhood Testnet prototype. <a href="../../../whitepaper.html">Read the current-release note.</a></p></aside><p>On-chain implementation of the locked whitepaper v1.7 pool + checkpoint payout rules.
+  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automatic Pool Mechanism — `gkd_chain` — Historical reference | Galaxy King Dog</title>
+<link rel="stylesheet" href="../../../src/site/site.css?v=robin-paper-6"></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap header-inner"><a class="brand" href="../../../whitepaper.html">GALAXY KING DOG</a>
+<nav class="main-nav"><a href="../../../whitepaper.html#design">Current whitepaper</a><a href="../../../play/?mode=choose">Play</a></nav></div></header>
+<main id="main"><header class="reader-hero"><div class="wrap"><p class="eyebrow">Historical reference</p>
+<h1>Automatic Pool Mechanism — `gkd_chain`</h1></div></header><div class="reading-surface"><div class="wrap reader-layout">
+<aside class="contents"><a href="../../../whitepaper.html#12-historical-material-and-decision-precedence">Current decisions ↗</a></aside>
+<article class="prose"><aside class="status-note"><strong>Historical scope</strong><p>Historical Solana design and dated development notes. These rules and deployment statements are not the current RH policy or a live-status report. The current whitepaper takes precedence for RH fees, charity, buyback, administrator control and mainnet readiness.</p>
+<a href="../../../whitepaper.html">Read the current whitepaper</a></aside><p>On-chain implementation of the locked whitepaper v1.7 pool + checkpoint payout rules.
 Builds on Gate E (proof registry). <strong>Not yet deployed</strong> — see &quot;Pending before mainnet&quot;.</p>
 <h2 id="fund-accounts-program-owned-pdas-no-admin-withdraw">Fund accounts (program-owned PDAs, no admin withdraw)</h2>
 <ul>
@@ -112,11 +100,5 @@ fund the deploy keypair with real SOL.</li>
 with a <code>deposit_entry_fee</code> instruction call against the deployed program + IDL.</li>
 <li><strong>Audit</strong> — independent review of pool/checkpoint math before real funds.</li>
 </ol>
-</article></div></div></main>
-  <footer class="site-footer"><div class="wrap footer-inner">
-    <span>© 2026 Galaxy King Dog</span>
-    <span class="footer-signoff">Aim beyond the next reward.</span>
-    <div class="footer-links"><a href="../../../whitepaper.html">Whitepaper</a><a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Game Jolt ↗</a><a href="/play/">Choose controls ↗</a><a href="/mobile/?v=mobile-6">Mobile ↗</a><a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet ↗</a></div>
-  </div></footer>
-</body>
-</html>
+
+<p><a href="pool_mechanism.md" download>Download this historical source</a></p></article></div></div></main></body></html>

@@ -1,0 +1,20 @@
+/* X profile links: presentation only, shared by the homepage and whitepaper. */
+.site-header .header-inner { flex-wrap: wrap; }
+.header-inner .main-nav { min-width: 0; max-width: 100%; flex-wrap: wrap; gap: 8px 18px; }
+.x-link { display: inline-flex; align-items: center; justify-content: center; gap: 9px; }
+.x-icon { width: 16px; height: 16px; flex: 0 0 16px; }
+.main-nav .x-header { display: inline-flex; white-space: nowrap; }
+.x-community { max-width: 420px; margin-top: 24px; padding: 16px 18px; border: 1px solid var(--line); border-left: 2px solid var(--cyan); background: var(--forest); }
+.x-community-title { font-size: 14px; font-weight: 650; line-height: 1.5; color: var(--paper); }
+.x-community-copy { margin-top: 6px; font-size: 12px; line-height: 1.7; color: var(--muted); }
+.x-community .x-link { margin-top: 13px; min-height: 44px; font-size: 13px; }
+.x-link:focus-visible { outline: 3px solid var(--cyan); outline-offset: 5px; }
+.x-footer { min-height: 44px; color: var(--cyan); }
+.x-footer:hover { text-decoration: underline; text-underline-offset: 4px; }
+.footer-links { align-items: center; }
+@media (max-width: 740px) {
+  .header-inner .main-nav { gap: 8px 16px; }
+  .main-nav .x-header { display: inline-flex; padding: 9px 12px; font-size: 12px; }
+  .x-community { max-width: 100%; padding: 15px 16px; }
+}
+@media print { .x-community { display: none; } }

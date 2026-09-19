@@ -1,29 +1,24 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
   <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
-  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#091610">
-  <title>Charity decisions and holder advice | Galaxy King Dog</title>
-  <meta name="description" content="The undeployed Robinhood charity candidate: advisory holders, a sole administrator and public decisions, alongside historical Solana documentation.">
-  
-  <link rel="icon" type="image/svg+xml" href="../../../assets/site/star.svg">
-  <link rel="stylesheet" href="../../../src/site/site.css?v=robin-paper-4">
-</head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header"><div class="wrap header-inner">
-    <a class="brand" href="../../../whitepaper.html" aria-label="Galaxy King Dog whitepaper"><span class="brand-star" aria-hidden="true">✦</span><span>GALAXY KING DOG<small>WHITEPAPER / ROBIN</small></span></a>
-    <nav class="main-nav" aria-label="Main navigation">
-      <a href="../../../whitepaper.html#robin">Prologue</a>
-      <a href="../../../whitepaper.html#design" aria-current="page">Design</a>
-      <a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet</a>
-      <a class="button small" href="https://gamejolt.com/games/galaxy-king-dog/1084669">Open Game Jolt <span class="arrow" aria-hidden="true">↗</span></a>
-    </nav>
-  </div></header>
-  <main id="main"><aside class="status-note wrap" id="rh-candidate" aria-label="Robinhood candidate status"><strong>RH candidate update · 13 September 2026 · Not deployed</strong><p>Robinhood is the development priority, but this reward candidate remains local and undeployed. No project mainnet release is deployed or enabled. Twenty targeted local suites passed, including an actual local HTTP flow from authenticated test entry and server-issued seed through replay, signed proof, recorded run and one test-only fixture token. These results are not an independent audit or a live rollout.</p><p>Holders advise through one 99-day ballot at each Human or Chaos gate. After finalization, the sole project administrator reviews the visible result and chooses the final charity recipient with a public reason. Ties or insufficient quorum do not require another ballot. Ballot candidates are sealed, while the administrator may choose a recipient outside that list. The contract does not establish an organization's charitable identity.</p><p>Saving a decision authorizes anyone to pay its original charity allocation. Payment must match the reviewed recipient and reason. An unpaid decision may be corrected before payment confirms. Failed transfers leave the allocation unpaid and reserved, separate from player and creator credits; completed payments cannot be recalled. No holder committee, extra timelock or automatic DAO transition is included.</p><p>The separate 5% buyback allocation is intended for a meme-token treasury governed by its own community. No production token, treasury or governance addresses are bound yet. This treasury is separate from the administrator's charity decisions. NFT artwork and metadata templates remain local and unpublished.</p><p>Before launch: independent contract and replay review, a real hosting rehearsal with Android and wallet checks, verified administrator custody and charity/token addresses, and NFT publication. The public arcade and existing testnet are separate from this candidate. The Solana v1.7 material below is preserved historical design, not the current RH charity policy. <a href="charity_governance.md">Download the current policy and historical notes.</a></p></aside><header class="reader-hero"><div class="wrap"><p class="eyebrow">Galaxy King Dog / Supporting design document</p><h1>Charity decisions and holder advice</h1><div class="reader-meta"><a href="../../../whitepaper.html">← Whitepaper and current release</a><a href="charity_governance.md" download>Download original Markdown ↓</a></div></div></header><div class="reading-surface"><div class="wrap reader-layout"><aside class="contents"><nav aria-label="Table of contents"><p class="eyebrow">In this document</p><a href="#rh-candidate">Current RH candidate</a><a href="#locked-rules-v1-7">Historical rules (v1.7)</a><a href="#instructions">Instructions</a><a href="#accounts-pdas">Accounts / PDAs</a><a href="#voting-finalize">Voting &amp; finalize</a><a href="#known-limitations-documented-pre-audit">Known limitations (documented, pre-audit)</a><a class="contents-back" href="../../../whitepaper.html">↑ Whitepaper</a></nav></aside><article class="prose"><aside class="status-note"><strong>Historical Solana v1.7 reference</strong><p>The preserved material below describes the earlier Solana design. It is not the current RH charity policy or a statement about today's public arcade. <a href="../../../whitepaper.html#current-state">Read the current status.</a></p></aside><p>On-chain implementation of the whitepaper v1.7 charity governance: token-weighted votes that
+  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charity Governance — RH candidate and historical Solana design — Historical reference | Galaxy King Dog</title>
+<link rel="stylesheet" href="../../../src/site/site.css?v=robin-paper-6"></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="wrap header-inner"><a class="brand" href="../../../whitepaper.html">GALAXY KING DOG</a>
+<nav class="main-nav"><a href="../../../whitepaper.html#design">Current whitepaper</a><a href="../../../play/?mode=choose">Play</a></nav></div></header>
+<main id="main"><header class="reader-hero"><div class="wrap"><p class="eyebrow">Historical reference</p>
+<h1>Charity Governance — RH candidate and historical Solana design</h1></div></header><div class="reading-surface"><div class="wrap reader-layout">
+<aside class="contents"><a href="../../../whitepaper.html#12-historical-material-and-decision-precedence">Current decisions ↗</a></aside>
+<article class="prose"><aside class="status-note"><strong>Historical scope</strong><p>Historical Solana design and dated development notes. These rules and deployment statements are not the current RH policy or a live-status report. The current whitepaper takes precedence for RH fees, charity, buyback, administrator control and mainnet readiness.</p>
+<a href="../../../whitepaper.html">Read the current whitepaper</a></aside><h2 id="rh-candidate-status-13-september-2026-not-deployed">RH candidate status — 13 September 2026 — not deployed</h2>
+<p>Robinhood is the development priority, but this reward candidate remains local and undeployed. No project mainnet release is deployed or enabled. Twenty targeted local suites passed, including an actual local HTTP flow from authenticated test entry and server-issued seed through replay, signed proof, recorded run and one test-only fixture token. These results are not an independent audit or a live rollout.</p>
+<p>Holders advise through one 99-day ballot at each Human or Chaos gate. After finalization, the sole project administrator reviews the visible result and chooses the final charity recipient with a public reason. Ties or insufficient quorum do not require another ballot. Ballot candidates are sealed, while the administrator may choose a recipient outside that list. The contract does not establish an organization's charitable identity.</p>
+<p>Saving a decision authorizes anyone to pay its original charity allocation. Payment must match the reviewed recipient and reason. An unpaid decision may be corrected before payment confirms. Failed transfers leave the allocation unpaid and reserved, separate from player and creator credits; completed payments cannot be recalled. No holder committee, extra timelock or automatic DAO transition is included.</p>
+<p>The separate 5% buyback allocation is intended for a meme-token treasury governed by its own community. No production token, treasury or governance addresses are bound yet. This treasury is separate from the administrator's charity decisions. NFT artwork and metadata templates remain local and unpublished.</p>
+<p>Before launch: independent contract and replay review, a real hosting rehearsal with Android and wallet checks, verified administrator custody and charity/token addresses, and NFT publication. The public arcade and existing testnet are separate from this candidate. The Solana v1.7 material below is preserved historical design, not the current RH charity policy.</p>
+<h2 id="historical-solana-v1-7-design">Historical Solana v1.7 design</h2>
+<p>On-chain implementation of the whitepaper v1.7 charity governance: token-weighted votes that
 direct the Charity Pool to a whitelisted charity operator. <strong>Not yet deployed.</strong></p>
 <h2 id="locked-rules-v1-7">Locked rules (v1.7)</h2>
 <ul>
@@ -96,11 +91,5 @@ hardening step before mainnet.</li>
 <li>Quorum unit is whole-token weight (10,000), matching the token-weighted default; confirm against
 the whitepaper if a one-wallet-one-vote interpretation was intended instead.</li>
 </ul>
-</article></div></div></main>
-  <footer class="site-footer"><div class="wrap footer-inner">
-    <span>© 2026 Galaxy King Dog</span>
-    <span class="footer-signoff">Aim beyond the next reward.</span>
-    <div class="footer-links"><a href="../../../whitepaper.html">Whitepaper</a><a href="https://gamejolt.com/games/galaxy-king-dog/1084669">Game Jolt ↗</a><a href="/play/">Choose controls ↗</a><a href="/mobile/?v=mobile-6">Mobile ↗</a><a href="/robinhood.html?skin=robin-cat-v6&voice=1">Testnet ↗</a></div>
-  </div></footer>
-</body>
-</html>
+
+<p><a href="charity_governance.md" download>Download this historical source</a></p></article></div></div></main></body></html>
