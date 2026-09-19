@@ -1,10 +1,10 @@
 {
   "schema": "gkd-whitepaper-status-1",
-  "checkedAt": "2026-09-19T13:25:07.004Z",
+  "checkedAt": "2026-09-19T17:17:43.104Z",
   "scope": "Read-only snapshot; not a new full wallet gameplay test or independent security audit",
   "network": "Robinhood Testnet",
   "chainId": 46630,
-  "block": 121693161,
+  "block": 121756175,
   "game": "0xC9023FD8cd6364920CF890dF180883217Ff4944E",
   "charityPolicyVersion": 2,
   "configurationSealed": true,
@@ -16,7 +16,9 @@
   "buybackReserveWei": "108000000000000",
   "rewardToken": "0xa4323820060D8A657B42fe45c101A2eEae54E118",
   "rewardTokenDecimals": 9,
-  "rewardTokenTotalSupplyBaseUnits": "3000000000",
+  "rewardTokenTotalSupplyBaseUnits": "4000000000",
+  "recordedRuns": 4,
+  "recoveredRewardTransaction": "0xdaa29c8dbd85fa90fffd0438090e8df546f65388096ecc7430a9ddcb2f79c234",
   "milestones": "0x0ab172e677E6B1c304AE92d3867191cE6F9dAB0D",
   "issuedMilestonesChecked": ["firstPlayer:0", "recordBreaker:1"],
   "metadataEndpointsResponding": 5,
@@ -31,6 +33,6 @@
     "persistent_ledger": true,
     "run_start_auth": true
   },
-  "hosting": "Temporary tunnel; stable public hosting recovery incomplete",
+  "hosting": "GitHub Pages and stable Cloudflare Worker API restored; backend remains PC-hosted through a temporary tunnel",
   "mainnetMigrationPerformed": false
 }

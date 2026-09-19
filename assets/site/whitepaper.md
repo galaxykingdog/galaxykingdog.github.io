@@ -55,8 +55,9 @@ they are not mainnet assets or a promise of earnings.
 [Telegram community](https://t.me/GDK_Robin_Chapter)
 
 Relative game links in the downloadable paper resolve from its hosted location.
-At this review the working Web3 demo uses a temporary tunnel. It depends on its
-host computer and running services; stable public hosting still needs restoration.
+The Web3 pages now stay on the current website and use a stable API address.
+The backend still reaches its host computer through a temporary tunnel; the
+computer and services must remain online. Independent production hosting is pending.
 An older mirror may show older documentation. Treat the date and contract identity
 in this paper as part of every deployment claim.
 
@@ -80,15 +81,20 @@ The current RH V3 game is
 Its [deployment transaction](https://explorer.testnet.chain.robinhood.com/tx/0x0bda103147e558264656b982aa779c9ad9a516531d9b7f54926bacbba32cad1e)
 is on **Robinhood Testnet, chain 46630**.
 
-Read-only checks at block **121693161**, on 19 September 2026, found:
+Read-only checks at block **121756175**, on 19 September 2026, found:
 
 - Charity policy version 2; configuration sealed; season 1 active; game unpaused.
-- **3 whole test $420POP** in total supply, with 9 decimals.
+- **4 recorded runs and 4 whole test $420POP** in total supply, with 9 decimals.
 - First-player and first-record milestone NFTs already issued.
 - A bound buyback executor. Its token, route, price guard and governor are
   **test fixtures**, not a reviewed production market or DAO.
 - Contract balance and accounted liabilities both **0.0021087 test ETH**.
   This is a point-in-time accounting observation, not a security audit.
+
+The relayer now reconstructs pending rewards from recorded contract events after
+a restart. It checks whether each reward was already minted before retrying.
+This recovered [one previously missing test reward](https://explorer.testnet.chain.robinhood.com/tx/0xdaa29c8dbd85fa90fffd0438090e8df546f65388096ecc7430a9ddcb2f79c234)
+on 19 September without adding another run or changing pool allocations.
 
 The active verifier reports `testnet_event_ledger` validation, authenticated run
 starts and a persistent ledger. It validates submitted events and signs accepted
