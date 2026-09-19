@@ -1,10 +1,10 @@
 {
   "schema": 1,
-  "version": "df53c7811ff23f2e4ad9cfcd",
+  "version": "a537745ca16c5d4e4d71c3ae",
   "scope": "/mobile/",
   "entry": "/mobile/",
   "count": 120,
-  "totalBytes": 7704611,
+  "totalBytes": 7705975,
   "voiceCount": 60,
   "assets": [
     {
@@ -204,14 +204,14 @@
     },
     {
       "url": "/mobile/",
-      "sha256": "efe7b4351aebcbcb60bc61780f7b8785bb726b98b50f7a04351a739e1e41b705",
-      "bytes": 6846,
+      "sha256": "2d30ebedbcb56b9833a53081b6e70b004de14e17f0598b114890d36c53e330f1",
+      "bytes": 7528,
       "sourceUrl": "/assets/mobile/offline-shell.txt"
     },
     {
       "url": "/mobile/index.html",
-      "sha256": "efe7b4351aebcbcb60bc61780f7b8785bb726b98b50f7a04351a739e1e41b705",
-      "bytes": 6846,
+      "sha256": "2d30ebedbcb56b9833a53081b6e70b004de14e17f0598b114890d36c53e330f1",
+      "bytes": 7528,
       "sourceUrl": "/assets/mobile/offline-shell.txt"
     },
     {

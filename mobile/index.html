@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net https://static.cloudflareinsights.com/beacon.min.js; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev https://cloudflareinsights.com; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
   <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
   <script>
     // The web app needs HTTP asset loading; double-clicking this source file
@@ -63,7 +63,7 @@
   </section>
   <footer class="mobile-footer"><span id="mobile-cache" role="status">Free · No wallet</span><button id="mobile-help" type="button">Add to home screen</button></footer>
   <output id="mobile-perf" hidden></output>
-  <dialog id="mobile-install-help"><h2>Keep Robin on your phone</h2><p>In Chrome on Android, open the ⋮ menu and choose <b>Add to Home screen</b> or <b>Install app</b>.</p><p>Wait for “Offline ready” before playing without a connection.</p><form method="dialog"><button class="primary">Got it</button></form></dialog>
+  <dialog id="mobile-install-help"><h2>Keep Robin on your phone</h2><p>In Chrome on Android, open the ⋮ menu and choose <b>Add to Home screen</b> or <b>Install app</b>.</p><p>Wait for “Offline ready” before playing without a connection.</p><p><a href="/privacy.html">Website privacy &amp; analytics</a></p><form method="dialog"><button class="primary">Got it</button></form></dialog>
   <script>window.GKD_MOBILE_MODE=true;window.GKD_DISABLE_GLOBAL_LEADERBOARD=true;window.CHAIN=Object.freeze({enabled:false,requireWalletToStart:false});</script>
   <script src="assets/mobile/phaser-3.55.2.min.js"></script>
   <script src="src/chain/gkd_whitepaper_spec.js"></script>
@@ -84,5 +84,6 @@
   <script src="src/mobile/mobile_performance.js?v=mobile-6"></script>
   <script src="src/mobile/mobile_app.js?v=mobile-10"></script>
   <script src="src/main_galaxian.js?v=chain-scores-1"></script>
+<script data-gkd-web-analytics="cloudflare">(function(){if(location.hostname!=="galaxykingdog.github.io"||location.protocol!=="https:"||navigator.onLine===false||navigator.doNotTrack==="1"||window.doNotTrack==="1"||navigator.globalPrivacyControl===true)return;var s=document.createElement("script");s.type="module";s.async=true;s.src="https://static.cloudflareinsights.com/beacon.min.js";s.setAttribute("data-cf-beacon","{\"token\": \"fc2c3c6326874ea1b6d6319604369dbd\", \"spa\": false}");document.body.appendChild(s);})();</script>
 </body>
 </html>
