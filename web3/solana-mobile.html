@@ -1,2 +1,89 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Opening the Testnet demo | Galaxy King Dog</title><script>location.replace("https://symantec-default-merger-beginners.trycloudflare.com/web3/solana-mobile.html"+location.search+location.hash);</script><noscript><meta http-equiv="refresh" content="0; url=https://symantec-default-merger-beginners.trycloudflare.com/web3/solana-mobile.html"></noscript></head><body><h1>Opening the Testnet demo</h1><p>This experimental service currently uses a temporary tunnel. Mainnet is disabled.</p><p><a href="https://symantec-default-merger-beginners.trycloudflare.com/web3/solana-mobile.html">Continue to the Testnet demo</a></p><p><a href="/">Return to the website</a> · <a href="/play/?mode=choose">Free arcade</a></p></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src &#x27;self&#x27;; script-src &#x27;self&#x27; &#x27;unsafe-inline&#x27; https://cdn.jsdelivr.net https://static.cloudflareinsights.com/beacon.min.js; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data: blob:; media-src &#x27;self&#x27; data: blob:; font-src &#x27;self&#x27; data:; connect-src &#x27;self&#x27; https://rpc.testnet.chain.robinhood.com https://api.devnet.solana.com https://gkd-api.gkd-api-proxy.workers.dev https://cloudflareinsights.com; object-src &#x27;none&#x27;; base-uri &#x27;self&#x27;">
+  <script data-gkd-api-origin="https://gkd-api.gkd-api-proxy.workers.dev">(function(){var api="https://gkd-api.gkd-api-proxy.workers.dev";if(!window.fetch)return;var original=window.fetch.bind(window);function target(u){try{var url=new URL(u,location.href);if(url.origin===location.origin&&url.pathname.indexOf("/api/")===0)return api+url.pathname+url.search;}catch(e){}return null;}window.fetch=function(input,init){if(typeof input==="string"||input instanceof URL){var t=target(String(input));if(t)input=t;}else if(typeof Request!=="undefined"&&input instanceof Request){var r=target(input.url);if(r)input=new Request(r,input);}return original(input,init);};})();</script>
+<base href="../">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#06120e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="Robin testnet arcade with analog joystick controls and wallet entry.">
+  <title>Robin — Mobile Arcade</title>
+  <link rel="icon" href="assets/site/star.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/mobile/icon-192.png">
+  <link rel="stylesheet" href="src/mobile/mobile.css?v=mobile-10">
+<link rel="stylesheet" href="src/chain/web3.css">
+</head>
+<body class="web3-mobile">
+  <header class="mobile-bar">
+    <a class="mobile-brand" href="whitepaper.html" aria-label="Whitepaper">✦ ROBIN <small>SOLANA DEVNET</small></a>
+    <div class="toolbar">
+      <a class="mobile-mode-switch" id="mode-switch" href="web3/index.html?network=solana&amp;mode=mobile" aria-label="Choose desktop or mobile controls" style="font-size:11px;align-self:center;padding:7px 5px">Mode</a>
+      <a id="mobile-update" href="mobile-refresh/" hidden>Update</a>
+      <button id="mobile-fullscreen" type="button" aria-label="Expand game" aria-pressed="false" title="Expand game">⛶</button>
+      <button id="mobile-sound" type="button" aria-pressed="true">Sound on</button>
+      <button id="mobile-pause" type="button" disabled>Pause</button>
+      <button id="mobile-install" type="button" hidden>Install</button>
+    </div>
+  </header>
+<aside id="chain-ui" class="rh-mobile-chain"><details id="rh-mobile-tools"><summary id="rh-mobile-tools-summary">Wallet &amp; progress</summary><div class="rh-mobile-tools-body"><b id="network-badge">SOLANA DEVNET</b><span id="chain-status" role="status">Testnet · Connecting score service…</span><div class="box"><button id="btn-connect" type="button">Connect wallet</button><button id="btn-retry-score" type="button">Retry score</button></div><!-- WEB3_ACCOUNT_BEGIN --><details class="web3-tools"><summary>Wallet &amp; rewards</summary><p>Testnet tokens only</p><button id="web3-refresh" type="button">Refresh status</button><button id="web3-claim" type="button" disabled>Claim last run reward</button><button id="web3-native" type="button" hidden>Claim payout</button><button id="web3-refund" type="button" hidden>Refund unused entry</button><button id="web3-expire" type="button" hidden>Close expired run (no refund)</button><output id="web3-account-status" aria-live="polite">Connect your wallet to see your on-chain progress.</output><div id="web3-score-slot" hidden></div></details><!-- WEB3_ACCOUNT_END --></div></details></aside>
+  <div class="mobile-hud" aria-label="Game score">
+    <span>SCORE <b id="mobile-score">0</b></span><span>WAVE <b id="mobile-wave">1</b></span>
+    <span>LIVES <b id="mobile-lives">3</b></span><span>BEST <b id="mobile-best">0</b></span>
+  </div>
+  <main class="mobile-stage">
+    <div id="game-container" aria-label="Galaxy King Dog game"></div>
+    <div id="mobile-overlay" class="mobile-overlay">
+      <section class="mobile-dialog" aria-labelledby="mobile-title">
+        <p class="kicker">ONE MORE WAVE</p><h1 id="mobile-title">Find your aim.</h1>
+        <p id="mobile-message">Hold the stick to move. Ease toward the center for a precise dodge.</p>
+        <button id="mobile-start" class="primary" type="button" disabled>Loading…</button>
+        <p id="mobile-load" role="status">Preparing the arcade</p>
+        <small>Turn your phone sideways for a larger view.</small>
+      </section>
+    </div>
+  </main>
+  <section class="touch-deck" aria-label="Touch controls">
+    <div id="mobile-trackpad" class="joystick-area">
+      <div id="mobile-stick" class="joystick" role="group" tabindex="0" aria-label="Movement joystick. Hold left or right to move Robin; return to center or release to stop.">
+        <i class="joystick-rail" aria-hidden="true"></i><i class="joystick-neutral" aria-hidden="true"></i>
+        <span id="mobile-stick-thumb" class="joystick-thumb" aria-hidden="true"></span>
+      </div>
+      <span class="joystick-hint" aria-hidden="true">← &nbsp; MOVE &nbsp; →</span>
+    </div>
+    <div class="fire-controls"><button id="mobile-auto" type="button" aria-pressed="true">Auto fire: ON</button><button id="mobile-fire" type="button" aria-label="Hold to fire">FIRE</button></div>
+  </section>
+  <footer class="mobile-footer"><span id="mobile-cache" role="status">Testnet · Online connection required</span><button id="mobile-help" type="button" hidden>Add to home screen</button></footer>
+  <output id="mobile-perf" hidden></output>
+  <dialog id="mobile-install-help"><h2>Keep Robin on your phone</h2><p>In Chrome on Android, open the ⋮ menu and choose <b>Add to Home screen</b> or <b>Install app</b>.</p><p>Web3 play requires an online connection and a compatible wallet browser.</p><form method="dialog"><button class="primary">Got it</button></form></dialog>
+  <script>window.GKD_MOBILE_MODE=true;window.GKD_WEB3_MOBILE=true;window.GKD_DISABLE_GLOBAL_LEADERBOARD=true;</script>
+  <script src="assets/mobile/phaser-3.55.2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.98.4/lib/index.iife.min.js"></script>
+<script src="src/chain/gkd_whitepaper_spec.js?v=web3-candidate-1"></script>
+<script src="src/chain/run_receipts.js?v=web3-candidate-1"></script>
+<script src="src/chain/web3_preflight.js?v=web3-candidate-1"></script>
+<script src="src/chain/solana_protocol.js?v=web3-candidate-1"></script>
+<script src="src/chain/chain_config.js?v=web3-candidate-1"></script>
+<script src="src/chain/chain_client.js?v=chain-scores-1"></script>
+<script src="src/chain/web3_account.js?v=web3-candidate-1"></script>
+  <script src="src/scoring_rules.js?v=1.7.2"></script>
+  <script src="src/main_runtime_patch.js?v=1.7.2"></script>
+  <script src="src/robin_voice_lines.js?v=1.7.19-robin-paperhands"></script>
+  <script src="src/robin_voice.js?v=1.7.20-robin-every-clear"></script>
+  <script src="src/robin_weapon_fx.js?v=1.7.20-robin-arrows"></script>
+  <script src="src/robin_personality_motion.js?v=1.7.20-robin-arrows"></script>
+  <script src="src/robin_cape_fx.js?v=1.7.20-robin-arrows"></script>
+  <script src="src/invasion_story.js?v=invasion-2"></script>
+  <script src="src/invasion_enemy_fx.js?v=invasion-2"></script>
+  <script src="src/invasion_objectives.js?v=invasion-2"></script>
+  <script src="src/invasion_presentation.js?v=invasion-2"></script>
+  <script src="src/arcade_features.js?v=invasion-2"></script>
+  <script src="src/enemy_motion.js?v=1.7.2"></script>
+  <script src="src/mobile/mobile_input.js?v=mobile-6"></script>
+  <script src="src/mobile/mobile_performance.js?v=mobile-6"></script>
+  <script src="src/mobile/mobile_app.js?v=mobile-10"></script>
+  <script src="src/main_galaxian.js?v=chain-scores-1"></script>
+</body>
+</html>

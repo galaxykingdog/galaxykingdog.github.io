@@ -556,10 +556,60 @@
     }
   }
 
+  function showWalletHelp() {
+    if (typeof document.createElement !== "function" || !document.body) return;
+    let panel = $("rh-wallet-help");
+    if (!panel) {
+      panel = document.createElement("dialog");
+      panel.id = "rh-wallet-help";
+      panel.setAttribute("aria-labelledby", "rh-wallet-help-title");
+      panel.style.cssText = "box-sizing:border-box;width:min(420px,calc(100vw - 24px));max-height:85dvh;overflow:auto;background:#071d1c;color:#ecfff5;border:1px solid #638578;border-radius:18px;padding:24px;font:15px/1.5 system-ui;box-shadow:0 20px 90px #000b";
+      const title = document.createElement("h2"); title.id = "rh-wallet-help-title";
+      title.textContent = "Open Robin in your wallet"; title.style.cssText = "font-size:22px;margin:0 0 12px";
+      const guidance = document.createElement("p");
+      guidance.textContent = "On your phone, open this game in MetaMask's browser, then tap Connect wallet again. On a computer, enable an EVM wallet extension for this site.";
+      const note = document.createElement("p");
+      note.textContent = "Robinhood Testnet only · Use test ETH. Connecting does not pay an entry fee.";
+      note.style.color = "#ceef99";
+      panel.append(title, guidance, note);
+      // Handoff only the page and cosmetic options, never wallet/session/auth query data.
+      let target;
+      try {
+        const current = new URL(window.location.href);
+        target = new URL(current.pathname, current.origin);
+        for (const name of ["skin", "voice", "controls"]) {
+          const value = current.searchParams.get(name);
+          if (value && /^[a-zA-Z0-9_-]{1,48}$/.test(value)) target.searchParams.set(name, value);
+        }
+        if (target.protocol !== "https:" || target.username || target.password) target = null;
+      } catch (_) {}
+      if (target) {
+        const open = document.createElement("a"); open.id = "rh-wallet-open";
+        open.textContent = "Open in MetaMask";
+        // MetaMask's official dapp link format: metamask.github.io/metamask-deeplinks/.
+        open.href = "https://metamask.app.link/dapp/" + target.href.slice(8);
+        open.rel = "noreferrer"; open.style.cssText = "display:block;padding:12px;text-align:center;color:#071d1c;background:#ceef99;border-radius:10px;font-weight:700;text-decoration:none";
+        const fallback = document.createElement("p");
+        fallback.textContent = "If the app opens without the game, paste this address into its browser:";
+        const address = document.createElement("input"); address.id = "rh-wallet-address";
+        address.readOnly = true; address.value = target.href; address.setAttribute("aria-label", "Game address for wallet browser");
+        address.style.cssText = "box-sizing:border-box;width:100%;padding:10px;background:#102c25;color:#fff;border:1px solid #638578;border-radius:8px";
+        address.addEventListener("click", () => address.select());
+        panel.append(open, fallback, address);
+      }
+      const close = document.createElement("button"); close.type = "button"; close.textContent = "Close";
+      close.style.cssText = "display:block;margin:18px 0 0 auto;padding:10px 20px;color:#ecfff5;background:#173b30;border:1px solid #638578;border-radius:10px;cursor:pointer";
+      close.addEventListener("click", () => panel.close()); panel.append(close);
+      document.body.appendChild(panel);
+    }
+    if (!panel.open) panel.showModal();
+  }
+
   async function connectWalletOnce() {
     const injected = await discoverInjectedProvider();
     if (!injected) {
-      status("ROBINHOOD: EVM wallet not found");
+      status("ROBINHOOD: open this game in your wallet's browser, then connect");
+      showWalletHelp();
       return false;
     }
     walletConnectionInProgress = true;
@@ -583,6 +633,7 @@
         state.lastRunRecord = ""; state.lastVerify = null;
       }
       state.pubkey = address;
+      $("rh-wallet-help")?.close?.();
       syncPOHPContext();
       status(`ROBINHOOD: connected ${address.slice(0, 6)}…${address.slice(-4)}`);
       return true;
@@ -1996,7 +2047,7 @@
       return;
     }
     if (!injectedProvider()) {
-      status("ROBINHOOD: install/connect an EVM wallet");
+      status("ROBINHOOD: tap Connect wallet for phone or desktop setup");
       return;
     }
     status(`ROBINHOOD: ready (${cfg().chainName})`);
