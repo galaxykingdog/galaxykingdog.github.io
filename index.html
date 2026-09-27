@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Galaxy King Dog — Whitepaper</title>
+<meta name="description" content="Galaxy King Dog whitepaper summary: Robin's arcade, verifiable Web3 runs, game pools, charity and a community treasury. Testnet progress and the road to mainnet.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Galaxy King Dog — Whitepaper v2.3 (summary)">
+<meta property="og:description" content="Robin's arcade on Robinhood Chain and Solana: verifiable runs, game pools, charity and a community treasury. First full testnet basket cycle completed.">
+<meta property="og:image" content="https://galaxykingdog.github.io/robin-hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://galaxykingdog.github.io/robin-hero.jpg">
+<style>
+:root{--bg:#0d1117;--panel:#161b22;--text:#e6edf3;--muted:#9da7b3;--accent:#3fb97c;--accent2:#58c4dc;--line:#2a313c;--warn:#e3b341}
+@media (prefers-color-scheme:light){:root{--bg:#f7f8fa;--panel:#ffffff;--text:#1b1f24;--muted:#57606a;--accent:#1a7f4b;--accent2:#0b6b88;--line:#d8dee4;--warn:#9a6700}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:32px 16px 64px}
+header.hero{display:grid;grid-template-columns:1fr;gap:20px;align-items:center;margin-bottom:28px}
+@media (min-width:760px){header.hero{grid-template-columns:1.25fr 1fr}}
+.hero img{width:100%;height:auto;border-radius:14px;border:1px solid var(--line)}
+h1{font-size:2.1rem;line-height:1.15;margin:0 0 8px}
+.tag{color:var(--muted);font-size:.95rem;margin:0 0 14px}
+h2{font-size:1.35rem;margin:38px 0 10px;padding-top:6px;border-top:1px solid var(--line)}
+h3{font-size:1.08rem;margin:22px 0 6px;color:var(--accent2)}
+p{margin:10px 0}
+.lead{font-size:1.08rem}
+.note{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:10px;padding:12px 16px;margin:16px 0}
+.ok{border-left-color:var(--accent)}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.96rem;background:var(--panel);border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:.88rem;text-transform:uppercase;letter-spacing:.03em}
+tr:last-child td{border-bottom:0}
+.table-wrap{overflow-x:auto}
+ul,ol{padding-left:22px}
+li{margin:5px 0}
+a{color:var(--accent2)}
+.pill{display:inline-block;font-size:.8rem;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin-right:6px}
+footer{margin-top:46px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+<main>
+
+<header class="hero">
+  <div>
+    <p class="tag"><span class="pill">Whitepaper v2.3</span><span class="pill">Summary</span>27 September 2026</p>
+    <h1>Galaxy King Dog</h1>
+    <p class="lead">Robin's arcade: a cat archer, cyberpunk alien hounds and a city worth fighting for. The free game comes first. Separate Web3 editions add verifiable runs, chain-specific game pools, achievement rewards, charity funding and a community treasury.</p>
+    <p><strong>Robinhood Chain is the first integration; Solana follows with separate accounting. Mainnet has not launched.</strong></p>
+  </div>
+  <img src="robin-hero.jpg" width="900" height="1125" alt="Robin, the cat archer, drawing a glowing arrow on a rain-soaked rail bridge in a neon city">
+</header>
+
+<section>
+<h2>1. The game</h2>
+<p>Galaxy King Dog is a fast arcade shooter for keyboard and touch. Robin defends the city from waves of alien hounds that follow a command signal; the story unfolds through wave-linked objectives and boss fights. A boss fight starts with a random weapon gift. That gift is a gameplay pickup, not a token or an NFT.</p>
+<p>Robin's costumes are free cosmetic skins. They carry no financial value and grant no reward.</p>
+</section>
+
+<section>
+<h2>2. Web3 editions: verified play</h2>
+<ul>
+  <li><strong>Paid entry.</strong> An entry is paid in the chain's native currency and held in escrow until the first successful start. A retry reuses the same entry and never charges again. An unused entry can be refunded after it expires.</li>
+  <li><strong>Verified runs.</strong> Before any reward, an independent verifier replays the run with the same game engine and inputs. Only verified results count.</li>
+  <li><strong>Fees.</strong> Fees are fixed when a deployment is sealed. Mainnet pricing still needs final approval.</li>
+</ul>
+</section>
+
+<section>
+<h2>3. Where each entry goes</h2>
+<p>Allocation happens once, at the first successful start, from the <strong>gross</strong> entry payment on that chain.</p>
+<div class="table-wrap"><table>
+<tr><th>Share</th><th>Destination</th></tr>
+<tr><td>5%</td><td>SOL reserve</td></tr>
+<tr><td>5%</td><td>HOOD reserve (tokenized Robinhood Markets exposure)</td></tr>
+<tr><td>10%</td><td>Eight-asset stock &amp; commodity basket (section 5)</td></tr>
+<tr><td>80%</td><td>Game pool, rewards, creator and charity (section 4)</td></tr>
+</table></div>
+<p>Each chain keeps its own revenue, liabilities and treasury. Robinhood Chain and Solana funds are never pooled or spent across chains.</p>
+</section>
+
+<section>
+<h2>4. Game pool, creator and charity</h2>
+<p>The game pool is contract accounting, not a trading liquidity pool. It pays out at these checkpoints:</p>
+<div class="table-wrap"><table>
+<tr><th>Checkpoint</th><th>Split of the eligible pool</th></tr>
+<tr><td>Ordinary season end (seasons 1–31)</td><td>70% retained · 20% champion · 10% creator &amp; charity</td></tr>
+<tr><td>Every new world record</td><td>70% retained · 20% record breaker · 10% creator &amp; charity</td></tr>
+<tr><td>Human season (32)</td><td>30% carried to Chaos · 40% human champion · 30% creator &amp; charity</td></tr>
+<tr><td>Chaos season (33)</td><td>67% Chaos champion · 33% creator &amp; charity</td></tr>
+</table></div>
+<p>Each creator-and-charity share splits <strong>49% creator / 51% charity</strong>. A fifth of the charity part is recycled into the game pool.</p>
+<p>Holders advise on charity recipients through a <strong>99-day ballot</strong>, weighted by farmed tokens they hold. The project administrator then selects the recipient and publishes the reason. Charity decisions and treasury governance are separate systems.</p>
+</section>
+
+<section>
+<h2>5. Community treasury</h2>
+<p>The treasury acquires assets for the community; it does not buy meme tokens or burn anything. Basket funds accumulate per chain. When the <strong>whole basket</strong> reaches about <strong>$50</strong>, one basket cycle may run. The $50 is a total for the basket, not $50 per asset.</p>
+<p>Every asset keeps its own allocation. If an asset cannot be bought safely, its share waits. It is <strong>never substituted or redistributed</strong>.</p>
+
+<h3>The eight exposures and their planned routes</h3>
+<div class="table-wrap"><table>
+<tr><th>Exposure</th><th>Planned route</th></tr>
+<tr><td>SpaceX</td><td>Directly on Robinhood Chain</td></tr>
+<tr><td>Cerebras Systems</td><td>Directly on Robinhood Chain</td></tr>
+<tr><td>Intel</td><td>Directly on Robinhood Chain</td></tr>
+<tr><td>Silver</td><td>Directly on Robinhood Chain, through a silver ETF token</td></tr>
+<tr><td>Robinhood Markets (HOOD)</td><td>Bridge to Ethereum</td></tr>
+<tr><td>Beam Therapeutics</td><td>Bridge to Ethereum</td></tr>
+<tr><td>X-energy</td><td>Bridge to Ethereum</td></tr>
+<tr><td>STMicroelectronics</td><td>Bridge to Ethereum</td></tr>
+</table></div>
+<p>Buying on Robinhood Chain itself takes minutes and needs no bridge. Bridged purchases take hours, because every step waits for final confirmation.</p>
+<p>Before mainnet, each route must be verified for:</p>
+<ul>
+  <li>the exact instrument;</li>
+  <li>liquidity;</li>
+  <li>eligibility;</li>
+  <li>custody.</li>
+</ul>
+<p>Final weights are still to be approved. Tokenized exposure does not grant ordinary shareholder rights.</p>
+</section>
+
+<section>
+<h2>6. Testnet progress</h2>
+<div class="note ok"><strong>First complete basket cycle finished — 27 September 2026.</strong> It ran on Robinhood Chain testnet and Ethereum Sepolia, using test tokens that stand in for the eight assets:
+<ul>
+  <li>7 of 8 legs were dispatched.</li>
+  <li>6 test purchases completed end to end: bridge, purchase, delivery confirmation and settlement.</li>
+  <li>One planned failure (Intel) returned its full principal through the refund path.</li>
+  <li>Silver was deliberately held back, and its allocation was kept.</li>
+  <li>The cycle closed with zero outstanding principal.</li>
+</ul>
+</div>
+<p>The treasury engine is designed to be safe under restarts and network trouble:</p>
+<ul>
+  <li>Every step waits for final confirmation.</li>
+  <li>Every transaction is recorded durably before it is sent, so a restart never creates a duplicate purchase.</li>
+  <li>Transactions that got stuck were recovered without losing funds.</li>
+  <li>Unavailable purchases keep their allocation.</li>
+</ul>
+<p>The code went through independent reviews and hundreds of automated tests.</p>
+<p>Earlier testnet work covered paid entries, verified replays, test-token rewards, milestone NFTs and automatic delivery.</p>
+<p>Test tokens, NFTs and test ETH have no value and do not convert to mainnet balances.</p>
+</section>
+
+<section>
+<h2>7. $420POP token</h2>
+<ul>
+  <li>One project supply cap of <strong>2,100,300,000 $420POP</strong> (9 decimals). Human seasons 1–32 total 2,100,000,000; Chaos season 33 adds at most 300,000.</li>
+  <li>Rewards are minted only for verified qualifying runs, within each season's cap. The score targets rise as a season approaches its cap.</li>
+  <li>Mainnet starts with fresh seasons. No second independent supply exists on another chain.</li>
+</ul>
+</section>
+
+<section>
+<h2>8. Milestone NFTs</h2>
+<p>Five milestone NFTs, each issued to its original achiever:</p>
+<ul>
+  <li><strong>First Player</strong></li>
+  <li><strong>Season Champion</strong></li>
+  <li><strong>Record Breaker</strong></li>
+  <li><strong>Human Champion</strong></li>
+  <li><strong>Chaos Champion</strong></li>
+</ul>
+<p>The same milestone cannot be issued twice. No market value is promised. Mainnet NFT artwork will use durable, dedicated hosting.</p>
+</section>
+
+<section>
+<h2>9. Security and trust</h2>
+<p>The administrator can pause and resume the game, replace the verifier and decide charity recipients. The administrator cannot withdraw the game pool, and ownership cannot be renounced by accident. The project does not claim to be ownerless; these powers are a disclosed trust boundary.</p>
+<p>Signing keys stay on protected, owner-controlled systems. An independent security review is required before mainnet.</p>
+</section>
+
+<section>
+<h2>10. Road to mainnet</h2>
+<ol>
+  <li><strong>Perfect the testnet.</strong>
+    <ul>
+      <li>A second consecutive basket cycle.</li>
+      <li>A rehearsal of the hybrid design: direct Robinhood Chain purchases plus bridged purchases.</li>
+      <li>Durable NFT hosting.</li>
+    </ul>
+  </li>
+  <li><strong>Verify real routes.</strong>
+    <ul>
+      <li>Exact instruments, liquidity, eligibility and custody for every asset.</li>
+      <li>Final basket weights.</li>
+    </ul>
+  </li>
+  <li><strong>Governance and custody.</strong>
+    <ul>
+      <li>Verified control of the creator and treasury wallets.</li>
+      <li>Enforceable rules for releasing treasury funds.</li>
+    </ul>
+  </li>
+  <li><strong>Solana integration</strong>, with its own addresses and accounting.</li>
+  <li><strong>An independent security review</strong> of the contracts, verifier and dependencies.</li>
+  <li><strong>A separately approved migration</strong>, with exact, sealed launch parameters.</li>
+</ol>
+<p>Mainnet stays disabled until every step has passed.</p>
+</section>
+
+<footer>
+<p><strong>Important.</strong> Galaxy King Dog is an independent game project, and nothing on this page is financial advice.</p>
+<ul>
+  <li>Nothing here is a promise of returns, profit or asset value.</li>
+  <li>Test-network tokens, NFTs and balances have no value.</li>
+  <li>Naming Robinhood, Solana, Ethereum or any company does not imply endorsement, partnership or affiliation.</li>
+  <li>Tokenized exposure is not ordinary share ownership.</li>
+  <li>Plans may change before launch.</li>
+  <li>Robin's story and artwork are fiction.</li>
+</ul>
+<p>Project updates: <a href="https://x.com/Parrottwit" rel="noopener noreferrer">X</a> · <a href="https://t.me/GDK_Robin_Chapter" rel="noopener noreferrer">Telegram</a></p>
+</footer>
+
+</main>
+</body>
+</html>
