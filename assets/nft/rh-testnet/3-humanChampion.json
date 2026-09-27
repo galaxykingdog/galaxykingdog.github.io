@@ -1,0 +1,28 @@
+{
+  "name": "Galaxy King Dog — Human Champion",
+  "description": "Awarded to the recorded Human champion when the final Human emission season closes. Robinhood Chain Testnet award with no monetary value.",
+  "image": "https://galaxykingdog.github.io/assets/nft/rh-testnet/human_metatron.jpg",
+  "attributes": [
+    {
+      "trait_type": "Milestone",
+      "value": "Human Champion"
+    },
+    {
+      "trait_type": "Award kind",
+      "value": 3
+    },
+    {
+      "trait_type": "Network",
+      "value": "Robinhood Chain Testnet"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "https://galaxykingdog.github.io/assets/nft/rh-testnet/human_metatron.jpg",
+        "type": "image/jpeg"
+      }
+    ]
+  },
+  "external_url": "https://galaxykingdog.github.io/robinhood.html"
+}
